@@ -53,7 +53,7 @@ public:
 		if( !init_ )
 		{
 			tetraCount_ = tetraCount;
-			emPropData_ = new size_t[ 2 * tetraCount_ ];
+			emPropData_ = new T[ 2 * tetraCount_ ];
 			init_ = true;
 		}
 	}
@@ -82,7 +82,7 @@ public:
 		}
 
 		propFile.read( ( char* )&tetraCount_, 8 );
-		emPropData_ = new size_t[ 2 * tetraCount_ ];
+		emPropData_ = new T[ 2 * tetraCount_ ];
 
 		propFile.read( ( char* )emPropData_, 8 * 2 * tetraCount_ );
 

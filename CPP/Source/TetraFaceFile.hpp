@@ -236,32 +236,22 @@ public:
 			tetraFace[1] = TetraFace< size_t >( iPtr[ iVert[0] ], iPtr[ iVert[1] ], iPtr[ iVert[3] ] );
 			tetraFace[2] = TetraFace< size_t >( iPtr[ iVert[0] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
 			tetraFace[3] = TetraFace< size_t >( iPtr[ iVert[1] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
-
-			//cout << "A" << endl;
 			
 			string faceHash[4];
 			faceHash[0] = tetraFace[0].MakeHash();
 			faceHash[1] = tetraFace[1].MakeHash();
 			faceHash[2] = tetraFace[2].MakeHash();
 			faceHash[3] = tetraFace[3].MakeHash();
-			
-			//cout << "A1" << endl;
 
 			for( size_t idf = 0; idf < 4; ++idf )
 			{
 				auto itMap = faceMap.find( faceHash[ idf ] );
-				//cout << "A2" << endl;
 				if( itMap == faceMap.end() )
 				{
-					//cout << "A3" << endl;
 					tetraFace[ idf ].t1_ = idt + 1;
-					//cout << "A4" << endl;
 					faceList.push_back( tetraFace[ idf ] );
-					//cout << "A5" << endl;
 					size_t faceIndex = faceList.size();
-					//cout << "A6" << endl;
 					faceMap[ faceHash[ idf ] ] = faceIndex;
-					//cout << "A7" << endl;
 					tetraFaceIndex_[ iVert[ idf ] ] = faceIndex;
 				}
 				else
@@ -271,8 +261,6 @@ public:
 					tetraFaceIndex_[ iVert[ idf ] ] = faceIndex;
 				}
 			}
-
-			//cout << "B" << endl;
 		}
 
 		faceList.shrink_to_fit();

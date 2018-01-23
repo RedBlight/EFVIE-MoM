@@ -101,13 +101,12 @@ int main( int argc, char *argv[] )
 	EmPropFile< double > propFile;
 	propFile.Initialise( meshFile.tetraCount_ );
 
-	EmRuleFactory< double >::Initialize();
+	EmRuleFactory< double >* ruleFactory = EmRuleFactory< double >::GetInstance();
 
-	EmRule< double >* emRule = EmRuleFactory< double >::GetRule( ruleFile.ruleType_ );
+	EmRule< double >* emRule = ruleFactory->GetRule( ruleFile.ruleType_ );
 	if( emRule == nullptr )
 	{
 		cout << "Specified EmRule type is not defined: " << ruleFile.ruleType_ << endl;
-		EmRuleFactory< double >::Destroy();
 		return 1;
 	}
 	
@@ -115,7 +114,6 @@ int main( int argc, char *argv[] )
 	if( !emRuleSet )
 	{
 		cout << "There are some proplems in the EmRule parameters!" << endl;
-		EmRuleFactory< double >::Destroy();
 		return 1;
 	}
 	
@@ -123,7 +121,6 @@ int main( int argc, char *argv[] )
 	if( !propsGenerated )
 	{
 		cout << "A proplem encountered whlie generating EmProp data!" << endl;
-		EmRuleFactory< double >::Destroy();
 		return 1;
 	}
 	
@@ -131,12 +128,8 @@ int main( int argc, char *argv[] )
 	if( !propfileSaved )
 	{
 		cout << "A proplem encountered whlie saving " << propFileName << " file!" << endl;
-		EmRuleFactory< double >::Destroy();
 		return 1;
 	}
-	
-	EmRuleFactory< double >::Destroy();
-
 
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;
