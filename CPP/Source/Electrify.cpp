@@ -106,6 +106,7 @@ int main( int argc, char *argv[] )
 	EmRule< double >* emRule = ruleFactory->GetRule( ruleFile.ruleType_ );
 	if( emRule == nullptr )
 	{
+		cout << "Error!" << endl;
 		cout << "Specified EmRule type is not defined: " << ruleFile.ruleType_ << endl;
 		return 1;
 	}
@@ -113,6 +114,7 @@ int main( int argc, char *argv[] )
 	bool emRuleSet = emRule->SetRuleData( ruleFile.ruleData_ );
 	if( !emRuleSet )
 	{
+		cout << "Error!" << endl;
 		cout << "There are some proplems in the EmRule parameters!" << endl;
 		return 1;
 	}
@@ -120,6 +122,7 @@ int main( int argc, char *argv[] )
 	bool propsGenerated = emRule->GenerateProps( propFile.emPropData_, meshFile.vertexData_, meshFile.tetraVertexIndex_, propFile.tetraCount_ );
 	if( !propsGenerated )
 	{
+		cout << "Error!" << endl;
 		cout << "A proplem encountered whlie generating EmProp data!" << endl;
 		return 1;
 	}
@@ -127,9 +130,14 @@ int main( int argc, char *argv[] )
 	bool propfileSaved = propFile.Save_emprop( propFileName );
 	if( !propfileSaved )
 	{
+		cout << "Error!" << endl;
 		cout << "A proplem encountered whlie saving " << propFileName << " file!" << endl;
 		return 1;
 	}
+
+	cout << "Done!" << endl;
+
+
 
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;

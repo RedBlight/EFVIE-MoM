@@ -81,7 +81,7 @@ public:
 };
 
 template< class T >
-static EmRuleFactory< T >* EmRuleFactory< T >::pInstance_ = nullptr;
+EmRuleFactory< T >* EmRuleFactory< T >::pInstance_ = nullptr;
 
 
 
