@@ -1,0 +1,232 @@
+TODO:
+
+ * tetraquad ve triquad algoritmalarını çözümle
+	* rquad fonksiyonundan gelen sayıları direkt kaydet
+	* bir üstteki fonksiyonu analiz et
+	
+ * c++ .tetraquad ve .facequad dosyası oluşturan program yaz, tetrahedron ve üçgenler için quadrature noktaları ve ağırlıklarını hesaplayıp kaydet.
+ 
+ * analitik integral kısmını çözümle.
+ 
+ * .incident dosya formatında gelen alan bilgileri olsun.
+ 
+ * .mommatrix ve .rhs dosyalarını oluşturan program yaz.
+ 
+ * başka bir programda lineer denklemi çöz, katsayıları .coef olarak kaydet.
+ 
+ * .obspoint gözlem noktaları formatı.
+ 
+ * başka bir programda, .coef, .tetramesh, .tetraface, .emprop, .opspoint dosyalarını alarak, .obspointlerdeki saçılmış alanı çöz.
+ 
+ bitti
+ 
+ ------------------------------------------------------------------------------------
+ 
+rquad katsayıları:
+ 
+rquad( 4, 2 ):
+q1:
+0.204148582103227
+0.482952704895632
+0.761399262448138
+0.951499450553003
+w1:
+0.010352240749918
+0.068633887172923
+0.143458789799214
+0.110888415611278
+ 
+rquad( 4, 1 ):
+q2:
+0.139759864343781
+0.416409567631083
+0.723156986361876
+0.942895803885482
+w2:
+0.031180970950008
+0.129847547608232
+0.203464568010271
+0.135506913431488
+ 
+rquad( 4, 0 ):
+q3:
+0.069431844202974
+0.330009478207572
+0.669990521792428
+0.930568155797026
+w3:
+0.173927422568727
+0.326072577431273
+0.326072577431273
+0.173927422568727
+
+.
+
+q1 q2 q3: repeat elements
+1  1  1
+1  2  1
+2  1  1
+2  2  1
+1  1  2
+1  2  2
+2  1  2
+2  2  2
+
+w: multiply elems of w1 w2 w3
+1	1	1
+1	2	1
+2	1	1
+2	2	1
+1	1	2
+1	2	2
+2	1	2
+2	2	2
+
+x = 1 - q1
+y = ( 1 - q2 ) .* q1
+z = q1 .* q2 .* q3
+
+bunların hepsi column vector idi
+
+vert =
+x1 y1 z1
+x2 y2 z2
+x3 y3 z3
+x4 y4 z4
+
+diffMatX =
+1	0	0	0
+-1	1	0	0
+-1	0	1	0
+-1	0	0	1
+
+vertDiffX = diffMat * vert
+
+W = abs( det( vertDiffX( 2:4, : ) ) ) * w
+
+XYZ = [ 1, x, y, z ] * vertDiffX; 
+
+X = XYZ( :, 1 )
+X = XYZ( :, 2 )
+X = XYZ( :, 3 )
+
+.tetraquad:
+[0] tetracount
+[1] quadlevel = 4,  N = quadlevel ^ 3
+[2 ... A - 1]
+w1 x1 y1 z1 |
+....        | -> for 1 tetrahedron, double, 4 * N cell
+wN xN yN zN |
+repeat for all tetrahedra
+
+A = 2 + 4 * N * [0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
