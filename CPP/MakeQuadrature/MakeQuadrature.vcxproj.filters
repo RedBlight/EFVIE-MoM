@@ -18,6 +18,18 @@
     <ClInclude Include="..\Source\TetraMeshFile.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\TriQuadGenerator7.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_LuVector.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TetraFaceFile.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TetraFace.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\MakeQuadrature.cpp">

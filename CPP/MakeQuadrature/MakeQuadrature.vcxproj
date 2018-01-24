@@ -35,9 +35,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\TetraFace.hpp" />
+    <ClInclude Include="..\Source\TetraFaceFile.hpp" />
     <ClInclude Include="..\Source\TetraMeshFile.hpp" />
     <ClInclude Include="..\Source\TetraQuadFile.hpp" />
     <ClInclude Include="..\Source\TetraQuadGenerator4.hpp" />
+    <ClInclude Include="..\Source\TriQuadGenerator7.hpp" />
+    <ClInclude Include="..\Source\_LuVector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\MakeQuadrature.cpp" />

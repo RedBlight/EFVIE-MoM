@@ -118,7 +118,7 @@ public:
 	bool Save_tetraquad( const string& filePath )
 	{
 		fstream quadFile( filePath, ios::trunc | ios::out | ios::binary );
-
+		
 		if( !quadFile.good() )
 		{
 			quadFile.close();

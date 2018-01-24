@@ -1,6 +1,9 @@
 #include "TetraMeshFile.hpp"
+#include "TetraFaceFile.hpp"
 #include "TetraQuadFile.hpp"
+#include "TriQuadFile.hpp"
 #include "TetraQuadGenerator4.hpp"
+#include "TriQuadGenerator7.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -20,20 +23,22 @@ int main( int argc, char *argv[] )
 		Some Sanity checks first.
 	**/
 
-	if( argc < 3 )
+	if( argc < 5 )
 	{
-		cout << "Not enough arguments! Please specify 'input.tetramesh', and 'output.tetraquad' filenames as 1st and 2rd arguments.";
+		cout << "Not enough arguments! Please specify 'input.tetramesh', 'input.tetraface', 'output.tetraquad', 'output.triquad' filenames as 1st and 2rd arguments.";
 		return 1;
 	}
 
-	if( argc > 3 )
+	if( argc > 5 )
 	{
-		cout << "More than 3 arguments!?! There is something fishy here! Please specify 'input.tetramesh', and 'output.tetraquad' filenames as 1st and 2rd arguments, and nothing more.";
+		cout << "More than 4 arguments!?! There is something fishy here!";
 		return 1;
 	}
 
 	string meshFileName = argv[ 1 ];
-	string quadFileName = argv[ 2 ];
+	string faceFileName = argv[ 2 ];
+	string tetqFileName = argv[ 3 ];
+	string triqFileName = argv[ 4 ];
 
 	ifstream meshFileTest( meshFileName ); 
 	if( !meshFileTest )
@@ -42,6 +47,14 @@ int main( int argc, char *argv[] )
 		return 1;
 	}
 	meshFileTest.close();
+
+	ifstream faceFileTest( faceFileName ); 
+	if( !faceFileTest )
+	{
+		cout << faceFileName << " file doesn't exist." << endl;
+		return 1;
+	}
+	faceFileTest.close();
 
 
 
@@ -64,22 +77,60 @@ int main( int argc, char *argv[] )
 	cout << "Done!" << endl;
 
 
+
+	/**
+		Load .tetraface file.
+	**/
+
+	cout << "Loading " << faceFileName << " file... ";
+
+    TetraFaceFile< double > faceFile;
+
+	bool faceLoaded = faceFile.Load_tetraface( faceFileName );
+
+	if( !faceLoaded )
+	{
+		cout << "An error occured while loading!" << endl;
+		return 1;
+	}
+
+	cout << "Done!" << endl;
+
+
+
 	/**
 		Generate .tetraquad
 	**/
 
-	cout << "Generating " << quadFileName << " file... ";
+	cout << "Generating " << tetqFileName << " file... ";
 
 	// add more checks here
 
-	TetraQuadGenerator4< double > quadGen;
-	TetraQuadFile< double > quadFile;
-	quadFile.Initialise( meshFile.tetraCount_, 4 );
-	quadGen.Generate( quadFile.quadData_, meshFile.tetraVertexIndex_, meshFile.vertexData_, meshFile.tetraCount_ );
-	quadFile.Save_tetraquad( quadFileName );
+	TetraQuadGenerator4< double > tetQuadGen;
+	TetraQuadFile< double > tetqFile;
+	tetqFile.Initialise( meshFile.tetraCount_, 4 );
+	tetQuadGen.Generate( tetqFile.quadData_, meshFile.tetraVertexIndex_, meshFile.vertexData_, meshFile.tetraCount_ );
+	tetqFile.Save_tetraquad( tetqFileName );
 
 	cout << "Done!" << endl;
 
+
+
+	/**
+		Generate .triquad
+	**/
+
+	cout << "Generating " << triqFileName << " file... ";
+
+	// add more checks here
+
+	TriQuadGenerator7< double > triQuadGen;
+	TriQuadFile< double > triqFile;
+	triqFile.Initialise( faceFile.faceCount_, 7 );
+	triQuadGen.Generate( triqFile.quadData_, faceFile.faceVertexIndex_, meshFile.vertexData_, faceFile.faceCount_ );
+	triqFile.Save_triquad( triqFileName );
+
+	cout << "Done!" << endl;
 
 
 	auto tEnd = chrono::high_resolution_clock::now();
