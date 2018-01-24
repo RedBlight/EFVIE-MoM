@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeFace", "MakeFace\MakeFa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Electrify", "Electrify\Electrify.vcxproj", "{0CC46981-DB2D-4B66-9B6E-50334762BB1F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeQuadrature", "MakeQuadrature\MakeQuadrature.vcxproj", "{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CPU_Debug|x64 = CPU_Debug|x64
@@ -69,6 +71,22 @@ Global
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Release|x64.Build.0 = Unified_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Debug|x64.ActiveCfg = CPU_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Debug|x64.Build.0 = CPU_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Release|x64.ActiveCfg = CPU_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Release|x64.Build.0 = CPU_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Debug|x64.ActiveCfg = CUDA_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Debug|x64.Build.0 = CUDA_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Release|x64.ActiveCfg = CUDA_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Release|x64.Build.0 = CUDA_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Debug|x64.ActiveCfg = OpenCL_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Debug|x64.Build.0 = OpenCL_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Release|x64.ActiveCfg = OpenCL_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Release|x64.Build.0 = OpenCL_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Debug|x64.ActiveCfg = Unified_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
+		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Release|x64.Build.0 = Unified_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

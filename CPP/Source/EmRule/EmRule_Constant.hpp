@@ -22,7 +22,8 @@ protected:
 			return false;
 		}
 		ruleData_ = ruleData;
-		
+
+		return true;
 	}
 
 	bool GenerateProps_( T* propArr, const T* vertexList, const size_t* tetraList, const size_t& tetraCount ) const override
