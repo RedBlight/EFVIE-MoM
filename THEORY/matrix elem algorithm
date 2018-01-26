@@ -1,0 +1,30 @@
+
+find tip points with array fire set operations.
+
+calculate areas and volumes
+
+af::array vec_r_V_m = load from quad pointer
+
+af::array mag_x_V_m = 1. row
+af::array mag_y_V_m = 2. row
+af::array mag_z_V_m = 3. row
+
+n'leri tranpos yapıp da sakla.
+
+af::array mag_R_V_V = m'leri aşağı repeat, n'leri sağa repeat yap, çıkart, ^2, topla, sqrt.
+
+af::array mag_G_N_V_V = ( exp( jkR ) - 1 ) / R; if R = 0, val = jk
+
+for( 64 )
+{
+	G_I_V_V[i] = calculate analytical( params )
+}
+
+load analytical vectors to arrayfire
+
+do summations for integrals
+
+Do summation for the matrix elem
+
+
+
