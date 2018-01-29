@@ -6,6 +6,7 @@
 #include <utility>
 #include <iterator>
 #include <map>
+#include <iostream>
 #include "EmRule.hpp"
 #include "EmRule_Constant.hpp"
 
@@ -27,7 +28,7 @@ class EmRuleFactory
 {
 public:
 	static EmRuleFactory< T >* pInstance_;
-	static size_t refCount_ = 0;
+	static size_t refCount_;
 	
 public:
 	map< string, unsigned long long int > ruleMap_;
@@ -47,6 +48,9 @@ public:
 
 	EmRuleFactory()
 	{
+		
+		cout << "!!EMRULEFACTORY Created!! " << refCount_ << endl;
+
 		ruleMap_.clear();
 
 		// Register all kinds of EmRule variants here
@@ -59,9 +63,10 @@ public:
 	~EmRuleFactory()
 	{
 		--refCount_;
-
+		cout << "!!EMRULEFACTORY Destroyed!! " << refCount_ << endl;
 		if( refCount_ == 0 )
 		{
+			cout << "!!EMRULEFACTORY DELETED!!" << endl;
 			for( const auto& elem : ruleMap_ )
 			{
 				delete reinterpret_cast< EmRule< T >* >( elem.second );
@@ -89,6 +94,9 @@ public:
 
 template< class T >
 EmRuleFactory< T >* EmRuleFactory< T >::pInstance_ = nullptr;
+
+template< class T >
+size_t EmRuleFactory< T >::refCount_ = 0;
 
 
 

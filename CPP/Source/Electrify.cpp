@@ -101,9 +101,9 @@ int main( int argc, char *argv[] )
 	EmPropFile< double > propFile;
 	propFile.Initialise( meshFile.tetraCount_ );
 
-	EmRuleFactory< double >* ruleFactory = EmRuleFactory< double >::GetInstance();
+	EmRuleFactory< double >& ruleFactory = EmRuleFactory< double >::GetInstance();
 
-	EmRule< double >* emRule = ruleFactory->GetRule( ruleFile.ruleType_ );
+	EmRule< double >* emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
 	if( emRule == nullptr )
 	{
 		cout << "Error!" << endl;

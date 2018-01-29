@@ -21,9 +21,6 @@
     <ClInclude Include="..\Source\IncWave\IncWave_Base.hpp">
       <Filter>Headers\IncWave</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\IncWave\IncWave_Constant.hpp">
-      <Filter>Headers\IncWave</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp">
       <Filter>Headers\IncWave</Filter>
     </ClInclude>

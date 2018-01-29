@@ -6,16 +6,16 @@
 #include <utility>
 #include <iterator>
 #include <map>
-#include "EmRule.hpp"
-#include "EmRule_Constant.hpp"
+#include "IncWave.hpp"
+#include "IncWave_Plane.hpp"
 
 using namespace std;
 /*
 	This definition of the map had some internal problems, that I was not able to figure out:
-	map< string, EmRule< T >* > ruleMap_;
+	map< string, IncWave< T >* > typeMap_;
 
 	So instead, I did it like this:
-	map< string, unsigned long long int > ruleMap_;
+	map< string, unsigned long long int > typeMap_;
 
 	... and then casted that int to the pointer.
 
@@ -23,7 +23,7 @@ using namespace std;
 */
 
 template< class T >
-class EmRuleFactory
+class IncWaveFactory
 {
 public:
 	static EmRuleFactory< T >* pInstance_;

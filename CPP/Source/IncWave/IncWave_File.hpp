@@ -9,13 +9,13 @@
 using namespace std;
 
 template< class T >
-class EmRuleFile
+class IncWaveFile
 {
 public:
 
 	bool init_;
-	string ruleType_;
-	vector< T > ruleData_;
+	string waveType_;
+	vector< T > waveData_;
 
 public:
 	EmRuleFile() :

@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\IncWave\IncWave_Base.hpp" />
-    <ClInclude Include="..\Source\IncWave\IncWave_Constant.hpp" />
     <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp" />
     <ClInclude Include="..\Source\IncWave\IncWave_File.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector.hpp" />
