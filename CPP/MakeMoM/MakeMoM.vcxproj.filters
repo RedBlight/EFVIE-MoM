@@ -2,36 +2,33 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
-      <UniqueIdentifier>{3d4909c3-80b2-4ae9-8948-f887fba384bb}</UniqueIdentifier>
+      <UniqueIdentifier>{e1f09815-2aaa-4bfd-8829-338482da6936}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source">
-      <UniqueIdentifier>{ea9df042-3a9e-4385-ad0e-54d4da30aa47}</UniqueIdentifier>
+      <UniqueIdentifier>{d8d939e0-acd4-4474-b5a0-cb9e9e71d83b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IncWave">
+      <UniqueIdentifier>{4fcb3530-35c5-4009-8774-80b25d7eda79}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\LuVector">
-      <UniqueIdentifier>{3c3f561e-5326-4d15-b54d-29045326266a}</UniqueIdentifier>
+      <UniqueIdentifier>{42c4eda3-d1ca-43ac-b01a-7c31e9c51d93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\TetraQuadGenerator4.hpp">
+    <ClInclude Include="..\Source\_IncWave.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\TetraQuadFile.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="..\Source\IncWave\IncWave_Base.hpp">
+      <Filter>Headers\IncWave</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\TetraMeshFile.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="..\Source\IncWave\IncWave_Constant.hpp">
+      <Filter>Headers\IncWave</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\TriQuadGenerator7.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp">
+      <Filter>Headers\IncWave</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\_LuVector.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\TetraFaceFile.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\TetraFace.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="..\Source\IncWave\IncWave_File.hpp">
+      <Filter>Headers\IncWave</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\LuVector\LuVector.hpp">
       <Filter>Headers\LuVector</Filter>
@@ -39,10 +36,10 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Body.hpp">
       <Filter>Headers\LuVector</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp">
+    <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp">
       <Filter>Headers\LuVector</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp">
+    <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp">
       <Filter>Headers\LuVector</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp">
@@ -54,10 +51,8 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp">
       <Filter>Headers\LuVector</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Source\MakeQuadrature.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
+    <ClInclude Include="..\Source\_LuVector.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

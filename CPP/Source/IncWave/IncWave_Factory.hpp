@@ -1,5 +1,5 @@
-#ifndef EM_RULE_FACTORY_INCLUDED
-#define EM_RULE_FACTORY_INCLUDED
+#ifndef INC_WAVE_FACTORY_INCLUDED
+#define INC_WAVE_FACTORY_INCLUDED
 
 #include <string>
 #include <list>
@@ -27,22 +27,19 @@ class EmRuleFactory
 {
 public:
 	static EmRuleFactory< T >* pInstance_;
-	static size_t refCount_ = 0;
 	
 public:
 	map< string, unsigned long long int > ruleMap_;
 
 public:
-	static EmRuleFactory< T >& GetInstance()
+	static EmRuleFactory< T >* GetInstance()
 	{
-		++refCount_;
-
-		if( pInstance_ == nullptr )
+		if (pInstance_ == nullptr)
 		{
 			pInstance_ = new EmRuleFactory< T >();
 		}
 
-		return *pInstance_;
+		return pInstance_;
 	}
 
 	EmRuleFactory()
@@ -58,21 +55,17 @@ public:
 
 	~EmRuleFactory()
 	{
-		--refCount_;
+		delete pInstance_;
 
-		if( refCount_ == 0 )
+		EmRule< T >* pp;
+
+		for( const auto& elem : ruleMap_ )
 		{
-			for( const auto& elem : ruleMap_ )
-			{
-				delete reinterpret_cast< EmRule< T >* >( elem.second );
-			}
-
-			delete pInstance_;
-			pInstance_ = nullptr;
+			delete reinterpret_cast< EmRule< T >* >( elem.second );
 		}
 	}
 
-	EmRule< T >* GetRule( const string& name )
+	EmRule< T >* GetRule(const string& name)
 	{
 		auto it = ruleMap_.find( name );
 		if( it == ruleMap_.end() )
@@ -81,7 +74,7 @@ public:
 		}
 		else
 		{
-			return reinterpret_cast< EmRule< T >* >( it->second )->Clone();
+			return reinterpret_cast< EmRule< T >* >( it->second );
 		}
 	}
 

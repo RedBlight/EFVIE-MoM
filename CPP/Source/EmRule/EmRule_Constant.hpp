@@ -1,7 +1,7 @@
 #ifndef EM_RULE_CONSTANT_INCLUDED
 #define EM_RULE_CONSTANT_INCLUDED
 
-#include "EmRule_Base.hpp"
+#include "EmRule.hpp"
 
 template< class T >
 class EmRule_Constant: public EmRule< T >
@@ -37,6 +37,11 @@ protected:
 		}
 
 		return true;
+	}
+
+	EmRule< T >* Clone_() const override
+	{
+		return new EmRule_Constant< T >( *this );
 	}
 
 public:

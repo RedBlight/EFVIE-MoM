@@ -36,6 +36,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\EmPropFile.hpp" />
+    <ClInclude Include="..\Source\EmRule\EmRule_Base.hpp" />
+    <ClInclude Include="..\Source\EmRule\EmRule_Constant.hpp" />
+    <ClInclude Include="..\Source\EmRule\EmRule_Factory.hpp" />
+    <ClInclude Include="..\Source\EmRule\EmRule_File.hpp" />
     <ClInclude Include="..\Source\TetraMeshFile.hpp" />
     <ClInclude Include="..\Source\_EmRule.hpp" />
   </ItemGroup>
@@ -144,18 +148,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_Debug|x64'">
     <IntDir>$(OutDir)temp\Debug\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unified_Debug|x64'">
     <IntDir>$(OutDir)temp\Debug\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CPU_Debug|x64'">
     <IntDir>$(OutDir)temp\Debug\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='OpenCL_Debug|x64'">
     <IntDir>$(OutDir)temp\Debug\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_Release|x64'">
     <OutDir>$(ProjectDir)CUDA\</OutDir>
@@ -171,15 +179,19 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_Release|x64'">
     <IntDir>$(OutDir)temp\Release\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unified_Release|x64'">
     <IntDir>$(OutDir)temp\Release\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CPU_Release|x64'">
     <IntDir>$(OutDir)temp\Release\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='OpenCL_Release|x64'">
     <IntDir>$(OutDir)temp\Release\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Source\</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_Debug|x64'">
     <ClCompile>

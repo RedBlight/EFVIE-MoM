@@ -18,13 +18,16 @@ namespace LUV
 	template< class T >
 	using LuVector3 = LuVector< 3, T >;
 
+	template< class T >
+	using LuVector3c = LuVector< 3, complex< T > >;
+
 	using LuVector2f = LuVector< 2, float >;
 	using LuVector2d = LuVector< 2, double >;
-	using LuVector2c = LuVector< 2, complex< double > >;
+	using LuVector2cd = LuVector< 2, complex< double > >;
 
 	using LuVector3f = LuVector< 3, float >;
 	using LuVector3d = LuVector< 3, double >;
-	using LuVector3c = LuVector< 3, complex< double > >;
+	using LuVector3cd = LuVector< 3, complex< double > >;
 
 };
 

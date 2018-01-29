@@ -1,5 +1,5 @@
-#ifndef EM_RULE_BASE_INCLUDED
-#define EM_RULE_BASE_INCLUDED
+#ifndef EM_RULE_INCLUDED
+#define EM_RULE_INCLUDED
 
 #include <fstream>
 #include <string>
@@ -14,6 +14,7 @@ class EmRule
 protected:
 	virtual bool SetRuleData_( const vector< T >& ruleData ) = 0;
 	virtual bool GenerateProps_( T* propArr, const T* vertexList, const size_t* tetraList, const size_t& tetraCount ) const = 0;
+	virtual EmRule< T >* Clone_() const = 0;
 
 public:
 
@@ -25,6 +26,11 @@ public:
 	bool GenerateProps( T* propArr, const T* vertexList, const size_t* tetraList, const size_t& tetraCount ) const
 	{
 		return GenerateProps_( propArr, vertexList, tetraList, tetraCount );
+	}
+
+	EmRule< T >* Clone() const
+	{
+		return Clone_();
 	}
 
 };

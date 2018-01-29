@@ -1,0 +1,23 @@
+.incwave file format
+#TYPE# : plane, dipol, etc.
+#PARAM1#
+#PARAM2#
+#PARAM3#
+...
+#PARAMN#
+
+Example plane wave:
+########
+Plane #type
+WaveLength #in terms of meters
+DirX #forward direction
+DirY
+DirZ
+PolX #polarization, must be orthogonal to forward direction
+PolY
+PolZ
+PhaseOriginX # the point where the phase of the incoming plane wave is PhaseOffset
+PhaseOriginY
+PhaseOriginZ
+PhaseOffset # between 0 and 2pi
+########
