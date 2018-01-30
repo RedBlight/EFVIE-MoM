@@ -21,15 +21,15 @@ int main( int argc, char *argv[] )
 	string triqFileName = argv[ 4 ];
 
     TetraMeshFile< FLOAT_T > meshFile;
-	meshFile.Load_tetramesh( meshFileName );
+	meshFile.Load( meshFileName );
 
     TetraFaceFile< FLOAT_T > faceFile;
-	faceFile.Load_tetraface( faceFileName );
+	faceFile.Load( faceFileName );
 
 	TetraQuadGenerator64< FLOAT_T > tetQuadGen;
 	TetraQuadFile< FLOAT_T > tetqFile;
 	tetqFile.Initialise( meshFile.tetraCount_, 4 );
-	tetQuadGen.Generate( tetqFile.quadData_, meshFile.tetraVertexIndex_, meshFile.vertexData_, meshFile.tetraCount_ );
+	tetQuadGen.Generate( tetqFile.quadData_, meshFile.tetraVertexIndex_.operator->(), meshFile.vertexData_.operator->(), meshFile.tetraCount_ );
 	tetqFile.Save_tetraquad( tetqFileName );
 
 	TriQuadGenerator7< FLOAT_T > triQuadGen;

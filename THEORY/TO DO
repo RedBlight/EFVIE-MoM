@@ -1,3 +1,19 @@
+NOTLAR:
+
+ * Neden tüm class'lar template?
+Aslında çoğunlukla tüm kodlar kolayca headerlarda bulunsun diye.
+
+ * Neden tüm tipler template parameter değil de _BitDepthDefines.hpp yazılı?
+Tüm tipler template olduğu zaman, arrayfire eleman tipleri de işin içine gireceği için karmaşıklık çok artacaktı. Her ne kadar kodlar çok daha genelleşmiş olacak olsa da, şimdilik bu kadar karmaşıklığın olmaması daha iyi. 
+
+TODO short term:
+Dosya tipleri yalnızca okuma yazma yapacak.
+İçlerindeki eylemler için yeni bir operasyon classı yaz, eylemleri onlan yap.
+
+unv ile tetramesh file classlarını ayrıştır
+
+rhs'yi kuran appleti yaz.
+
 TODO:
 
  * tetraquad ve triquad algoritmalarını çözümle
@@ -125,10 +141,52 @@ A = 2 + 4 * N * [0]
 
 
 
+64 bit:
+# MakeMesh # 
+Vertex count: 2718 
+Tetrahedron count: 11885 
+# Finished in 0.0734021 sec. # 
+ 
+# MakeFace # 
+Tetrahedron count: 11885 
+Triangle count: 25155 
+# Finished in 0.0485957 sec. # 
+ 
+# Electrify # 
+EmRule Type: Constant 
+Tetrahedron Count: 11885 
+# Finished in 0.00175376 sec. # 
+ 
+# Make Quadrature # 
+Tetrahedron count: 11885 
+TetraQuad count: 64 
+Face count: 25155 
+TriQuad count: 7 
+# Finished in 1.05491 sec. # 
 
+32 bit:
 
-
-
+# MakeMesh # 
+Vertex count: 2718 
+Tetrahedron count: 11885 
+# Finished in 0.070738 sec. # 
+ 
+# MakeFace # 
+Tetrahedron count: 11885 
+Triangle count: 25155 
+# Finished in 0.0697055 sec. # 
+ 
+# Electrify # 
+EmRule Type: Constant 
+Tetrahedron Count: 11885 
+# Finished in 0.00140092 sec. # 
+ 
+# Make Quadrature # 
+Tetrahedron count: 11885 
+TetraQuad count: 64 
+Face count: 25155 
+TriQuad count: 7 
+# Finished in 1.16137 sec. # 
 
 
 
