@@ -1,6 +1,7 @@
 #include "TetraMeshFile.hpp"
 #include "_EmRule.hpp"
 #include "EmPropFile.hpp"
+#include "EmRuleFile.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -103,7 +104,7 @@ int main( int argc, char *argv[] )
 
 	EmRuleFactory< double >& ruleFactory = EmRuleFactory< double >::GetInstance();
 
-	EmRule< double >* emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
+	shared_ptr< EmRule< double > > emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
 	if( emRule == nullptr )
 	{
 		cout << "Error!" << endl;

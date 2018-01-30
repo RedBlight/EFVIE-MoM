@@ -7,10 +7,71 @@
 #include <iterator>
 #include <map>
 #include <iostream>
+#include <memory>
+#include <_EmRule.hpp>
 #include "EmRule.hpp"
 #include "EmRule_Constant.hpp"
 
 using namespace std;
+
+/*
+	USAGE:
+	EmRuleFactory< T >& myFac = EmRuleFactory< T >::GetInstance();
+	shared_ptr< EmRule< T > > myRule = myFac.GetRule( "MyRule" );
+*/
+template< class T >
+class EmRuleFactory
+{
+public:
+	static EmRuleFactory< T >& GetInstance()
+	{
+		static EmRuleFactory< T > instance_;
+		return instance_;
+	}
+
+	map< string, shared_ptr< EmRule< T > > > ruleMap_;
+	
+private:
+	EmRuleFactory()
+	{
+		ruleMap_.clear();
+
+		// Register all kinds of EmRule variants here
+
+		ruleMap_[ "Constant" ] = shared_ptr< EmRule< T > >( new EmRule_Constant< T >() );
+
+		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
+		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
+	}
+
+	~EmRuleFactory()
+	{
+	}
+
+public:
+	EmRuleFactory( const EmRuleFactory< T >& ) = delete;
+    void operator=( const EmRuleFactory< T >& ) = delete;
+
+	shared_ptr< EmRule< T > > GetRule( const string& name )
+	{
+		// Fecking Visual Studio, can compile this, but can't identify the type in IDE. 
+		auto it = ruleMap_.find( name );
+		if( it == ruleMap_.end() )
+		{
+			return nullptr;
+		}
+		else
+		{
+			return it->second->Clone();
+		}
+	}
+
+};
+
+
+
+
+// FOR OLD
 /*
 	This definition of the map had some internal problems, that I was not able to figure out:
 	map< string, EmRule< T >* > ruleMap_;
@@ -21,88 +82,159 @@ using namespace std;
 	... and then casted that int to the pointer.
 
 	Dayumn C++, you're scary.
+
+	USAGE:
+	EmRuleFactory< T >& myFac = EmRuleFactory< T >::GetInstance();
+	EmRule< T >* myRule = myFac.GetRule( "MyRule" );
 */
 
-template< class T >
-class EmRuleFactory
-{
-public:
-	static EmRuleFactory< T >* pInstance_;
-	static size_t refCount_;
-	
-public:
-	map< string, unsigned long long int > ruleMap_;
-
-public:
-	static EmRuleFactory< T >& GetInstance()
-	{
-		++refCount_;
-
-		if( pInstance_ == nullptr )
-		{
-			pInstance_ = new EmRuleFactory< T >();
-		}
-
-		return *pInstance_;
-	}
-
-	EmRuleFactory()
-	{
-		
-		cout << "!!EMRULEFACTORY Created!! " << refCount_ << endl;
-
-		ruleMap_.clear();
-
-		// Register all kinds of EmRule variants here
-
-		ruleMap_[ "Constant" ] = reinterpret_cast< unsigned long long int >( new EmRule_Constant< T >() );
-		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
-		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
-	}
-
-	~EmRuleFactory()
-	{
-		--refCount_;
-		cout << "!!EMRULEFACTORY Destroyed!! " << refCount_ << endl;
-		if( refCount_ == 0 )
-		{
-			cout << "!!EMRULEFACTORY DELETED!!" << endl;
-			for( const auto& elem : ruleMap_ )
-			{
-				delete reinterpret_cast< EmRule< T >* >( elem.second );
-			}
-
-			delete pInstance_;
-			pInstance_ = nullptr;
-		}
-	}
-
-	EmRule< T >* GetRule( const string& name )
-	{
-		auto it = ruleMap_.find( name );
-		if( it == ruleMap_.end() )
-		{
-			return nullptr;
-		}
-		else
-		{
-			return reinterpret_cast< EmRule< T >* >( it->second )->Clone();
-		}
-	}
-
-};
-
-template< class T >
-EmRuleFactory< T >* EmRuleFactory< T >::pInstance_ = nullptr;
-
-template< class T >
-size_t EmRuleFactory< T >::refCount_ = 0;
+////////////////////////
+// OLD V3
+////////////////////////
+//template< class T >
+//class EmRuleFactory
+//{
+//public:
+//	static EmRuleFactory< T >& GetInstance()
+//	{
+//		static EmRuleFactory< T > instance_;
+//		return instance_;
+//	}
+//
+//	map< string, unsigned long long int > ruleMap_;
+//	
+//private:
+//	EmRuleFactory()
+//	{
+//		
+//		cout << "!!EMRULEFACTORY Created!! " << endl;
+//
+//		ruleMap_.clear();
+//
+//		// Register all kinds of EmRule variants here
+//
+//		ruleMap_[ "Constant" ] = reinterpret_cast< unsigned long long int >( new EmRule_Constant< T >() );
+//
+//		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
+//		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
+//	}
+//
+//	~EmRuleFactory()
+//	{
+//		cout << "!!EMRULEFACTORY Destroyed!! " << endl;
+//
+//		for( const auto& elem : ruleMap_ )
+//		{
+//			delete reinterpret_cast< EmRule< T >* >( elem.second );
+//		}
+//	}
+//
+//public:
+//	EmRuleFactory( const EmRuleFactory< T >& ) = delete;
+//    void operator=( const EmRuleFactory< T >& ) = delete;
+//
+//	shared_ptr< EmRule< T > > GetRule( const string& name )
+//	{
+//		auto it = ruleMap_.find( name );
+//		if( it == ruleMap_.end() )
+//		{
+//			return nullptr;
+//		}
+//		else
+//		{
+//			return reinterpret_cast< EmRule< T >* >( it->second )->Clone();
+//		}
+//	}
+//
+//};
 
 
 
 
+////////////////////////
+// OLD V2
+////////////////////////
+//template< class T >
+//class EmRuleFactory
+//{
+//public:
+//	static EmRuleFactory< T >* pInstance_;
+//	static size_t refCount_;
+//	
+//public:
+//	map< string, unsigned long long int > ruleMap_;
+//
+//public:
+//	static EmRuleFactory< T >& GetInstance()
+//	{
+//		++refCount_;
+//
+//		if( pInstance_ == nullptr )
+//		{
+//			pInstance_ = new EmRuleFactory< T >();
+//		}
+//
+//		return *pInstance_;
+//	}
+//
+//	EmRuleFactory()
+//	{
+//		
+//		cout << "!!EMRULEFACTORY Created!! " << refCount_ << endl;
+//
+//		ruleMap_.clear();
+//
+//		// Register all kinds of EmRule variants here
+//
+//		ruleMap_[ "Constant" ] = reinterpret_cast< unsigned long long int >( new EmRule_Constant< T >() );
+//		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
+//		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
+//	}
+//
+//	~EmRuleFactory()
+//	{
+//		--refCount_;
+//		cout << "!!EMRULEFACTORY Destroyed!! " << refCount_ << endl;
+//		if( refCount_ == 0 )
+//		{
+//			cout << "!!EMRULEFACTORY DELETED!!" << endl;
+//			for( const auto& elem : ruleMap_ )
+//			{
+//				delete reinterpret_cast< EmRule< T >* >( elem.second );
+//			}
+//
+//			delete pInstance_; // also calls the destructor, so refCount goes to -1.
+//			++refCount_;
+//			pInstance_ = nullptr;
+//		}
+//	}
+//
+//	EmRule< T >* GetRule( const string& name )
+//	{
+//		auto it = ruleMap_.find( name );
+//		if( it == ruleMap_.end() )
+//		{
+//			return nullptr;
+//		}
+//		else
+//		{
+//			return reinterpret_cast< EmRule< T >* >( it->second )->Clone();
+//		}
+//	}
+//
+//};
+//
+//template< class T >
+//EmRuleFactory< T >* EmRuleFactory< T >::pInstance_ = nullptr;
+//
+//template< class T >
+//size_t EmRuleFactory< T >::refCount_ = 0;
 
 
+
+////////////////////////
+// OLD V1
+////////////////////////
 
 
 //template< class T >

@@ -15,6 +15,9 @@
     <ClInclude Include="..\Source\StringFuncs.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\UnvTetraMeshFile.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\MakeMesh.cpp">

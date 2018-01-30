@@ -27,11 +27,11 @@
     <ClInclude Include="..\Source\EmRule\EmRule_Constant.hpp">
       <Filter>Headers\EmRule</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\EmRule\EmRule_Base.hpp">
+    <ClInclude Include="..\Source\EmRule\EmRule.hpp">
       <Filter>Headers\EmRule</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\EmRule\EmRule_File.hpp">
-      <Filter>Headers\EmRule</Filter>
+    <ClInclude Include="..\Source\EmRuleFile.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

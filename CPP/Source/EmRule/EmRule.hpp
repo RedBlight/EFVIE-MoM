@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class EmRule
 protected:
 	virtual bool SetRuleData_( const vector< T >& ruleData ) = 0;
 	virtual bool GenerateProps_( T* propArr, const T* vertexList, const size_t* tetraList, const size_t& tetraCount ) const = 0;
-	virtual EmRule< T >* Clone_() const = 0;
+	virtual shared_ptr< EmRule< T > > Clone_() const = 0;
 
 public:
 
@@ -28,7 +29,7 @@ public:
 		return GenerateProps_( propArr, vertexList, tetraList, tetraCount );
 	}
 
-	EmRule< T >* Clone() const
+	shared_ptr< EmRule< T > > Clone() const
 	{
 		return Clone_();
 	}

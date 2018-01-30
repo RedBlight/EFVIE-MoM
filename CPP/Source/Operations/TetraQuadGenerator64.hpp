@@ -1,5 +1,5 @@
-#ifndef TETRA_QUAD_GENERATOR4_INCLUDED
-#define TETRA_QUAD_GENERATOR4_INCLUDED
+#ifndef TETRA_QUAD_GENERATOR64_INCLUDED
+#define TETRA_QUAD_GENERATOR64_INCLUDED
 
 #include <fstream>
 #include <string>
@@ -9,12 +9,17 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+#include <memory>
 #include <arrayfire.h>
 
 using namespace std;
 
+/*
+C++ implementation of tetraquad.m file, where N=4, so there N^3 = 64 quadrature points for each tetrahedra.
+*/
+
 template< class T >
-class TetraQuadGenerator4
+class TetraQuadGenerator64
 {
 public:
 	af::array q1_; // these are taken directly from tetraquad.m file
@@ -46,7 +51,7 @@ public:
 	//af::array WXYZ_; // transpose and generate a host pointer
 
 public:
-	TetraQuadGenerator4() :
+	TetraQuadGenerator64() :
 		q1_( 4, f64 ),
 		q2_( 4, f64 ),
 		q3_( 4, f64 ),
@@ -147,6 +152,11 @@ public:
 		diffMat_.write( diffMat, 8 * 16 );
 	}
 
+	~TetraQuadGenerator64()
+	{
+
+	}
+
 	void Generate( T* quadData, const size_t* indexList, const T* vertexList, const size_t& tetraCount ) const
 	{
 		for( size_t idt = 0; idt < tetraCount; ++idt )
@@ -183,82 +193,15 @@ public:
 			af::array vertMat_( 4, 3, f64 );
 			vertMat_.write( vertMat, 8 * 12 );
 
-			//cout << "A" << endl;
-
 			af::array vertDiffX_ = af::matmul( diffMat_, vertMat_ );
-			
-			//cout << "B" << endl;
-
 			af::array W_ = abs( af::det< double >( vertDiffX_.rows( 1, 3 ) ) ) * Wr_;
-			
-	/*		cout << "C" << endl;*/
-
-			
-			//af_print( C1_.type() );
-			//af_print( Qx_.type() );
-			//af_print( Qy_.type() );
-			//af_print( Qz_.type() );
-
-			//af::array C1( C1_ );
-
-			//af::array Qx( Qx_ );
-
-			//af::array A1;
-
-			//try {
-
-			//	A1 = af::join( 2, C1, Qx ).as( f64 );
-
-			//} catch (af::exception& e) {
-
-			//	fprintf(stderr, "%s\n", e.what());
-			//	throw;
-			//}
-
-			//
-			//cout << "C11" << endl;
-
-			//A1 = af::join( 1, A1, Qy_ );
-
-			//cout << "C12" << endl;
-
-			//A1 = af::join( 1, A1, Qz_ );
-
-			//cout << "C13" << endl;
-			//
-			//cout << "C1" << endl;
-
-			//af::array A2 = af::matmul( A1, vertDiffX_ );
-
-			//cout << "C2" << endl;
-
-			//af::array A3 = af::join( 1, W_, A2 );
-
-			//cout << "C3" << endl;
-
 			af::array WXYZ_ = af::join( 1, W_, af::matmul( af::join( 1, C1_, Qx_, Qy_, Qz_ ), vertDiffX_ ) );
-			
-			//cout << "D" << endl;
 
-			T* hostQuadData = transpose( WXYZ_ ).host< T >();
-
-			//cout << "E" << endl;
+			shared_ptr< T > hostQuadData( transpose( WXYZ_ ).host< T >() );
 
 			copy( hostQuadData, hostQuadData + 4 * 64, &( quadData[ idQuad ] ) );
 
-			//if( idt == 0 )
-			//{
-			//	cout << abs( af::det< double >( vertDiffX_.rows( 1, 3 ) ) ) << endl;
-			//	af::print( "vertices", vertMat_, 12 );
-			//	af::print( "WXYZ", WXYZ_, 12 );
-			//}
-
 		}
-	}
-
-	~TetraQuadGenerator4()
-	{
-
 	}
 
 };

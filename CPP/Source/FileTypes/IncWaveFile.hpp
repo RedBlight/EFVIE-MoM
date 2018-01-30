@@ -18,15 +18,15 @@ public:
 	vector< T > waveData_;
 
 public:
-	EmRuleFile() :
+	IncWaveFile() :
 		init_( false ),
-		ruleType_( "" ),
-		ruleData_()
+		waveType_( "" ),
+		waveData_()
 	{
 
 	}
 
-	~EmRuleFile()
+	~IncWaveFile()
 	{
 
 	}
@@ -36,33 +36,33 @@ public:
 		if( init_ )
 		{
 			init_ = false;
-			ruleType_ = "";
-			ruleData_.clear();
+			waveType_ = "";
+			waveData_.clear();
 		}
 	}
 
-	bool Load_emrule( const string& filePath )
+	bool Load_incwave( const string& filePath )
 	{
 		if( !init_ )
 		{
 			Reset();
 		}
 
-		fstream ruleFile( filePath, ios::in );
+		fstream waveFile( filePath, ios::in );
 
-		if( !ruleFile.good() )
+		if( !waveFile.good() )
 		{
-			ruleFile.close();
+			waveFile.close();
 			return false;
 		}
 
-		ruleFile >> ruleType_;
+		waveFile >> ruleType_;
 		
 		T lineData;
-		while( !ruleFile.eof() )
+		while( !waveFile.eof() )
 		{
-			ruleFile >> lineData;
-			ruleData_.push_back( lineData );
+			waveFile >> lineData;
+			waveData_.push_back( lineData );
 		}
 
 		init_ = true;

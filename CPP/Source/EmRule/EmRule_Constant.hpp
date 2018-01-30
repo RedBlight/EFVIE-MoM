@@ -39,13 +39,12 @@ protected:
 		return true;
 	}
 
-	EmRule< T >* Clone_() const override
+	shared_ptr< EmRule< T > > Clone_() const override
 	{
-		return new EmRule_Constant< T >( *this );
+		return shared_ptr< EmRule< T > >( new EmRule_Constant< T >( *this ) );
 	}
 
 public:
-	
 	EmRule_Constant()
 	{
 
