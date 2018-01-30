@@ -132,6 +132,9 @@
     <ClInclude Include="..\Source\_BitDepthDefines.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Applets\MakeQuadrature.cpp">

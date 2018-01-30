@@ -57,6 +57,7 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
+    <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp" />
     <ClInclude Include="..\Source\Operations\TetraQuadGenerator64.hpp" />
     <ClInclude Include="..\Source\Operations\TriQuadGenerator7.hpp" />
     <ClInclude Include="..\Source\Tools\StringFuncs.hpp" />

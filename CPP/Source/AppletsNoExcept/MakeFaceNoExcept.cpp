@@ -18,10 +18,45 @@ int main( int argc, char *argv[] )
 	string meshFileName = argv[ 1 ];
 	string faceFileName = argv[ 2 ];
 
-    TetraFaceFile< FLOAT_T > faceFile;
+    TetraMeshFile< FLOAT_T > meshFile;
+	meshFile.Load( meshFileName );
 
-	faceFile.Load_tetramesh( meshFileName );
-	faceFile.Save_tetraface( faceFileName );
+	UINT_T faceCount = 0;
+	shared_ptr< UINT_T > faceVertexIndex;
+	shared_ptr< UINT_T > faceTetraIndex;
+	shared_ptr< UINT_T > tetraFaceIndex;
+
+	TetraFaceExtractor< FLOAT_T > extractor;
+	
+		//const UINT_T& tetraCount,
+		//shared_ptr< UINT_T >& tetraVertexIndex,
+
+		//UINT_T& faceCount,
+		//shared_ptr< UINT_T >& faceVertexIndex,
+		//shared_ptr< UINT_T >& faceTetraIndex,
+		//shared_ptr< UINT_T >& tetraFaceIndex
+
+	extractor.Extract(
+		meshFile.tetraCount_,
+		meshFile.tetraVertexIndex_,
+		
+		faceCount,
+		faceVertexIndex,
+		faceTetraIndex,
+		tetraFaceIndex
+	);
+
+    TetraFaceFile< FLOAT_T > faceFile;
+	faceFile.Initialize(
+		faceCount,
+		meshFile.tetraCount_,
+		faceVertexIndex,
+		faceTetraIndex,
+		tetraFaceIndex
+	);
+
+	faceFile.Save( faceFileName );
+
 
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;

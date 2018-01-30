@@ -18,9 +18,12 @@ int main( int argc, char *argv[] )
 	string unvFileName = argv[ 1 ];
 	string meshFileName = argv[ 2 ];
 
+	UnvTetraMeshFile< FLOAT_T > unvFile;
+	unvFile.Load( unvFileName );
+
     TetraMeshFile< FLOAT_T > meshFile;
-	meshFile.Load_unv( unvFileName );
-	meshFile.Save_tetramesh( meshFileName );
+	meshFile.Initialize( unvFile.vertexCount_, unvFile.tetraCount_, unvFile.vertexData_, unvFile.tetraVertexIndex_ );
+	meshFile.Save( meshFileName );
 
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;

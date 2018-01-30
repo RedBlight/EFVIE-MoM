@@ -94,7 +94,7 @@ public:
 		}
 	}
 
-	bool Load_unv( const string& filePath )
+	bool Load( const string& filePath )
 	{
 		using namespace __StringFuncs;
 
@@ -142,6 +142,9 @@ public:
 		vertexData_.reset( new T[ 3 * vertexCount_ ], []( T* ptr ){ delete[] ptr; } );
 		tetraVertexIndex_.reset( new UINT_T[ 4 * tetraCount_ ], []( UINT_T* ptr ){ delete[] ptr; } );
 
+		T* vertexDataPtr = vertexData_.get();
+		UINT_T* tetraVertexIndexPtr = tetraVertexIndex_.get();
+
 		unvFile.clear();
 		unvFile.seekg( 0, ios::beg );
 
@@ -168,9 +171,9 @@ public:
 			UINT_T idx = 3 * idv;
 			UINT_T idy = idx + 1;
 			UINT_T idz = idy + 1;
-			vertexData_[ idx ] = ( T )( stod( vCoords[ 0 ] ) );
-			vertexData_[ idy ] = ( T )( stod( vCoords[ 1 ] ) );
-			vertexData_[ idz ] = ( T )( stod( vCoords[ 2 ] ) );
+			vertexDataPtr[ idx ] = ( T )( stod( vCoords[ 0 ] ) );
+			vertexDataPtr[ idy ] = ( T )( stod( vCoords[ 1 ] ) );
+			vertexDataPtr[ idz ] = ( T )( stod( vCoords[ 2 ] ) );
 		}
 
 		while( lineStr.compare( tetraStartStr_ ) != 0 )
@@ -196,10 +199,10 @@ public:
 			UINT_T idv2 = idv1 + 1;
 			UINT_T idv3 = idv2 + 1;
 			UINT_T idv4 = idv3 + 1;
-			tetraVertexIndex_[ idv1 ] = ( UINT_T )( stoull( vIndices[ 0 ] ) );
-			tetraVertexIndex_[ idv2 ] = ( UINT_T )( stoull( vIndices[ 1 ] ) );
-			tetraVertexIndex_[ idv3 ] = ( UINT_T )( stoull( vIndices[ 2 ] ) );
-			tetraVertexIndex_[ idv4 ] = ( UINT_T )( stoull( vIndices[ 3 ] ) );
+			tetraVertexIndexPtr[ idv1 ] = ( UINT_T )( stoull( vIndices[ 0 ] ) );
+			tetraVertexIndexPtr[ idv2 ] = ( UINT_T )( stoull( vIndices[ 1 ] ) );
+			tetraVertexIndexPtr[ idv3 ] = ( UINT_T )( stoull( vIndices[ 2 ] ) );
+			tetraVertexIndexPtr[ idv4 ] = ( UINT_T )( stoull( vIndices[ 3 ] ) );
 		}
 
 		unvFile.close();
@@ -208,55 +211,6 @@ public:
 
 		return true;
 	}
-
-	//bool Load_tetramesh( const string& filePath )
-	//{
-	//	Reset();
-
-	//	fstream meshFile( filePath, ios::in | ios::binary );
-
-	//	if( !meshFile.good() )
-	//	{
-	//		meshFile.close();
-	//		return false;
-	//	}
-
-	//	meshFile.read( ( char* )&vertexCount_, 8 );
-	//	meshFile.read( ( char* )&tetraCount_, 8 );
-
-	//	vertexData_ = new T[ 3 * vertexCount_ ];
-	//	tetraVertexIndex_ = new size_t[ 4 * tetraCount_ ];
-
-	//	meshFile.read( ( char* )vertexData_, 8 * 3 * vertexCount_ );
-	//	meshFile.read( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
-
-	//	meshFile.close();
-
-	//	init_ = true;
-
-	//	return true;
-	//}
-
-	//bool Save_tetramesh( const string& filePath )
-	//{
-	//	fstream meshFile( filePath, ios::trunc | ios::out | ios::binary );
-
-	//	if( !meshFile.good() )
-	//	{
-	//		meshFile.close();
-	//		return false;
-	//	}
-
-	//	meshFile.write( ( char* )&vertexCount_, 8 );
-	//	meshFile.write( ( char* )&tetraCount_, 8 );
-
-	//	meshFile.write( ( char* )vertexData_, 8 * 3 * vertexCount_ );
-	//	meshFile.write( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
-
-	//	meshFile.close();
-
-	//	return true;
-	//}
 
 };
 
