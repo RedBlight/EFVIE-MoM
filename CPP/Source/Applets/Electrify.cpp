@@ -1,9 +1,10 @@
-#include "TetraMeshFile.hpp"
-#include "_EmRule.hpp"
-#include "EmPropFile.hpp"
-#include "EmRuleFile.hpp"
+#include <_BitDepthDefines.hpp>
+
 #include <iostream>
 #include <chrono>
+#include <fstream>
+
+#include <EFVIEMOM.hpp>
 
 using namespace std;
 
@@ -59,7 +60,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << meshFileName << " file... ";
 
-    TetraMeshFile< double > meshFile;
+    TetraMeshFile< FLOAT_T > meshFile;
 
 	bool meshLoaded = meshFile.Load_tetramesh( meshFileName );
 
@@ -79,7 +80,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << ruleFileName << " file... ";
 
-    EmRuleFile< double > ruleFile;
+    EmRuleFile< FLOAT_T > ruleFile;
 
 	bool ruleLoaded = ruleFile.Load_emrule( ruleFileName );
 
@@ -99,12 +100,12 @@ int main( int argc, char *argv[] )
 
 	cout << "Generating " << propFileName << " file... ";
 
-	EmPropFile< double > propFile;
+	EmPropFile< FLOAT_T > propFile;
 	propFile.Initialise( meshFile.tetraCount_ );
 
-	EmRuleFactory< double >& ruleFactory = EmRuleFactory< double >::GetInstance();
+	EmRuleFactory< FLOAT_T >& ruleFactory = EmRuleFactory< FLOAT_T >::GetInstance();
 
-	shared_ptr< EmRule< double > > emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
+	shared_ptr< EmRule< FLOAT_T > > emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
 	if( emRule == nullptr )
 	{
 		cout << "Error!" << endl;
@@ -143,7 +144,7 @@ int main( int argc, char *argv[] )
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;
 
-	chrono::duration< double > tMsec = tDiff;
+	chrono::duration< FLOAT_T > tMsec = tDiff;
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;

@@ -1,7 +1,9 @@
 #ifndef EM_RULE_CONSTANT_INCLUDED
 #define EM_RULE_CONSTANT_INCLUDED
 
-#include "EmRule.hpp"
+#include <_BitDepthDefines.hpp>
+
+#include <EmRule.hpp>
 
 template< class T >
 class EmRule_Constant: public EmRule< T >
@@ -11,8 +13,8 @@ protected:
 
 	enum RuleDataIndex
 	{
-		EPS = 0,
-		MU = 1
+		EPS,
+		MU
 	};
 
 	bool SetRuleData_( const vector< T >& ruleData ) override
@@ -26,7 +28,7 @@ protected:
 		return true;
 	}
 
-	bool GenerateProps_( T* propArr, const T* vertexList, const size_t* tetraList, const size_t& tetraCount ) const override
+	bool GenerateProps_( T* propArr, const T* vertexList, const UINT_T* tetraList, const UINT_T& tetraCount ) const override
 	{
 		for( size_t idt = 0; idt < tetraCount; ++idt )
 		{
@@ -47,12 +49,12 @@ protected:
 public:
 	EmRule_Constant()
 	{
-
+		//cout << "!!! EMRULE_CONSTANT CREATED !!!" << endl;
 	}
 	
 	~EmRule_Constant()
 	{
-
+		//cout << "!!! EMRULE_CONSTANT DESTROYED !!!" << endl;
 	}
 
 };

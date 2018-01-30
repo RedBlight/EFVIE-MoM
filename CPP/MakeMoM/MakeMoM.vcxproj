@@ -34,20 +34,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Source\IncWave\IncWave_Base.hpp" />
-    <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp" />
-    <ClInclude Include="..\Source\IncWave\IncWave_File.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Body.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp" />
-    <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
-    <ClInclude Include="..\Source\_IncWave.hpp" />
-    <ClInclude Include="..\Source\_LuVector.hpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55f0dbcc-1388-4e8d-834c-739cbd33a057}</ProjectGuid>
     <RootNamespace>MakeMoM</RootNamespace>

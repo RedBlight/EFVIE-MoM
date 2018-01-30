@@ -1,6 +1,9 @@
-#include "TetraFaceFile.hpp"
+#include <_BitDepthDefines.hpp>
+
 #include <iostream>
 #include <chrono>
+
+#include <EFVIEMOM.hpp>
 
 using namespace std;
 
@@ -49,7 +52,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << inputFileName << " file... ";
 
-    TetraFaceFile< double > faceFile;
+    TetraFaceFile< FLOAT_T > faceFile;
 
 	bool faceLoaded = faceFile.Load_tetramesh( inputFileName );
 
@@ -84,7 +87,7 @@ int main( int argc, char *argv[] )
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;
 
-	chrono::duration< double > tMsec = tDiff;
+	chrono::duration< FLOAT_T > tMsec = tDiff;
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;

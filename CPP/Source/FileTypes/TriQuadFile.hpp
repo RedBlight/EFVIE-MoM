@@ -1,6 +1,8 @@
 #ifndef TRI_QUAD_FILE_INCLUDED
 #define TRI_QUAD_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -27,7 +29,7 @@ repeat for all faces
 
 A = 2 + 4 * [1] * [0]
 
-total size = 8 * ( 2 + 4 * [0] * [1] ) byte
+total size = SIZEOF_T * ( 2 + 4 * [0] * [1] ) byte
 
 */
 
@@ -37,8 +39,8 @@ class TriQuadFile
 {
 public:
 	bool init_;
-	size_t faceCount_;
-	size_t quadCount_;
+	UINT_T faceCount_;
+	UINT_T quadCount_;
 	T* quadData_;
 
 public:
@@ -72,7 +74,7 @@ public:
 		}
 	}
 
-	void Initialise( const size_t& faceCount, const size_t& quadCount )
+	void Initialise( const UINT_T& faceCount, const UINT_T& quadCount )
 	{
 		if( !init_ )
 		{
@@ -95,12 +97,12 @@ public:
 			return false;
 		}
 
-		quadFile.read( ( char* )&faceCount_, 8 );
-		quadFile.read( ( char* )&quadCount_, 8 );
+		quadFile.read( ( char* )&faceCount_, SIZEOF_T );
+		quadFile.read( ( char* )&quadCount_, SIZEOF_T );
 
 		quadData_ = new T[ 4 * quadCount_ * faceCount_ ];
 
-		quadFile.read( ( char* )quadData_, 8 * 4 * quadCount_ * faceCount_ );
+		quadFile.read( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * faceCount_ );
 
 		quadFile.close();
 
@@ -119,10 +121,10 @@ public:
 			return false;
 		}
 
-		quadFile.write( ( char* )&faceCount_, 8 );
-		quadFile.write( ( char* )&quadCount_, 8 );
+		quadFile.write( ( char* )&faceCount_, SIZEOF_T );
+		quadFile.write( ( char* )&quadCount_, SIZEOF_T );
 
-		quadFile.write( ( char* )quadData_, 8 * 4 * quadCount_ * faceCount_ );
+		quadFile.write( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * faceCount_ );
 
 		quadFile.close();
 

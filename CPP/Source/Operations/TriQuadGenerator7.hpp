@@ -1,6 +1,8 @@
 #ifndef TRI_QUAD_GENERATOR7_INCLUDED
 #define TRI_QUAD_GENERATOR7_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -9,8 +11,9 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+
 #include <arrayfire.h>
-#include "_LuVector.hpp"
+#include <_LuVector.hpp>
 
 using namespace std;
 
@@ -44,27 +47,27 @@ public:
 		wFactor3_ = ( 155.0 + sqrt( 15.0 ) ) / 1200.0;
 	}
 
-	void Generate( T* quadData, const size_t* indexList, const T* vertexList, const size_t& faceCount ) const
+	void Generate( T* quadData, const UINT_T* indexList, const T* vertexList, const UINT_T& faceCount ) const
 	{
-		for( size_t idf = 0; idf < faceCount; ++idf )
+		for( UINT_T idf = 0; idf < faceCount; ++idf )
 		{
-			size_t idx1 = 3 * idf;
-			size_t idx2 = idx1 + 1;
-			size_t idx3 = idx1 + 2;
+			UINT_T idx1 = 3 * idf;
+			UINT_T idx2 = idx1 + 1;
+			UINT_T idx3 = idx1 + 2;
 
-			size_t idv1x = 3 * indexList[ idx1 ];
-			size_t idv1y = idv1x + 1;
-			size_t idv1z = idv1x + 2;
+			UINT_T idv1x = 3 * indexList[ idx1 ];
+			UINT_T idv1y = idv1x + 1;
+			UINT_T idv1z = idv1x + 2;
 
-			size_t idv2x = 3 * indexList[ idx2 ];
-			size_t idv2y = idv2x + 1;
-			size_t idv2z = idv2x + 2;
+			UINT_T idv2x = 3 * indexList[ idx2 ];
+			UINT_T idv2y = idv2x + 1;
+			UINT_T idv2z = idv2x + 2;
 
-			size_t idv3x = 3 * indexList[ idx3 ];
-			size_t idv3y = idv3x + 1;
-			size_t idv3z = idv3x + 2;
+			UINT_T idv3x = 3 * indexList[ idx3 ];
+			UINT_T idv3y = idv3x + 1;
+			UINT_T idv3z = idv3x + 2;
 
-			size_t idQuad = 4 * 7 * idf;
+			UINT_T idQuad = 4 * 7 * idf;
 
 			LUV::LuVector< 3, T > v1( vertexList[ idv1x ], vertexList[ idv1x ], vertexList[ idv1x ] );
 			LUV::LuVector< 3, T > v2( vertexList[ idv2y ], vertexList[ idv2y ], vertexList[ idv2y ] );
@@ -94,12 +97,12 @@ public:
 			w[5] = wFactor3_ * area;
 			w[6] = wFactor3_ * area;
 
-			for( size_t idq = 0; idq < 7; ++idq )
+			for( UINT_T idq = 0; idq < 7; ++idq )
 			{
-				size_t idq1 = idQuad + 4 * idq;
-				size_t idq2 = idq1 + 1;
-				size_t idq3 = idq1 + 2;
-				size_t idq4 = idq1 + 3;
+				UINT_T idq1 = idQuad + 4 * idq;
+				UINT_T idq2 = idq1 + 1;
+				UINT_T idq3 = idq1 + 2;
+				UINT_T idq4 = idq1 + 3;
 				quadData[ idq1 ] = w[ idq ];
 				quadData[ idq2 ] = q[ idq ][0];
 				quadData[ idq3 ] = q[ idq ][1];

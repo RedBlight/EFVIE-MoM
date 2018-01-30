@@ -1,6 +1,8 @@
 #ifndef UNV_TETRA_MESH_FILE_INCLUDED
 #define UNV_TETRA_MESH_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -11,6 +13,7 @@
 #include <utility>
 #include <cstdint>
 #include <memory>
+
 #include <StringFuncs.hpp>
 
 using namespace std;
@@ -52,15 +55,15 @@ class UnvTetraMeshFile
 {
 public:
 	bool init_;
-	uint64_t vertexCount_;
-	uint64_t tetraCount_;
+	UINT_T vertexCount_;
+	UINT_T tetraCount_;
 	shared_ptr< T > vertexData_;
-	shared_ptr< uint64_t > tetraVertexIndex_;
+	shared_ptr< UINT_T > tetraVertexIndex_;
 
-	static const string vertexStartStr_ = "  2411";
-	static const string vertexEndStr_ = "    -1";
-	static const string tetraStartStr_ = "  2412";
-	static const string tetraEndStr_ = "    -1";
+	static string vertexStartStr_;
+	static string vertexEndStr_;
+	static string tetraStartStr_;
+	static string tetraEndStr_;
 
 public:
 
@@ -103,19 +106,19 @@ public:
 			Perhaps do some sanity checks here etc.
 		*/
 
-		string vertexStartStr = "  2411";
-		string vertexEndStr = "    -1";
-		string tetraStartStr = "  2412";
-		string tetraEndStr = "    -1";
+		//string vertexStartStr = "  2411";
+		//string vertexEndStr = "    -1";
+		//string tetraStartStr = "  2412";
+		//string tetraEndStr = "    -1";
 
 		string lineStr = "";
 
-		while( lineStr.compare( vertexStartStr ) != 0 )
+		while( lineStr.compare( vertexStartStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 		}
 
-		while( lineStr.compare( vertexEndStr ) != 0 )
+		while( lineStr.compare( vertexEndStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 			++vertexCount_;
@@ -123,31 +126,31 @@ public:
 
 		vertexCount_ = ( vertexCount_ - 1 ) / 2;
 
-		while( lineStr.compare( tetraStartStr ) != 0 )
+		while( lineStr.compare( tetraStartStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 		}
 
-		while( lineStr.compare( tetraEndStr ) != 0 )
+		while( lineStr.compare( tetraEndStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 			++tetraCount_;
 		}
 
 		tetraCount_ = ( tetraCount_ - 1 ) / 2;
-		
-		vertexData_ = new T[ 3 * vertexCount_ ];
-		tetraVertexIndex_ = new size_t[ 4 * tetraCount_ ];
+
+		vertexData_.reset( new T[ 3 * vertexCount_ ], []( T* ptr ){ delete[] ptr; } );
+		tetraVertexIndex_.reset( new UINT_T[ 4 * tetraCount_ ], []( UINT_T* ptr ){ delete[] ptr; } );
 
 		unvFile.clear();
 		unvFile.seekg( 0, ios::beg );
 
-		while( lineStr.compare( vertexStartStr ) != 0 )
+		while( lineStr.compare( vertexStartStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 		}
 
-		for( size_t idv = 0; idv < vertexCount_; ++idv )
+		for( UINT_T idv = 0; idv < vertexCount_; ++idv )
 		{
 			getline( unvFile, lineStr );
 			getline( unvFile, lineStr );
@@ -162,20 +165,20 @@ public:
 			SearchAndReplace( lineStr, "D", "E" );
 			vector< string > vCoords = Explode( lineStr, ' ' );
 
-			size_t idx = 3 * idv;
-			size_t idy = idx + 1;
-			size_t idz = idy + 1;
+			UINT_T idx = 3 * idv;
+			UINT_T idy = idx + 1;
+			UINT_T idz = idy + 1;
 			vertexData_[ idx ] = ( T )( stod( vCoords[ 0 ] ) );
 			vertexData_[ idy ] = ( T )( stod( vCoords[ 1 ] ) );
 			vertexData_[ idz ] = ( T )( stod( vCoords[ 2 ] ) );
 		}
 
-		while( lineStr.compare( tetraStartStr ) != 0 )
+		while( lineStr.compare( tetraStartStr_ ) != 0 )
 		{
 			getline( unvFile, lineStr );
 		}
 
-		for( size_t idt = 0; idt < tetraCount_; ++idt )
+		for( UINT_T idt = 0; idt < tetraCount_; ++idt )
 		{
 			getline( unvFile, lineStr );
 			getline( unvFile, lineStr );
@@ -189,14 +192,14 @@ public:
 			SearchAndReplace( lineStr, "  ", " " );
 			vector< string > vIndices = Explode( lineStr, ' ' );
 
-			size_t idv1 = 4 * idt;
-			size_t idv2 = idv1 + 1;
-			size_t idv3 = idv2 + 1;
-			size_t idv4 = idv3 + 1;
-			tetraVertexIndex_[ idv1 ] = ( size_t )( stoull( vIndices[ 0 ] ) );
-			tetraVertexIndex_[ idv2 ] = ( size_t )( stoull( vIndices[ 1 ] ) );
-			tetraVertexIndex_[ idv3 ] = ( size_t )( stoull( vIndices[ 2 ] ) );
-			tetraVertexIndex_[ idv4 ] = ( size_t )( stoull( vIndices[ 3 ] ) );
+			UINT_T idv1 = 4 * idt;
+			UINT_T idv2 = idv1 + 1;
+			UINT_T idv3 = idv2 + 1;
+			UINT_T idv4 = idv3 + 1;
+			tetraVertexIndex_[ idv1 ] = ( UINT_T )( stoull( vIndices[ 0 ] ) );
+			tetraVertexIndex_[ idv2 ] = ( UINT_T )( stoull( vIndices[ 1 ] ) );
+			tetraVertexIndex_[ idv3 ] = ( UINT_T )( stoull( vIndices[ 2 ] ) );
+			tetraVertexIndex_[ idv4 ] = ( UINT_T )( stoull( vIndices[ 3 ] ) );
 		}
 
 		unvFile.close();
@@ -206,55 +209,67 @@ public:
 		return true;
 	}
 
-	bool Load_tetramesh( const string& filePath )
-	{
-		Reset();
+	//bool Load_tetramesh( const string& filePath )
+	//{
+	//	Reset();
 
-		fstream meshFile( filePath, ios::in | ios::binary );
+	//	fstream meshFile( filePath, ios::in | ios::binary );
 
-		if( !meshFile.good() )
-		{
-			meshFile.close();
-			return false;
-		}
+	//	if( !meshFile.good() )
+	//	{
+	//		meshFile.close();
+	//		return false;
+	//	}
 
-		meshFile.read( ( char* )&vertexCount_, 8 );
-		meshFile.read( ( char* )&tetraCount_, 8 );
+	//	meshFile.read( ( char* )&vertexCount_, 8 );
+	//	meshFile.read( ( char* )&tetraCount_, 8 );
 
-		vertexData_ = new T[ 3 * vertexCount_ ];
-		tetraVertexIndex_ = new size_t[ 4 * tetraCount_ ];
+	//	vertexData_ = new T[ 3 * vertexCount_ ];
+	//	tetraVertexIndex_ = new size_t[ 4 * tetraCount_ ];
 
-		meshFile.read( ( char* )vertexData_, 8 * 3 * vertexCount_ );
-		meshFile.read( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
+	//	meshFile.read( ( char* )vertexData_, 8 * 3 * vertexCount_ );
+	//	meshFile.read( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
 
-		meshFile.close();
+	//	meshFile.close();
 
-		init_ = true;
+	//	init_ = true;
 
-		return true;
-	}
+	//	return true;
+	//}
 
-	bool Save_tetramesh( const string& filePath )
-	{
-		fstream meshFile( filePath, ios::trunc | ios::out | ios::binary );
+	//bool Save_tetramesh( const string& filePath )
+	//{
+	//	fstream meshFile( filePath, ios::trunc | ios::out | ios::binary );
 
-		if( !meshFile.good() )
-		{
-			meshFile.close();
-			return false;
-		}
+	//	if( !meshFile.good() )
+	//	{
+	//		meshFile.close();
+	//		return false;
+	//	}
 
-		meshFile.write( ( char* )&vertexCount_, 8 );
-		meshFile.write( ( char* )&tetraCount_, 8 );
+	//	meshFile.write( ( char* )&vertexCount_, 8 );
+	//	meshFile.write( ( char* )&tetraCount_, 8 );
 
-		meshFile.write( ( char* )vertexData_, 8 * 3 * vertexCount_ );
-		meshFile.write( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
+	//	meshFile.write( ( char* )vertexData_, 8 * 3 * vertexCount_ );
+	//	meshFile.write( ( char* )tetraVertexIndex_, 8 * 4 * tetraCount_ );
 
-		meshFile.close();
+	//	meshFile.close();
 
-		return true;
-	}
+	//	return true;
+	//}
 
 };
+
+template< class T >
+string UnvTetraMeshFile< T >::vertexStartStr_ = "  2411";
+
+template< class T >
+string UnvTetraMeshFile< T >::vertexEndStr_ = "    -1";
+
+template< class T >
+string UnvTetraMeshFile< T >::tetraStartStr_ = "  2412";
+
+template< class T >
+string UnvTetraMeshFile< T >::tetraEndStr_ = "    -1";
 
 #endif

@@ -35,12 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\FileTypes\UnvTetraMeshFile.hpp" />
-    <ClInclude Include="..\Source\StringFuncs.hpp" />
-    <ClInclude Include="..\Source\TetraMeshFile.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Source\MakeMesh.cpp" />
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeMeshNoExcept.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8d39e580-48c5-40df-aa87-75f1fef95350}</ProjectGuid>

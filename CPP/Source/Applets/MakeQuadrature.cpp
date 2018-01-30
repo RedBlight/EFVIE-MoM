@@ -1,11 +1,9 @@
-#include "TetraMeshFile.hpp"
-#include "TetraFaceFile.hpp"
-#include "TetraQuadFile.hpp"
-#include "TriQuadFile.hpp"
-#include "TetraQuadGenerator4.hpp"
-#include "TriQuadGenerator7.hpp"
+#include <_BitDepthDefines.hpp>
+
 #include <iostream>
 #include <chrono>
+
+#include <EFVIEMOM.hpp>
 
 using namespace std;
 
@@ -64,7 +62,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << meshFileName << " file... ";
 
-    TetraMeshFile< double > meshFile;
+    TetraMeshFile< FLOAT_T > meshFile;
 
 	bool meshLoaded = meshFile.Load_tetramesh( meshFileName );
 
@@ -84,7 +82,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << faceFileName << " file... ";
 
-    TetraFaceFile< double > faceFile;
+    TetraFaceFile< FLOAT_T > faceFile;
 
 	bool faceLoaded = faceFile.Load_tetraface( faceFileName );
 
@@ -106,8 +104,8 @@ int main( int argc, char *argv[] )
 
 	// add more checks here
 
-	TetraQuadGenerator4< double > tetQuadGen;
-	TetraQuadFile< double > tetqFile;
+	TetraQuadGenerator64< FLOAT_T > tetQuadGen;
+	TetraQuadFile< FLOAT_T > tetqFile;
 	tetqFile.Initialise( meshFile.tetraCount_, 4 );
 	tetQuadGen.Generate( tetqFile.quadData_, meshFile.tetraVertexIndex_, meshFile.vertexData_, meshFile.tetraCount_ );
 	tetqFile.Save_tetraquad( tetqFileName );
@@ -124,8 +122,8 @@ int main( int argc, char *argv[] )
 
 	// add more checks here
 
-	TriQuadGenerator7< double > triQuadGen;
-	TriQuadFile< double > triqFile;
+	TriQuadGenerator7< FLOAT_T > triQuadGen;
+	TriQuadFile< FLOAT_T > triqFile;
 	triqFile.Initialise( faceFile.faceCount_, 7 );
 	triQuadGen.Generate( triqFile.quadData_, faceFile.faceVertexIndex_, meshFile.vertexData_, faceFile.faceCount_ );
 	triqFile.Save_triquad( triqFileName );
@@ -136,7 +134,7 @@ int main( int argc, char *argv[] )
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;
 
-	chrono::duration< double > tMsec = tDiff;
+	chrono::duration< FLOAT_T > tMsec = tDiff;
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;

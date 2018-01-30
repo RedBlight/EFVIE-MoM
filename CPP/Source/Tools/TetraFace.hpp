@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// always uint
 template< class T >
 class TetraFace
 {

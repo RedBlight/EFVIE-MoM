@@ -1,6 +1,8 @@
 #ifndef EM_RULE_FACTORY_INCLUDED
 #define EM_RULE_FACTORY_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <string>
 #include <list>
 #include <utility>
@@ -8,9 +10,9 @@
 #include <map>
 #include <iostream>
 #include <memory>
-#include <_EmRule.hpp>
-#include "EmRule.hpp"
-#include "EmRule_Constant.hpp"
+
+#include <EmRule.hpp>
+#include <EmRule_Constant.hpp>
 
 using namespace std;
 
@@ -34,18 +36,19 @@ public:
 private:
 	EmRuleFactory()
 	{
-		ruleMap_.clear();
-
 		// Register all kinds of EmRule variants here
 
+		ruleMap_.clear();
 		ruleMap_[ "Constant" ] = shared_ptr< EmRule< T > >( new EmRule_Constant< T >() );
-
 		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
 		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
+
+		//cout << "!!! EMRULE_FACTORY CREATED !!!" << endl;
 	}
 
 	~EmRuleFactory()
 	{
+		//cout << "!!! EMRULE_FACTORY DESTOYED !!!" << endl;
 	}
 
 public:

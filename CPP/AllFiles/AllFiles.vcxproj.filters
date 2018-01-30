@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{3d0833f2-f8b9-4ead-b1e8-051c8db1712c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4de47fd3-2f01-41e0-bb51-627b73d57902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\EmRule">
+      <UniqueIdentifier>{763ec414-0255-465d-a0ef-d0ac3c515d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FileTypes">
+      <UniqueIdentifier>{1cab9bd8-3745-48d1-bc47-30ff478ff7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IncWave">
+      <UniqueIdentifier>{ff5d61bc-aaa3-433d-b8c2-765df099169b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\LuVector">
+      <UniqueIdentifier>{c806d074-987e-4882-9abc-a5c50a45acb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Tools">
+      <UniqueIdentifier>{f389aa96-6a9c-489b-97d0-e9c5e09a8ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Operations">
+      <UniqueIdentifier>{b0afe748-603c-4ddd-9e81-f9606707cc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Applets">
+      <UniqueIdentifier>{0cf6659f-297a-472f-8b68-e9b90ba66422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AppletsNoExcept">
+      <UniqueIdentifier>{86f01b2a-be06-4a2a-a551-df30bc8bd015}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Tools\StringFuncs.hpp">
+      <Filter>Headers\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Tools\TetraFace.hpp">
+      <Filter>Headers\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EmRule\EmRule.hpp">
+      <Filter>Headers\EmRule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EmRule\EmRule_Constant.hpp">
+      <Filter>Headers\EmRule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EmRule\EmRule_Factory.hpp">
+      <Filter>Headers\EmRule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\EmPropFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\EmRuleFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\IncWaveFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\TetraFaceFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\TetraMeshFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\TetraQuadFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\TriQuadFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\UnvTetraMeshFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\IncWave\IncWave.hpp">
+      <Filter>Headers\IncWave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp">
+      <Filter>Headers\IncWave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\IncWave\IncWave_Plane.hpp">
+      <Filter>Headers\IncWave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Body.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp">
+      <Filter>Headers\LuVector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\TetraQuadGenerator64.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\TriQuadGenerator7.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_LuVector.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_IncWave.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_EmRule.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_FileTypes.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_Operations.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_Tools.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\EFVIEMOM.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\_BitDepthDefines.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\Applets\MakeQuadrature.cpp">
+      <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
+      <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Applets\MakeMesh.cpp">
+      <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Applets\MakeFace.cpp">
+      <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Applets\Electrify.cpp">
+      <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\ElectrifyNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeFaceNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeMeshNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadratureNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

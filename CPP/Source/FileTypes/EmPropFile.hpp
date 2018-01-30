@@ -1,6 +1,8 @@
 #ifndef EM_PROP_FILE_INCLUDED
 #define EM_PROP_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -14,7 +16,7 @@ using namespace std;
 
 /*
 .emprop file: each cell is 8 byte
-[0] = tetrahedron count (size_t)
+[0] = tetrahedron count (uint64)
 [A ... B-1] = eps mu (double) 8 byte X 2 X [0] -> electromagnetic material properties, eps and mu relative to eps0 and mu0
 
 A = 1
@@ -27,7 +29,7 @@ class EmPropFile
 {
 public:
 	bool init_;
-	size_t tetraCount_;
+	UINT_T tetraCount_;
 	double* emPropData_;
 
 public:
@@ -48,7 +50,7 @@ public:
 		}
 	}
 
-	void Initialise( const size_t& tetraCount )
+	void Initialise( const UINT_T& tetraCount )
 	{
 		if( !init_ )
 		{
@@ -81,10 +83,10 @@ public:
 			return false;
 		}
 
-		propFile.read( ( char* )&tetraCount_, 8 );
+		propFile.read( ( char* )&tetraCount_, SIZEOF_T );
 		emPropData_ = new T[ 2 * tetraCount_ ];
 
-		propFile.read( ( char* )emPropData_, 8 * 2 * tetraCount_ );
+		propFile.read( ( char* )emPropData_, SIZEOF_T * 2 * tetraCount_ );
 
 		propFile.close();
 
@@ -103,9 +105,8 @@ public:
 			return false;
 		}
 
-		propFile.write( ( char* )&tetraCount_, 8 );
-
-		propFile.write( ( char* )emPropData_, 8 * 2 * tetraCount_ );
+		propFile.write( ( char* )&tetraCount_, SIZEOF_T );
+		propFile.write( ( char* )emPropData_, SIZEOF_T * 2 * tetraCount_ );
 
 		propFile.close();
 

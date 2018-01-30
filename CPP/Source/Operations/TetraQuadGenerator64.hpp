@@ -1,5 +1,7 @@
-#ifndef TETRA_QUAD_GENERATOR64_INCLUDED
-#define TETRA_QUAD_GENERATOR64_INCLUDED
+#ifndef TETRA_QUAD_GENERATOR_64_INCLUDED
+#define TETRA_QUAD_GENERATOR_64_INCLUDED
+
+#include <_BitDepthDefines.hpp>
 
 #include <fstream>
 #include <string>
@@ -10,6 +12,7 @@
 #include <sstream>
 #include <utility>
 #include <memory>
+
 #include <arrayfire.h>
 
 using namespace std;
@@ -52,32 +55,32 @@ public:
 
 public:
 	TetraQuadGenerator64() :
-		q1_( 4, f64 ),
-		q2_( 4, f64 ),
-		q3_( 4, f64 ),
-		w1_( 4, f64 ),
-		w2_( 4, f64 ),
-		w3_( 4, f64 ),
+		q1_( 4, AF_FLOAT_T ),
+		q2_( 4, AF_FLOAT_T ),
+		q3_( 4, AF_FLOAT_T ),
+		w1_( 4, AF_FLOAT_T ),
+		w2_( 4, AF_FLOAT_T ),
+		w3_( 4, AF_FLOAT_T ),
 
-		Q1_( 64, f64 ),
-		Q2_( 64, f64 ),
-		Q3_( 64, f64 ),
-		Wr_( 64, f64 ),
+		Q1_( 64, AF_FLOAT_T ),
+		Q2_( 64, AF_FLOAT_T ),
+		Q3_( 64, AF_FLOAT_T ),
+		Wr_( 64, AF_FLOAT_T ),
 
-		Qx_( 64, f64 ),
-		Qy_( 64, f64 ),
-		Qz_( 64, f64 ),
+		Qx_( 64, AF_FLOAT_T ),
+		Qy_( 64, AF_FLOAT_T ),
+		Qz_( 64, AF_FLOAT_T ),
 
-		C1_( 64, f64 ),
+		C1_( 64, AF_FLOAT_T ),
 
-		diffMat_( 4, 4, f64 )
+		diffMat_( 4, 4, AF_FLOAT_T )
 
-		//vertMat_( 4, 3, f64 ),
-		//vertDiffX_( 4, 3, f64 ),
+		//vertMat_( 4, 3, AF_FLOAT_T ),
+		//vertDiffX_( 4, 3, AF_FLOAT_T ),
 
-		//W_( 64, f64 ),
+		//W_( 64, AF_FLOAT_T ),
 		//
-		//WXYZ_( 64, 4, f64 )
+		//WXYZ_( 64, 4, AF_FLOAT_T )
 	{
 		T q1[4] = {
 			0.204148582103227,
@@ -128,12 +131,12 @@ public:
 			0,	0,	0,	1
 		};
 
-		q1_.write( q1, 8 * 4 );
-		q2_.write( q2, 8 * 4 );
-		q3_.write( q3, 8 * 4 );
-		w1_.write( w1, 8 * 4 );
-		w2_.write( w2, 8 * 4 );
-		w3_.write( w3, 8 * 4 );
+		q1_.write( q1, SIZEOF_T * 4 );
+		q2_.write( q2, SIZEOF_T * 4 );
+		q3_.write( q3, SIZEOF_T * 4 );
+		w1_.write( w1, SIZEOF_T * 4 );
+		w2_.write( w2, SIZEOF_T * 4 );
+		w3_.write( w3, SIZEOF_T * 4 );
 
 		Q1_ = af::tile( af::flat( af::tile( q1_.T(), 4 ) ), 4 );
 		Q2_ = af::tile( af::tile( q2_, 4 ), 4 );
@@ -147,9 +150,9 @@ public:
 		Qy_ = ( 1.0 - Q2_ ) * Q1_;
 		Qz_ = Q1_ * Q2_ * Q3_;
 
-		C1_ = af::constant( 1.0, 64, f64 );
+		C1_ = af::constant( 1.0, 64, AF_FLOAT_T );
 
-		diffMat_.write( diffMat, 8 * 16 );
+		diffMat_.write( diffMat, SIZEOF_T * 16 );
 	}
 
 	~TetraQuadGenerator64()
@@ -157,32 +160,32 @@ public:
 
 	}
 
-	void Generate( T* quadData, const size_t* indexList, const T* vertexList, const size_t& tetraCount ) const
+	void Generate( T* quadData, const UINT_T* indexList, const T* vertexList, const UINT_T& tetraCount ) const
 	{
-		for( size_t idt = 0; idt < tetraCount; ++idt )
+		for( UINT_T idt = 0; idt < tetraCount; ++idt )
 		{
-			size_t idx1 = 4 * idt;
-			size_t idx2 = idx1 + 1;
-			size_t idx3 = idx1 + 2;
-			size_t idx4 = idx1 + 3;
+			UINT_T idx1 = 4 * idt;
+			UINT_T idx2 = idx1 + 1;
+			UINT_T idx3 = idx1 + 2;
+			UINT_T idx4 = idx1 + 3;
 
-			size_t idv1x = 3 * indexList[ idx1 ];
-			size_t idv1y = idv1x + 1;
-			size_t idv1z = idv1x + 2;
+			UINT_T idv1x = 3 * indexList[ idx1 ];
+			UINT_T idv1y = idv1x + 1;
+			UINT_T idv1z = idv1x + 2;
 
-			size_t idv2x = 3 * indexList[ idx2 ];
-			size_t idv2y = idv2x + 1;
-			size_t idv2z = idv2x + 2;
+			UINT_T idv2x = 3 * indexList[ idx2 ];
+			UINT_T idv2y = idv2x + 1;
+			UINT_T idv2z = idv2x + 2;
 
-			size_t idv3x = 3 * indexList[ idx3 ];
-			size_t idv3y = idv3x + 1;
-			size_t idv3z = idv3x + 2;
+			UINT_T idv3x = 3 * indexList[ idx3 ];
+			UINT_T idv3y = idv3x + 1;
+			UINT_T idv3z = idv3x + 2;
 
-			size_t idv4x = 3 * indexList[ idx4 ];
-			size_t idv4y = idv4x + 1;
-			size_t idv4z = idv4x + 2;
+			UINT_T idv4x = 3 * indexList[ idx4 ];
+			UINT_T idv4y = idv4x + 1;
+			UINT_T idv4z = idv4x + 2;
 
-			size_t idQuad = 4 * 64 * idt;
+			UINT_T idQuad = 4 * 64 * idt;
 
 			T vertMat[12] = { // col major
 				vertexList[ idv1x ], vertexList[ idv2x ], vertexList[ idv3x ], vertexList[ idv4x ],
@@ -190,11 +193,11 @@ public:
 				vertexList[ idv1z ], vertexList[ idv2z ], vertexList[ idv3z ], vertexList[ idv4z ]
 			};
 
-			af::array vertMat_( 4, 3, f64 );
-			vertMat_.write( vertMat, 8 * 12 );
+			af::array vertMat_( 4, 3, AF_FLOAT_T );
+			vertMat_.write( vertMat, SIZEOF_T * 12 );
 
 			af::array vertDiffX_ = af::matmul( diffMat_, vertMat_ );
-			af::array W_ = abs( af::det< double >( vertDiffX_.rows( 1, 3 ) ) ) * Wr_;
+			af::array W_ = abs( af::det< FLOAT_T >( vertDiffX_.rows( 1, 3 ) ) ) * Wr_;
 			af::array WXYZ_ = af::join( 1, W_, af::matmul( af::join( 1, C1_, Qx_, Qy_, Qz_ ), vertDiffX_ ) );
 
 			shared_ptr< T > hostQuadData( transpose( WXYZ_ ).host< T >() );

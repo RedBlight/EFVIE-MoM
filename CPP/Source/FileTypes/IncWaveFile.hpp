@@ -1,6 +1,8 @@
 #ifndef INC_WAVE_FILE_INCLUDED
 #define INC_WAVE_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <vector>

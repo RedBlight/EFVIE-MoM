@@ -1,6 +1,8 @@
 #ifndef TETRA_QUAD_FILE_INCLUDED
 #define TETRA_QUAD_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -38,9 +40,9 @@ class TetraQuadFile
 {
 public:
 	bool init_;
-	size_t tetraCount_;
-	size_t quadLevel_;
-	size_t quadCount_;
+	UINT_T tetraCount_;
+	UINT_T quadLevel_;
+	UINT_T quadCount_;
 	T* quadData_;
 
 public:
@@ -76,7 +78,7 @@ public:
 		}
 	}
 
-	void Initialise( const size_t& tetraCount, const size_t& quadLevel )
+	void Initialise( const UINT_T& tetraCount, const UINT_T& quadLevel )
 	{
 		if( !init_ )
 		{
@@ -100,13 +102,13 @@ public:
 			return false;
 		}
 
-		quadFile.read( ( char* )&tetraCount_, 8 );
-		quadFile.read( ( char* )&quadLevel_, 8 );
-		quadFile.read( ( char* )&quadCount_, 8 );
+		quadFile.read( ( char* )&tetraCount_, SIZEOF_T );
+		quadFile.read( ( char* )&quadLevel_, SIZEOF_T );
+		quadFile.read( ( char* )&quadCount_, SIZEOF_T );
 
 		quadData_ = new T[ 4 * quadCount_ * tetraCount_ ];
 
-		quadFile.read( ( char* )quadData_, 8 * 4 * quadCount_ * tetraCount_ );
+		quadFile.read( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * tetraCount_ );
 
 		quadFile.close();
 
@@ -125,11 +127,11 @@ public:
 			return false;
 		}
 
-		quadFile.write( ( char* )&tetraCount_, 8 );
-		quadFile.write( ( char* )&quadLevel_, 8 );
-		quadFile.write( ( char* )&quadCount_, 8 );
+		quadFile.write( ( char* )&tetraCount_, SIZEOF_T );
+		quadFile.write( ( char* )&quadLevel_, SIZEOF_T );
+		quadFile.write( ( char* )&quadCount_, SIZEOF_T );
 
-		quadFile.write( ( char* )quadData_, 8 * 4 * quadCount_ * tetraCount_ );
+		quadFile.write( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * tetraCount_ );
 
 		quadFile.close();
 

@@ -1,6 +1,9 @@
-#include "TetraMeshFile.hpp"
+#include <_BitDepthDefines.hpp>
+
 #include <iostream>
 #include <chrono>
+
+#include <EFVIEMOM.hpp>
 
 using namespace std;
 
@@ -45,7 +48,7 @@ int main( int argc, char *argv[] )
 
 	cout << "Loading " << inputFileName << " file... ";
 
-    TetraMeshFile< double > meshFile;
+    TetraMeshFile< FLOAT_T > meshFile;
 
 	bool unvLoaded = meshFile.Load_unv( inputFileName );
 
@@ -80,7 +83,7 @@ int main( int argc, char *argv[] )
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;
 
-	chrono::duration< double > tMsec = tDiff;
+	chrono::duration< FLOAT_T > tMsec = tDiff;
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;

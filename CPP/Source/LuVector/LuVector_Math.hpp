@@ -237,6 +237,28 @@ namespace LUV
 		return Cross( OrthogonalR( dirN ), dirN ); 
 	}
 
+	// OrthonormalU N=3
+	template< class T >
+	inline LuVector< 3, T > OrthonormalR( const LuVector< 3, T >& dirN, const LuVector< 3, T >& dirU )
+	{
+		return Cross( dirN, dirU ); 
+	}
+
+	// Orthonormalize N=3
+	// Makes sure that given vectors are absolutely othogonal and unit length.
+	template< class T >
+	inline void Orthonormalize( LuVector< 3, T >& dirN, LuVector< 3, T >& dirU, LuVector< 3, T >& dirR )
+	{
+		dirN = Unit( dirN );
+		dirU = Unit( dirU );
+		dirR = Unit( dirR );
+
+		dirU = Unit( dirU - Dot( dirU, dirN ) * dirN );
+
+		dirR = Unit( dirR - Dot( dirR, dirN ) * dirN );
+		dirR = Unit( dirR - Dot( dirR, dirU ) * dirU );
+	}
+
 };
 
 #endif

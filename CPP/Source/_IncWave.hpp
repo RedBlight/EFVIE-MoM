@@ -1,6 +1,6 @@
 #ifndef _INC_WAVE_INCLUDED
 #define _INC_WAVE_INCLUDED
 
-#include "IncWave/IncWave_Factory.hpp"
+#include <IncWave_Factory.hpp>
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef EM_RULE_FILE_INCLUDED
 #define EM_RULE_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <vector>

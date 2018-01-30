@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)Source\;$(SolutionDir)Source\Applets\;$(SolutionDir)Source\EmRule\;$(SolutionDir)Source\FileTypes\;$(SolutionDir)Source\IncWave\;$(SolutionDir)Source\LuVector\;$(SolutionDir)Source\Operations\;$(SolutionDir)Source\Tools\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Source\;$(SolutionDir)Source\EmRule\;$(SolutionDir)Source\FileTypes\;$(SolutionDir)Source\IncWave\;$(SolutionDir)Source\LuVector\;$(SolutionDir)Source\Operations\;$(SolutionDir)Source\Tools\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemGroup />

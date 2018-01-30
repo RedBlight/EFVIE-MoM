@@ -7,49 +7,5 @@
     <Filter Include="Source">
       <UniqueIdentifier>{d8d939e0-acd4-4474-b5a0-cb9e9e71d83b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\IncWave">
-      <UniqueIdentifier>{4fcb3530-35c5-4009-8774-80b25d7eda79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\LuVector">
-      <UniqueIdentifier>{42c4eda3-d1ca-43ac-b01a-7c31e9c51d93}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Source\_IncWave.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\IncWave\IncWave_Base.hpp">
-      <Filter>Headers\IncWave</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp">
-      <Filter>Headers\IncWave</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\IncWave\IncWave_File.hpp">
-      <Filter>Headers\IncWave</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Body.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp">
-      <Filter>Headers\LuVector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\_LuVector.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

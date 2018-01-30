@@ -1,6 +1,8 @@
 #ifndef TETRA_FACE_FILE_INCLUDED
 #define TETRA_FACE_FILE_INCLUDED
 
+#include <_BitDepthDefines.hpp>
+
 #include <fstream>
 #include <string>
 #include <algorithm> 
@@ -10,10 +12,11 @@
 #include <sstream>
 #include <utility>
 #include <map>
-#include "arrayfire.h"
-#include "StringFuncs.hpp"
-#include "TetraMeshFile.hpp"
-#include "TetraFace.hpp"
+
+#include <arrayfire.h>
+#include <StringFuncs.hpp>
+#include <TetraMeshFile.hpp>
+#include <TetraFace.hpp>
 
 using namespace std;
 
@@ -83,11 +86,11 @@ class TetraFaceFile
 {
 public:
 	bool init_;
-	size_t faceCount_;
-	size_t tetraCount_;
-	size_t* faceVertexIndex_;
-	size_t* faceTetraIndex_;
-	size_t* tetraFaceIndex_;
+	UINT_T faceCount_;
+	UINT_T tetraCount_;
+	UINT_T* faceVertexIndex_;
+	UINT_T* faceTetraIndex_;
+	UINT_T* tetraFaceIndex_;
 
 public:
 
@@ -156,8 +159,8 @@ public:
 		//////
 
 		tetraCount_ = meshFile.tetraCount_;
-		tetraFaceIndex_ = new size_t[ 4 * tetraCount_ ];
-		meshFile.tetraVertexIndex_ = af::sort( af::array( 4, meshFile.tetraCount_, meshFile.tetraVertexIndex_, afHost ) ).host< size_t >();
+		tetraFaceIndex_ = new UINT_T[ 4 * tetraCount_ ];
+		meshFile.tetraVertexIndex_ = af::sort( af::array( 4, meshFile.tetraCount_, meshFile.tetraVertexIndex_, afHost ) ).host< UINT_T >();
 		
 
 
@@ -216,26 +219,26 @@ public:
 		//cout << endl;
 		//////
 
-		vector< TetraFace< size_t > > faceList;
+		vector< TetraFace< UINT_T > > faceList;
 		faceList.reserve( 4 * meshFile.tetraCount_ );
 
-		map< string, size_t > faceMap;
+		map< string, UINT_T > faceMap;
 
-		size_t* iPtr = meshFile.tetraVertexIndex_;
+		UINT_T* iPtr = meshFile.tetraVertexIndex_;
 
-		for( size_t idt = 0; idt < tetraCount_; ++idt )
+		for( UINT_T idt = 0; idt < tetraCount_; ++idt )
 		{
-			size_t iVert[4];
+			UINT_T iVert[4];
 			iVert[0] = 4 * idt;
 			iVert[1] = iVert[0] + 1;
 			iVert[2] = iVert[0] + 2;
 			iVert[3] = iVert[0] + 3;
 			
-			TetraFace< size_t > tetraFace[4];
-			tetraFace[0] = TetraFace< size_t >( iPtr[ iVert[0] ], iPtr[ iVert[1] ], iPtr[ iVert[2] ] );
-			tetraFace[1] = TetraFace< size_t >( iPtr[ iVert[0] ], iPtr[ iVert[1] ], iPtr[ iVert[3] ] );
-			tetraFace[2] = TetraFace< size_t >( iPtr[ iVert[0] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
-			tetraFace[3] = TetraFace< size_t >( iPtr[ iVert[1] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
+			TetraFace< UINT_T > tetraFace[4];
+			tetraFace[0] = TetraFace< UINT_T >( iPtr[ iVert[0] ], iPtr[ iVert[1] ], iPtr[ iVert[2] ] );
+			tetraFace[1] = TetraFace< UINT_T >( iPtr[ iVert[0] ], iPtr[ iVert[1] ], iPtr[ iVert[3] ] );
+			tetraFace[2] = TetraFace< UINT_T >( iPtr[ iVert[0] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
+			tetraFace[3] = TetraFace< UINT_T >( iPtr[ iVert[1] ], iPtr[ iVert[2] ], iPtr[ iVert[3] ] );
 			
 			string faceHash[4];
 			faceHash[0] = tetraFace[0].MakeHash();
@@ -243,20 +246,20 @@ public:
 			faceHash[2] = tetraFace[2].MakeHash();
 			faceHash[3] = tetraFace[3].MakeHash();
 
-			for( size_t idf = 0; idf < 4; ++idf )
+			for( UINT_T idf = 0; idf < 4; ++idf )
 			{
 				auto itMap = faceMap.find( faceHash[ idf ] );
 				if( itMap == faceMap.end() )
 				{
 					tetraFace[ idf ].t1_ = idt + 1;
 					faceList.push_back( tetraFace[ idf ] );
-					size_t faceIndex = faceList.size();
+					UINT_T faceIndex = faceList.size();
 					faceMap[ faceHash[ idf ] ] = faceIndex;
 					tetraFaceIndex_[ iVert[ idf ] ] = faceIndex;
 				}
 				else
 				{
-					size_t faceIndex = itMap->second;
+					UINT_T faceIndex = itMap->second;
 					faceList[ faceIndex ].t2_ = idt + 1;
 					tetraFaceIndex_[ iVert[ idf ] ] = faceIndex;
 				}
@@ -266,8 +269,8 @@ public:
 		faceList.shrink_to_fit();
 		faceCount_ = faceList.size();
 
-		faceVertexIndex_ = new size_t[ 3 * faceCount_ ];
-		faceTetraIndex_ = new size_t[ 2 * faceCount_ ];
+		faceVertexIndex_ = new UINT_T[ 3 * faceCount_ ];
+		faceTetraIndex_ = new UINT_T[ 2 * faceCount_ ];
 
 		/**
 			Think of a different way to alleviate this extra copy below.
@@ -275,14 +278,14 @@ public:
 
 		//cout << "C" << endl;
 
-		for( size_t idf = 0; idf < faceCount_; ++idf )
+		for( UINT_T idf = 0; idf < faceCount_; ++idf )
 		{
-			size_t iVert[3];
+			UINT_T iVert[3];
 			iVert[0] = 3 * idf;
 			iVert[1] = iVert[0] + 1;
 			iVert[2] = iVert[0] + 2;
 
-			size_t iTet[2];
+			UINT_T iTet[2];
 			iTet[0] = 2 * idf;
 			iTet[1] = iTet[0] + 1;
 
@@ -311,16 +314,16 @@ public:
 			return false;
 		}
 
-		tetrafaceFile.read( ( char* )&faceCount_, 8 );
-		tetrafaceFile.read( ( char* )&tetraCount_, 8 );
+		tetrafaceFile.read( ( char* )&faceCount_, SIZEOF_T );
+		tetrafaceFile.read( ( char* )&tetraCount_, SIZEOF_T );
 
-		faceVertexIndex_ = new size_t[ 3 * faceCount_ ];
-		faceTetraIndex_ = new size_t[ 2 * faceCount_ ];
-		tetraFaceIndex_ = new size_t[ 4 * tetraCount_ ];
+		faceVertexIndex_ = new UINT_T[ 3 * faceCount_ ];
+		faceTetraIndex_ = new UINT_T[ 2 * faceCount_ ];
+		tetraFaceIndex_ = new UINT_T[ 4 * tetraCount_ ];
 
-		tetrafaceFile.read( ( char* )faceVertexIndex_, 8 * 3 * faceCount_ );
-		tetrafaceFile.read( ( char* )faceTetraIndex_, 8 * 2 * faceCount_ );
-		tetrafaceFile.read( ( char* )tetraFaceIndex_, 8 * 4 * tetraCount_ );
+		tetrafaceFile.read( ( char* )faceVertexIndex_, SIZEOF_T * 3 * faceCount_ );
+		tetrafaceFile.read( ( char* )faceTetraIndex_, SIZEOF_T * 2 * faceCount_ );
+		tetrafaceFile.read( ( char* )tetraFaceIndex_, SIZEOF_T * 4 * tetraCount_ );
 
 		tetrafaceFile.close();
 
@@ -339,12 +342,12 @@ public:
 			return false;
 		}
 
-		tetrafaceFile.write( ( char* )&faceCount_, 8 );
-		tetrafaceFile.write( ( char* )&tetraCount_, 8 );
+		tetrafaceFile.write( ( char* )&faceCount_, SIZEOF_T );
+		tetrafaceFile.write( ( char* )&tetraCount_, SIZEOF_T );
 
-		tetrafaceFile.write( ( char* )faceVertexIndex_, 8 * 3 * faceCount_ );
-		tetrafaceFile.write( ( char* )faceTetraIndex_, 8 * 2 * faceCount_ );
-		tetrafaceFile.write( ( char* )tetraFaceIndex_, 8 * 4 * tetraCount_ );
+		tetrafaceFile.write( ( char* )faceVertexIndex_, SIZEOF_T * 3 * faceCount_ );
+		tetrafaceFile.write( ( char* )faceTetraIndex_, SIZEOF_T * 2 * faceCount_ );
+		tetrafaceFile.write( ( char* )tetraFaceIndex_, SIZEOF_T * 4 * tetraCount_ );
 
 		tetrafaceFile.close();
 

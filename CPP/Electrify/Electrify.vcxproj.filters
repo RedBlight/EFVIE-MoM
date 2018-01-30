@@ -7,35 +7,9 @@
     <Filter Include="Source">
       <UniqueIdentifier>{e012dd21-900a-40bc-841a-072af80b98ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\EmRule">
-      <UniqueIdentifier>{61c90739-6a5f-44b1-9bdc-d157189ac46c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\_EmRule.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\EmPropFile.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\TetraMeshFile.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\EmRule\EmRule_Factory.hpp">
-      <Filter>Headers\EmRule</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\EmRule\EmRule_Constant.hpp">
-      <Filter>Headers\EmRule</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\EmRule\EmRule.hpp">
-      <Filter>Headers\EmRule</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\EmRuleFile.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Source\Electrify.cpp">
+    <ClCompile Include="..\Source\AppletsNoExcept\ElectrifyNoExcept.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
