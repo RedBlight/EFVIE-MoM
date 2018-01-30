@@ -18,7 +18,7 @@ class EmRule
 {
 protected:
 	virtual bool SetRuleData_( const vector< T >& ruleData ) = 0;
-	virtual bool GenerateProps_( * propArr, const T* vertexList, const UINT_T* tetraList, const UINT_T& tetraCount ) const = 0;
+	virtual bool GenerateProps_( T* propArr, const T* vertexList, const UINT_T* tetraList, const UINT_T& tetraCount ) const = 0;
 	virtual shared_ptr< EmRule< T > > Clone_() const = 0;
 
 public:

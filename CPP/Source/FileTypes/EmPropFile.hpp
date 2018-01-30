@@ -30,7 +30,7 @@ class EmPropFile
 public:
 	bool init_;
 	UINT_T tetraCount_;
-	double* emPropData_;
+	FLOAT_T* emPropData_;
 
 public:
 

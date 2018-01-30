@@ -202,7 +202,7 @@ public:
 
 			shared_ptr< T > hostQuadData( transpose( WXYZ_ ).host< T >() );
 
-			copy( hostQuadData, hostQuadData + 4 * 64, &( quadData[ idQuad ] ) );
+			copy( hostQuadData.get(), hostQuadData.get() + 4 * 64, &( quadData[ idQuad ] ) );
 
 		}
 	}

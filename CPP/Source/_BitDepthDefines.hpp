@@ -4,7 +4,7 @@
 
 // change this to alternate between 32 and 64 bits of operation.
 /////////////////////////////
-#define EFVIEMOM_BIT_DEPTH 64
+#define EFVIEMOM_BIT_DEPTH 32
 /////////////////////////////
 
 #if EFVIEMOM_BIT_DEPTH == 32
