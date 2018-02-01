@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 using namespace std;
 
@@ -18,19 +19,18 @@ using namespace std;
 
 .tetraquad file:
 [0] tetrahedron count
-[1] quad level = 4,
-[2] quad count = level^3 = 64;
-[3 ... A - 1]:
+[1] quad count //= 64 for now
+[2 ... A - 1]:
 
 w1 x1 y1 z1 |
-....        | -> for 1 tetrahedron, all double, 4 * [2] cell total
+....        | -> for 1 tetrahedron, FLOAT_T, 4 * [2] cell total
 wN xN yN zN |
 
 repeat for all tetrahedra
 
-A = 3 + 4 * [2] * [0]
+A = 2 + 4 * [2] * [0]
 
-total size = 8 * ( 3 + 4 * [0] * [2] ) byte
+total size = SIZEOF_T * ( 2 + 4 * [0] * [2] ) byte
 
 */
 
@@ -41,28 +41,23 @@ class TetraQuadFile
 public:
 	bool init_;
 	UINT_T tetraCount_;
-	UINT_T quadLevel_;
 	UINT_T quadCount_;
-	T* quadData_;
+	shared_ptr< T > quadData_;
 
 public:
 
 	TetraQuadFile() :
 		init_( false ),
 		tetraCount_( 0 ),
-		quadLevel_( 0 ),
 		quadCount_( 0 ),
-		quadData_( nullptr )
+		quadData_()
 	{
 
 	}
 
 	~TetraQuadFile()
 	{
-		if( init_ )
-		{
-			delete[] quadData_;
-		}
+
 	}
 
 	void Reset()
@@ -71,26 +66,35 @@ public:
 		{
 			init_ = false;
 			tetraCount_ = 0;
-			quadLevel_ = 0;
 			quadCount_ = 0;
-			delete[] quadData_;
-			quadData_ = nullptr;
+			quadData_.reset();
 		}
 	}
 
-	void Initialise( const UINT_T& tetraCount, const UINT_T& quadLevel )
+	void Initialize( const UINT_T& tetraCount, const UINT_T& quadCount )
 	{
-		if( !init_ )
-		{
-			tetraCount_ = tetraCount;
-			quadLevel_ = quadLevel;
-			quadCount_ = quadLevel * quadLevel * quadLevel;
-			quadData_ = new T[ 4 * quadCount_ * tetraCount_ ];
-			init_ = true;
-		}
+		Reset();
+
+		tetraCount_ = tetraCount;
+		quadCount_ = quadCount;
+
+		quadData_.reset( new T[ 4 * quadCount_ * tetraCount_  ], []( T* ptr ){ delete[] ptr; } );
+
+		init_ = true;
 	}
 
-	bool Load_tetraquad( const string& filePath )
+	void Initialize( const UINT_T& tetraCount, const UINT_T& quadCount, const shared_ptr< T >& quadData )
+	{
+		Reset();
+
+		tetraCount_ = tetraCount;
+		quadCount_ = quadCount;
+		quadData_ = quadData;
+
+		init_ = true;
+	}
+
+	bool Load( const string& filePath )
 	{
 		Reset();
 
@@ -103,12 +107,11 @@ public:
 		}
 
 		quadFile.read( ( char* )&tetraCount_, SIZEOF_T );
-		quadFile.read( ( char* )&quadLevel_, SIZEOF_T );
 		quadFile.read( ( char* )&quadCount_, SIZEOF_T );
 
-		quadData_ = new T[ 4 * quadCount_ * tetraCount_ ];
+		quadData_.reset( new T[ 4 * quadCount_ * tetraCount_ ], []( T* ptr ){ delete[] ptr; } );
 
-		quadFile.read( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * tetraCount_ );
+		quadFile.read( ( char* )( quadData_.get() ), SIZEOF_T * 4 * quadCount_ * tetraCount_ );
 
 		quadFile.close();
 
@@ -117,7 +120,7 @@ public:
 		return true;
 	}
 
-	bool Save_tetraquad( const string& filePath )
+	bool Save( const string& filePath )
 	{
 		fstream quadFile( filePath, ios::trunc | ios::out | ios::binary );
 		
@@ -128,10 +131,9 @@ public:
 		}
 
 		quadFile.write( ( char* )&tetraCount_, SIZEOF_T );
-		quadFile.write( ( char* )&quadLevel_, SIZEOF_T );
 		quadFile.write( ( char* )&quadCount_, SIZEOF_T );
 
-		quadFile.write( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * tetraCount_ );
+		quadFile.write( ( char* )( quadData_.get() ), SIZEOF_T * 4 * quadCount_ * tetraCount_ );
 
 		quadFile.close();
 

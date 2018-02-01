@@ -137,9 +137,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Source\Applets\MakeQuadrature.cpp">
-      <Filter>Source\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
       <Filter>Source\Applets</Filter>
     </ClCompile>
@@ -161,8 +158,11 @@
     <ClCompile Include="..\Source\AppletsNoExcept\MakeMeshNoExcept.cpp">
       <Filter>Source\AppletsNoExcept</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadratureNoExcept.cpp">
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadNoExcept.cpp">
       <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Applets\MakeQuad.cpp">
+      <Filter>Source\Applets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

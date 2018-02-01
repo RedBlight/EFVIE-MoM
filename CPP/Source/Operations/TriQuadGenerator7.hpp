@@ -1,5 +1,5 @@
-#ifndef TRI_QUAD_GENERATOR7_INCLUDED
-#define TRI_QUAD_GENERATOR7_INCLUDED
+#ifndef TRI_QUAD_GENERATOR_7_INCLUDED
+#define TRI_QUAD_GENERATOR_7_INCLUDED
 
 #include <_BitDepthDefines.hpp>
 
@@ -11,8 +11,10 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 #include <arrayfire.h>
+
 #include <_LuVector.hpp>
 
 using namespace std;
@@ -46,32 +48,49 @@ public:
 		wFactor2_ = ( 155.0 - sqrt( 15.0 ) ) / 1200.0;
 		wFactor3_ = ( 155.0 + sqrt( 15.0 ) ) / 1200.0;
 	}
+	
+		//const UINT_T& tetraCount,
+		//const shared_ptr< T >& vertexData,
+		//const shared_ptr< UINT_T >& tetraVertexIndex,
 
-	void Generate( T* quadData, const UINT_T* indexList, const T* vertexList, const UINT_T& faceCount ) const
+		//shared_ptr< T >& quadData
+
+	void Generate(
+		const UINT_T& faceCount,
+		const shared_ptr< T >& vertexData,
+		const shared_ptr< UINT_T >& faceVertexIndex,
+
+		shared_ptr< T >& quadData // must be preallocated
+
+	) const
 	{
+		T* vertexDataPtr = vertexData.get();
+		UINT_T* tetraVertexIndexPtr = faceVertexIndex.get();
+		T* quadDataPtr = quadData.get();
+
 		for( UINT_T idf = 0; idf < faceCount; ++idf )
 		{
 			UINT_T idx1 = 3 * idf;
 			UINT_T idx2 = idx1 + 1;
 			UINT_T idx3 = idx1 + 2;
 
-			UINT_T idv1x = 3 * indexList[ idx1 ];
+			UINT_T idv1x = 3 * tetraVertexIndexPtr[ idx1 ];
 			UINT_T idv1y = idv1x + 1;
 			UINT_T idv1z = idv1x + 2;
 
-			UINT_T idv2x = 3 * indexList[ idx2 ];
+			UINT_T idv2x = 3 * tetraVertexIndexPtr[ idx2 ];
 			UINT_T idv2y = idv2x + 1;
 			UINT_T idv2z = idv2x + 2;
 
-			UINT_T idv3x = 3 * indexList[ idx3 ];
+			UINT_T idv3x = 3 * tetraVertexIndexPtr[ idx3 ];
 			UINT_T idv3y = idv3x + 1;
 			UINT_T idv3z = idv3x + 2;
 
 			UINT_T idQuad = 4 * 7 * idf;
 
-			LUV::LuVector< 3, T > v1( vertexList[ idv1x ], vertexList[ idv1x ], vertexList[ idv1x ] );
-			LUV::LuVector< 3, T > v2( vertexList[ idv2y ], vertexList[ idv2y ], vertexList[ idv2y ] );
-			LUV::LuVector< 3, T > v3( vertexList[ idv3z ], vertexList[ idv3z ], vertexList[ idv3z ] );
+			LUV::LuVector< 3, T > v1( vertexDataPtr[ idv1x ], vertexDataPtr[ idv1x ], vertexDataPtr[ idv1x ] );
+			LUV::LuVector< 3, T > v2( vertexDataPtr[ idv2y ], vertexDataPtr[ idv2y ], vertexDataPtr[ idv2y ] );
+			LUV::LuVector< 3, T > v3( vertexDataPtr[ idv3z ], vertexDataPtr[ idv3z ], vertexDataPtr[ idv3z ] );
 
 			LUV::LuVector< 3, T > q[7];
 
@@ -103,10 +122,10 @@ public:
 				UINT_T idq2 = idq1 + 1;
 				UINT_T idq3 = idq1 + 2;
 				UINT_T idq4 = idq1 + 3;
-				quadData[ idq1 ] = w[ idq ];
-				quadData[ idq2 ] = q[ idq ][0];
-				quadData[ idq3 ] = q[ idq ][1];
-				quadData[ idq4 ] = q[ idq ][2]; 
+				quadDataPtr[ idq1 ] = w[ idq ];
+				quadDataPtr[ idq2 ] = q[ idq ][0];
+				quadDataPtr[ idq3 ] = q[ idq ][1];
+				quadDataPtr[ idq4 ] = q[ idq ][2]; 
 			}
 
 		}

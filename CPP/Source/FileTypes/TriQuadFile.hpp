@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 using namespace std;
 
@@ -41,7 +42,7 @@ public:
 	bool init_;
 	UINT_T faceCount_;
 	UINT_T quadCount_;
-	T* quadData_;
+	shared_ptr< T > quadData_;
 
 public:
 
@@ -49,17 +50,14 @@ public:
 		init_( false ),
 		faceCount_( 0 ),
 		quadCount_( 0 ),
-		quadData_( nullptr )
+		quadData_()
 	{
 
 	}
 
 	~TriQuadFile()
 	{
-		if( init_ )
-		{
-			delete[] quadData_;
-		}
+
 	}
 
 	void Reset()
@@ -69,23 +67,34 @@ public:
 			init_ = false;
 			faceCount_ = 0;
 			quadCount_ = 0;
-			delete[] quadData_;
-			quadData_ = nullptr;
+			quadData_.reset();
 		}
 	}
 
-	void Initialise( const UINT_T& faceCount, const UINT_T& quadCount )
+	void Initialize( const UINT_T& faceCount, const UINT_T& quadCount )
 	{
-		if( !init_ )
-		{
-			faceCount_ = faceCount;
-			quadCount_ = quadCount;
-			quadData_ = new T[ 4 * quadCount_ * faceCount_ ];
-			init_ = true;
-		}
+		Reset();
+
+		faceCount_ = faceCount;
+		quadCount_ = quadCount;
+
+		quadData_.reset( new T[ 4 * quadCount_ * faceCount_  ], []( T* ptr ){ delete[] ptr; } );
+
+		init_ = true;
 	}
 
-	bool Load_triquad( const string& filePath )
+	void Initialize( const UINT_T& faceCount, const UINT_T& quadCount, const shared_ptr< T >& quadData )
+	{
+		Reset();
+
+		faceCount_ = faceCount;
+		quadCount_ = quadCount;
+		quadData_ = quadData;
+
+		init_ = true;
+	}
+
+	bool Load( const string& filePath )
 	{
 		Reset();
 
@@ -100,9 +109,9 @@ public:
 		quadFile.read( ( char* )&faceCount_, SIZEOF_T );
 		quadFile.read( ( char* )&quadCount_, SIZEOF_T );
 
-		quadData_ = new T[ 4 * quadCount_ * faceCount_ ];
+		quadData_.reset( new T[ 4 * quadCount_ * faceCount_ ], []( T* ptr ){ delete[] ptr; } );
 
-		quadFile.read( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * faceCount_ );
+		quadFile.read( ( char* )( quadData_.get() ), SIZEOF_T * 4 * quadCount_ * faceCount_ );
 
 		quadFile.close();
 
@@ -111,7 +120,7 @@ public:
 		return true;
 	}
 
-	bool Save_triquad( const string& filePath )
+	bool Save( const string& filePath )
 	{
 		fstream quadFile( filePath, ios::trunc | ios::out | ios::binary );
 		
@@ -124,7 +133,7 @@ public:
 		quadFile.write( ( char* )&faceCount_, SIZEOF_T );
 		quadFile.write( ( char* )&quadCount_, SIZEOF_T );
 
-		quadFile.write( ( char* )quadData_, SIZEOF_T * 4 * quadCount_ * faceCount_ );
+		quadFile.write( ( char* )( quadData_.get() ), SIZEOF_T * 4 * quadCount_ * faceCount_ );
 
 		quadFile.close();
 

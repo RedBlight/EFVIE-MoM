@@ -43,12 +43,9 @@ public:
 		}
 	}
 
-	bool Load_emrule( const string& filePath )
+	bool Load( const string& filePath )
 	{
-		if( !init_ )
-		{
-			Reset();
-		}
+		Reset();
 
 		fstream ruleFile( filePath, ios::in );
 

@@ -42,13 +42,11 @@ private:
 		ruleMap_[ "Constant" ] = shared_ptr< EmRule< T > >( new EmRule_Constant< T >() );
 		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
 		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
-
-		//cout << "!!! EMRULE_FACTORY CREATED !!!" << endl;
 	}
 
 	~EmRuleFactory()
 	{
-		//cout << "!!! EMRULE_FACTORY DESTOYED !!!" << endl;
+
 	}
 
 public:

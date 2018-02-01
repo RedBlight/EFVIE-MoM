@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 using namespace std;
 
@@ -30,34 +31,21 @@ class EmPropFile
 public:
 	bool init_;
 	UINT_T tetraCount_;
-	FLOAT_T* emPropData_;
+	shared_ptr< T > emPropData_;
 
 public:
 
 	EmPropFile() :
 		init_( false ),
 		tetraCount_( 0 ),
-		emPropData_( nullptr )
+		emPropData_()
 	{
 
 	}
 
 	~EmPropFile()
 	{
-		if( init_ )
-		{
-			delete[] emPropData_;
-		}
-	}
 
-	void Initialise( const UINT_T& tetraCount )
-	{
-		if( !init_ )
-		{
-			tetraCount_ = tetraCount;
-			emPropData_ = new T[ 2 * tetraCount_ ];
-			init_ = true;
-		}
 	}
 
 	void Reset()
@@ -66,12 +54,32 @@ public:
 		{
 			init_ = false;
 			tetraCount_ = 0;
-			delete[] emPropData_;
-			emPropData_ = nullptr;
+			emPropData_.reset();
 		}
 	}
 
-	bool Load_emprop( const string& filePath )
+	void Initialize( const UINT_T& tetraCount )
+	{
+		Reset();
+
+		tetraCount_ = tetraCount;
+
+		emPropData_.reset( new T[ 2 * tetraCount_  ], []( T* ptr ){ delete[] ptr; } );
+
+		init_ = true;
+	}
+
+	void Initialize( const UINT_T& tetraCount, const shared_ptr< T >& emPropData )
+	{
+		Reset();
+
+		tetraCount_ = tetraCount;
+		emPropData_ = emPropData;
+
+		init_ = true;
+	}
+
+	bool Load( const string& filePath )
 	{
 		Reset();
 
@@ -84,9 +92,9 @@ public:
 		}
 
 		propFile.read( ( char* )&tetraCount_, SIZEOF_T );
-		emPropData_ = new T[ 2 * tetraCount_ ];
 
-		propFile.read( ( char* )emPropData_, SIZEOF_T * 2 * tetraCount_ );
+		emPropData_.reset( new T[ 2 * tetraCount_ ], []( T* ptr ){ delete[] ptr; } );
+		propFile.read( ( char* )( emPropData_.get() ), SIZEOF_T * 2 * tetraCount_ );
 
 		propFile.close();
 
@@ -95,7 +103,7 @@ public:
 		return true;
 	}
 
-	bool Save_emprop( const string& filePath )
+	bool Save( const string& filePath )
 	{
 		fstream propFile( filePath, ios::trunc | ios::out | ios::binary );
 
@@ -106,7 +114,7 @@ public:
 		}
 
 		propFile.write( ( char* )&tetraCount_, SIZEOF_T );
-		propFile.write( ( char* )emPropData_, SIZEOF_T * 2 * tetraCount_ );
+		propFile.write( ( char* )( emPropData_.get() ), SIZEOF_T * 2 * tetraCount_ );
 
 		propFile.close();
 

@@ -20,19 +20,25 @@ int main( int argc, char *argv[] )
 	string propFileName = argv[ 3 ];
 
 	TetraMeshFile< FLOAT_T > meshFile;
-	meshFile.Load_tetramesh( meshFileName );
+	meshFile.Load( meshFileName );
 
     EmRuleFile< FLOAT_T > ruleFile;
-	ruleFile.Load_emrule( ruleFileName );
+	ruleFile.Load( ruleFileName );
 
 	EmPropFile< FLOAT_T > propFile;
-	propFile.Initialise( meshFile.tetraCount_ );
+	propFile.Initialize( meshFile.tetraCount_ );
 
 	EmRuleFactory< FLOAT_T >& ruleFactory = EmRuleFactory< FLOAT_T >::GetInstance();
 	shared_ptr< EmRule< FLOAT_T > > emRule = ruleFactory.GetRule( ruleFile.ruleType_ );
 	emRule->SetRuleData( ruleFile.ruleData_ );
-	emRule->GenerateProps( propFile.emPropData_, meshFile.vertexData_, meshFile.tetraVertexIndex_, propFile.tetraCount_ );
-	propFile.Save_emprop( propFileName );
+	emRule->GenerateProps(
+		meshFile.tetraCount_,
+		meshFile.vertexData_,
+		meshFile.tetraVertexIndex_,
+		propFile.emPropData_
+	);
+	
+	propFile.Save( propFileName );
 
 	auto tEnd = chrono::high_resolution_clock::now();
 	auto tDiff = tEnd - tStart;

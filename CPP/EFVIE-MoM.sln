@@ -9,13 +9,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeFace", "MakeFace\MakeFa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Electrify", "Electrify\Electrify.vcxproj", "{0CC46981-DB2D-4B66-9B6E-50334762BB1F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeQuadrature", "MakeQuadrature\MakeQuadrature.vcxproj", "{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeMoM", "MakeMoM\MakeMoM.vcxproj", "{55F0DBCC-1388-4E8D-834C-739CBD33A057}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "New EFVIE-MOM Project", "New EFVIE-MOM Project\New EFVIE-MOM Project.vcxproj", "{2F9415AC-F3CA-4DD0-97F9-83872EB03713}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AllFiles", "AllFiles\AllFiles.vcxproj", "{C62D9132-CDAA-49D4-A51B-58C7B5595584}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeQuad", "MakeQuad\MakeQuad.vcxproj", "{ED3C553E-389B-49A4-8266-700CC1EBF480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,22 +77,6 @@ Global
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
 		{0CC46981-DB2D-4B66-9B6E-50334762BB1F}.Unified_Release|x64.Build.0 = Unified_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Debug|x64.ActiveCfg = CPU_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Debug|x64.Build.0 = CPU_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Release|x64.ActiveCfg = CPU_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CPU_Release|x64.Build.0 = CPU_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Debug|x64.ActiveCfg = CUDA_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Debug|x64.Build.0 = CUDA_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Release|x64.ActiveCfg = CUDA_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.CUDA_Release|x64.Build.0 = CUDA_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Debug|x64.ActiveCfg = OpenCL_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Debug|x64.Build.0 = OpenCL_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Release|x64.ActiveCfg = OpenCL_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.OpenCL_Release|x64.Build.0 = OpenCL_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Debug|x64.ActiveCfg = Unified_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
-		{C96E2A89-55BC-4303-88A5-A2797D7D0AE6}.Unified_Release|x64.Build.0 = Unified_Release|x64
 		{55F0DBCC-1388-4E8D-834C-739CBD33A057}.CPU_Debug|x64.ActiveCfg = CPU_Debug|x64
 		{55F0DBCC-1388-4E8D-834C-739CBD33A057}.CPU_Debug|x64.Build.0 = CPU_Debug|x64
 		{55F0DBCC-1388-4E8D-834C-739CBD33A057}.CPU_Release|x64.ActiveCfg = CPU_Release|x64
@@ -141,6 +125,22 @@ Global
 		{C62D9132-CDAA-49D4-A51B-58C7B5595584}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
 		{C62D9132-CDAA-49D4-A51B-58C7B5595584}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
 		{C62D9132-CDAA-49D4-A51B-58C7B5595584}.Unified_Release|x64.Build.0 = Unified_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CPU_Debug|x64.ActiveCfg = CPU_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CPU_Debug|x64.Build.0 = CPU_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CPU_Release|x64.ActiveCfg = CPU_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CPU_Release|x64.Build.0 = CPU_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CUDA_Debug|x64.ActiveCfg = CUDA_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CUDA_Debug|x64.Build.0 = CUDA_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CUDA_Release|x64.ActiveCfg = CUDA_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.CUDA_Release|x64.Build.0 = CUDA_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.OpenCL_Debug|x64.ActiveCfg = OpenCL_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.OpenCL_Debug|x64.Build.0 = OpenCL_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.OpenCL_Release|x64.ActiveCfg = OpenCL_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.OpenCL_Release|x64.Build.0 = OpenCL_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.Unified_Debug|x64.ActiveCfg = Unified_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
+		{ED3C553E-389B-49A4-8266-700CC1EBF480}.Unified_Release|x64.Build.0 = Unified_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

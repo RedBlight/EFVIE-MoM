@@ -74,12 +74,12 @@
     <ClCompile Include="..\Source\AppletsNoExcept\ElectrifyNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeFaceNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeMeshNoExcept.cpp" />
-    <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadratureNoExcept.cpp" />
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadNoExcept.cpp" />
     <ClCompile Include="..\Source\Applets\Electrify.cpp" />
     <ClCompile Include="..\Source\Applets\MakeFace.cpp" />
     <ClCompile Include="..\Source\Applets\MakeMesh.cpp" />
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp" />
-    <ClCompile Include="..\Source\Applets\MakeQuadrature.cpp" />
+    <ClCompile Include="..\Source\Applets\MakeQuad.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{c62d9132-cdaa-49d4-a51b-58c7b5595584}</ProjectGuid>

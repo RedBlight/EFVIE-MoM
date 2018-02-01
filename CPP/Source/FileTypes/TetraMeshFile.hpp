@@ -78,7 +78,6 @@ public:
 
 		init_ = true;
 	}
-
 	
 	void Initialize( const UINT_T& vertexCount, const UINT_T& tetraCount, const shared_ptr< T >& vertexData, const shared_ptr< UINT_T >& tetraVertexIndex )
 	{

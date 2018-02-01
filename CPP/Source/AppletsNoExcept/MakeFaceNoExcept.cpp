@@ -27,14 +27,6 @@ int main( int argc, char *argv[] )
 	shared_ptr< UINT_T > tetraFaceIndex;
 
 	TetraFaceExtractor< FLOAT_T > extractor;
-	
-		//const UINT_T& tetraCount,
-		//shared_ptr< UINT_T >& tetraVertexIndex,
-
-		//UINT_T& faceCount,
-		//shared_ptr< UINT_T >& faceVertexIndex,
-		//shared_ptr< UINT_T >& faceTetraIndex,
-		//shared_ptr< UINT_T >& tetraFaceIndex
 
 	extractor.Extract(
 		meshFile.tetraCount_,

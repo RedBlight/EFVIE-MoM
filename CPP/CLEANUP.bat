@@ -25,10 +25,10 @@
 @RD /S /Q "MakeMoM\OpenCL"
 @RD /S /Q "MakeMoM\Unified"
 
-@RD /S /Q "MakeQuadrature\CPU"
-@RD /S /Q "MakeQuadrature\CUDA"
-@RD /S /Q "MakeQuadrature\OpenCL"
-@RD /S /Q "MakeQuadrature\Unified"
+@RD /S /Q "MakeQuad\CPU"
+@RD /S /Q "MakeQuad\CUDA"
+@RD /S /Q "MakeQuad\OpenCL"
+@RD /S /Q "MakeQuad\Unified"
 
 @RD /S /Q "New EFVIE-MOM Project\CPU"
 @RD /S /Q "New EFVIE-MOM Project\CUDA"

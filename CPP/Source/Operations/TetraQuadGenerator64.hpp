@@ -43,15 +43,6 @@ public:
 
 	af::array C1_; // column of ones
 	af::array diffMat_;
-	
-	// precalculated values end here
-
-	//af::array vertMat_;
-	//af::array vertDiffX_;
-	//
-	//af::array W_;
-
-	//af::array WXYZ_; // transpose and generate a host pointer
 
 public:
 	TetraQuadGenerator64() :
@@ -74,13 +65,6 @@ public:
 		C1_( 64, AF_FLOAT_T ),
 
 		diffMat_( 4, 4, AF_FLOAT_T )
-
-		//vertMat_( 4, 3, AF_FLOAT_T ),
-		//vertDiffX_( 4, 3, AF_FLOAT_T ),
-
-		//W_( 64, AF_FLOAT_T ),
-		//
-		//WXYZ_( 64, 4, AF_FLOAT_T )
 	{
 		T q1[4] = {
 			0.204148582103227,
@@ -160,8 +144,19 @@ public:
 
 	}
 
-	void Generate( T* quadData, const UINT_T* indexList, const T* vertexList, const UINT_T& tetraCount ) const
+	void Generate(
+		const UINT_T& tetraCount,
+		const shared_ptr< T >& vertexData,
+		const shared_ptr< UINT_T >& tetraVertexIndex,
+
+		shared_ptr< T >& quadData // must be preallocated
+
+	) const
 	{
+		T* vertexDataPtr = vertexData.get();
+		UINT_T* tetraVertexIndexPtr = tetraVertexIndex.get();
+		T* quadDataPtr = quadData.get();
+
 		for( UINT_T idt = 0; idt < tetraCount; ++idt )
 		{
 			UINT_T idx1 = 4 * idt;
@@ -169,41 +164,41 @@ public:
 			UINT_T idx3 = idx1 + 2;
 			UINT_T idx4 = idx1 + 3;
 
-			UINT_T idv1x = 3 * indexList[ idx1 ];
+			UINT_T idv1x = 3 * tetraVertexIndexPtr[ idx1 ];
 			UINT_T idv1y = idv1x + 1;
 			UINT_T idv1z = idv1x + 2;
 
-			UINT_T idv2x = 3 * indexList[ idx2 ];
+			UINT_T idv2x = 3 * tetraVertexIndexPtr[ idx2 ];
 			UINT_T idv2y = idv2x + 1;
 			UINT_T idv2z = idv2x + 2;
 
-			UINT_T idv3x = 3 * indexList[ idx3 ];
+			UINT_T idv3x = 3 * tetraVertexIndexPtr[ idx3 ];
 			UINT_T idv3y = idv3x + 1;
 			UINT_T idv3z = idv3x + 2;
 
-			UINT_T idv4x = 3 * indexList[ idx4 ];
+			UINT_T idv4x = 3 * tetraVertexIndexPtr[ idx4 ];
 			UINT_T idv4y = idv4x + 1;
 			UINT_T idv4z = idv4x + 2;
 
 			UINT_T idQuad = 4 * 64 * idt;
 
 			T vertMat[12] = { // col major
-				vertexList[ idv1x ], vertexList[ idv2x ], vertexList[ idv3x ], vertexList[ idv4x ],
-				vertexList[ idv1y ], vertexList[ idv2y ], vertexList[ idv3y ], vertexList[ idv4y ],
-				vertexList[ idv1z ], vertexList[ idv2z ], vertexList[ idv3z ], vertexList[ idv4z ]
+				vertexDataPtr[ idv1x ], vertexDataPtr[ idv2x ], vertexDataPtr[ idv3x ], vertexDataPtr[ idv4x ],
+				vertexDataPtr[ idv1y ], vertexDataPtr[ idv2y ], vertexDataPtr[ idv3y ], vertexDataPtr[ idv4y ],
+				vertexDataPtr[ idv1z ], vertexDataPtr[ idv2z ], vertexDataPtr[ idv3z ], vertexDataPtr[ idv4z ]
 			};
 
-			af::array vertMat_( 4, 3, AF_FLOAT_T );
-			vertMat_.write( vertMat, SIZEOF_T * 12 );
+			af::array vertMatAf( 4, 3, AF_FLOAT_T );
+			vertMatAf.write( vertMat, SIZEOF_T * 12 );
 
-			af::array vertDiffX_ = af::matmul( diffMat_, vertMat_ );
-			af::array W_ = abs( af::det< FLOAT_T >( vertDiffX_.rows( 1, 3 ) ) ) * Wr_;
-			af::array WXYZ_ = af::join( 1, W_, af::matmul( af::join( 1, C1_, Qx_, Qy_, Qz_ ), vertDiffX_ ) );
+			af::array vertDiffX = af::matmul( diffMat_, vertMatAf );
+			af::array W = abs( af::det< FLOAT_T >( vertDiffX.rows( 1, 3 ) ) ) * Wr_;
+			af::array WXYZ = af::join( 1, W, af::matmul( af::join( 1, C1_, Qx_, Qy_, Qz_ ), vertDiffX ) );
 
-			shared_ptr< T > hostQuadData( transpose( WXYZ_ ).host< T >() );
-
-			copy( hostQuadData.get(), hostQuadData.get() + 4 * 64, &( quadData[ idQuad ] ) );
-
+			// fix the unnecessary copy here
+			T* quadDataHost = transpose( WXYZ ).host< T >();
+			copy( quadDataHost, quadDataHost + 4 * 64, &( quadDataPtr[ idQuad ] ) );
+			delete[] quadDataHost;
 		}
 	}
 

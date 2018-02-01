@@ -13,8 +13,8 @@ protected:
 
 	enum RuleDataIndex
 	{
-		EPS,
-		MU
+		EPS,	// 0	Relative electric permittivity
+		MU		// 1	Relative magnetic permeability
 	};
 
 	bool SetRuleData_( const vector< T >& ruleData ) override
@@ -28,14 +28,23 @@ protected:
 		return true;
 	}
 
-	bool GenerateProps_( T* propArr, const T* vertexList, const UINT_T* tetraList, const UINT_T& tetraCount ) const override
+	bool GenerateProps_(
+		const UINT_T& tetraCount,
+		const shared_ptr< T >& vertexData,
+		const shared_ptr< UINT_T >& tetraVertexIndex,
+		shared_ptr< T >& emPropData // must be preallocated
+	) const override
 	{
+		T* vertexDataPtr = vertexData.get();
+		UINT_T* tetraVertexIndexPtr = tetraVertexIndex.get();
+		T* emPropDataPtr = emPropData.get();
+
 		for( size_t idt = 0; idt < tetraCount; ++idt )
 		{
 			size_t idEps = 2 * idt;
 			size_t idMu = idEps + 1;
-			propArr[ idEps ] = ruleData_[ EPS ];
-			propArr[ idMu ] = ruleData_[ MU ];
+			emPropDataPtr[ idEps ] = ruleData_[ EPS ];
+			emPropDataPtr[ idMu ] = ruleData_[ MU ];
 		}
 
 		return true;
@@ -49,12 +58,12 @@ protected:
 public:
 	EmRule_Constant()
 	{
-		//cout << "!!! EMRULE_CONSTANT CREATED !!!" << endl;
+
 	}
 	
 	~EmRule_Constant()
 	{
-		//cout << "!!! EMRULE_CONSTANT DESTROYED !!!" << endl;
+
 	}
 
 };
