@@ -10,6 +10,7 @@
 #if EFVIEMOM_BIT_DEPTH == 32
 
 #define SIZEOF_T		4
+#define SIZEOF_CT		8
 
 #define FLOAT_T			float
 #define INT_T			int32_t
@@ -23,6 +24,7 @@
 #elif EFVIEMOM_BIT_DEPTH == 64
 
 #define SIZEOF_T		8
+#define SIZEOF_CT		16
 
 #define FLOAT_T			double
 #define INT_T			int64_t

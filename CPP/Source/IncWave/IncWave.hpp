@@ -50,7 +50,7 @@ public:
 		return FieldEM_( obsPoint );
 	}
 
-	shared_ptr< IncWave< T > > Clone( const LUV::LuVector3< T >& obsPoint ) const
+	shared_ptr< IncWave< T > > Clone() const
 	{
 		return Clone_();
 	}

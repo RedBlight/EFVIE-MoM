@@ -36,18 +36,16 @@ public:
 private:
 	IncWaveFactory()
 	{
-		waveMap_.clear();
-
 		// Register all kinds of EmRule variants here
-
+		
+		waveMap_.clear();
 		waveMap_[ "Plane" ] = shared_ptr< IncWave< T > >( new IncWave_Plane< T >() );
-
-		//ruleMap_[ "RadialLinear" ] = new EmRule_RadialLinear< T >();
-		//ruleMap_[ "CartesianLinear" ] = new EmRule_CartesianLinear< T >();
+		//waveMap_[ "HertzianDipole" ] = shared_ptr< IncWave< T > >( new IncWave_HertzianDipole< T >() );
 	}
 
 	~IncWaveFactory()
 	{
+
 	}
 
 public:

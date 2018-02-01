@@ -30,7 +30,7 @@ vertexStartStr			-> Coordinates of vertices.
 	{}v2x{}v2y{}v2z{}	-> repeat for the number of vertices.
 vertexEndStr
 ***
-tetraStartStr			-> Indices of tetrahedra vertices
+tetraStartStr			-> Indices of tetrahedra vertices, starting from 1
 	//useless line
 	{}t1v1{}t1v2{}v2z{}
 	//useless line
@@ -199,10 +199,10 @@ public:
 			UINT_T idv2 = idv1 + 1;
 			UINT_T idv3 = idv2 + 1;
 			UINT_T idv4 = idv3 + 1;
-			tetraVertexIndexPtr[ idv1 ] = ( UINT_T )( stoull( vIndices[ 0 ] ) );
-			tetraVertexIndexPtr[ idv2 ] = ( UINT_T )( stoull( vIndices[ 1 ] ) );
-			tetraVertexIndexPtr[ idv3 ] = ( UINT_T )( stoull( vIndices[ 2 ] ) );
-			tetraVertexIndexPtr[ idv4 ] = ( UINT_T )( stoull( vIndices[ 3 ] ) );
+			tetraVertexIndexPtr[ idv1 ] = ( UINT_T )( stoull( vIndices[ 0 ] ) ) - 1; // make sure that indices start with 0
+			tetraVertexIndexPtr[ idv2 ] = ( UINT_T )( stoull( vIndices[ 1 ] ) ) - 1;
+			tetraVertexIndexPtr[ idv3 ] = ( UINT_T )( stoull( vIndices[ 2 ] ) ) - 1;
+			tetraVertexIndexPtr[ idv4 ] = ( UINT_T )( stoull( vIndices[ 3 ] ) ) - 1;
 		}
 
 		unvFile.close();

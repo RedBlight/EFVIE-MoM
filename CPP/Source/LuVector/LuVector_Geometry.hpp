@@ -133,9 +133,23 @@ namespace LUV
 
 	// PlaneNormalP
 	template< class T >
-	inline LuVector< 3, T > PlaneNormalPN(  const LuVector< 3, T >& vec, const LuVector< 3, T >& v1, const LuVector< 3, T >& n ) 
+	inline LuVector< 3, T > PlaneNormalPN( const LuVector< 3, T >& vec, const LuVector< 3, T >& v1, const LuVector< 3, T >& n ) 
 	{
 		return Dot( n, vec - v1 ) > 0 ? n : -n;
+	}
+
+	//////////////////////////////////////////////////////////////
+	
+	template< class T >
+	inline T TriangleArea( const LuVector< 3, T >& v1, const LuVector< 3, T >& v2, const LuVector< 3, T >& v3 ) 
+	{
+		return Length( Cross( v2 - v1, v3 - v1 ) ) / 2.0;
+	}
+	
+	template< class T >
+	inline T TetrahedronVolume( const LuVector< 3, T >& v1, const LuVector< 3, T >& v2, const LuVector< 3, T >& v3, const LuVector< 3, T >& v4 ) 
+	{
+		return abs( Dot( Cross( v2 - v1, v3 - v1 ), v4 - v1 ) ) / 6.0;
 	}
 
 };

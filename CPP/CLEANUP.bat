@@ -5,6 +5,11 @@
 @RD /S /Q "AllFiles\OpenCL"
 @RD /S /Q "AllFiles\Unified"
 
+@RD /S /Q "ArrayFireTest\CPU"
+@RD /S /Q "ArrayFireTest\CUDA"
+@RD /S /Q "ArrayFireTest\OpenCL"
+@RD /S /Q "ArrayFireTest\Unified"
+
 @RD /S /Q "Electrify\CPU"
 @RD /S /Q "Electrify\CUDA"
 @RD /S /Q "Electrify\OpenCL"
@@ -29,6 +34,11 @@
 @RD /S /Q "MakeQuad\CUDA"
 @RD /S /Q "MakeQuad\OpenCL"
 @RD /S /Q "MakeQuad\Unified"
+
+@RD /S /Q "MakeRHS\CPU"
+@RD /S /Q "MakeRHS\CUDA"
+@RD /S /Q "MakeRHS\OpenCL"
+@RD /S /Q "MakeRHS\Unified"
 
 @RD /S /Q "New EFVIE-MOM Project\CPU"
 @RD /S /Q "New EFVIE-MOM Project\CUDA"

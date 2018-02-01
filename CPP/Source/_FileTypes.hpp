@@ -4,6 +4,7 @@
 #include <EmPropFile.hpp>
 #include <EmRuleFile.hpp>
 #include <IncWaveFile.hpp>
+#include <RhsFile.hpp>
 #include <TetraFaceFile.hpp>
 #include <TetraMeshFile.hpp>
 #include <TetraQuadFile.hpp>

@@ -43,12 +43,9 @@ public:
 		}
 	}
 
-	bool Load_incwave( const string& filePath )
+	bool Load( const string& filePath )
 	{
-		if( !init_ )
-		{
-			Reset();
-		}
+		Reset();
 
 		fstream waveFile( filePath, ios::in );
 
@@ -58,7 +55,7 @@ public:
 			return false;
 		}
 
-		waveFile >> ruleType_;
+		waveFile >> waveType_;
 		
 		T lineData;
 		while( !waveFile.eof() )

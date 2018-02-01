@@ -10,3 +10,4 @@ system( "Electrify.exe Data/sphere.tetramesh Data/sphere.emrule Data/sphere.empr
 
 system( "MakeQuad.exe Data/sphere.tetramesh Data/sphere.tetraface Data/sphere.tetraquad Data/sphere.triquad" );
 
+system( "MakeRHS.exe Data/sphere.tetramesh Data/sphere.tetraface Data/sphere.tetraquad Data/sphere.incwave Data/sphere.rhs" );

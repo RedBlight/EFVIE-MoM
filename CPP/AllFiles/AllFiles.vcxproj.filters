@@ -135,6 +135,12 @@
     <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp">
       <Filter>Headers\Operations</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\RhsFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\RhsGenerator.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
@@ -163,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Applets\MakeQuad.cpp">
       <Filter>Source\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeRHSNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

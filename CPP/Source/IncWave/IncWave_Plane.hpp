@@ -65,7 +65,7 @@ protected:
 		direction_ = LUV::LuVector3< T >( waveData_[ DIRX ], waveData_[ DIRY ], waveData_[ DIRZ ] );
 		polarizationU_ = LUV::LuVector3< T >( waveData_[ POLX ], waveData_[ POLY ], waveData_[ POLZ ] );
 		polarizationR_ = LUV::Cross( direction_, polarizationU_ );
-		LUV::Orthonormalize( direction, polarizationU_, polarizationR_ );
+		LUV::Orthonormalize( direction_, polarizationU_, polarizationR_ );
 
 		phaseOrigin_ = LUV::LuVector3< T >( waveData_[ PORX ], waveData_[ PORY ], waveData_[ PORZ ] );
 		
