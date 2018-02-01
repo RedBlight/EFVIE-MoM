@@ -15,27 +15,6 @@ int main( int argc, char *argv[] )
 
 	cout << "# Make RHS #" << endl;
 
-		//const UINT_T& faceCount,
-		//const shared_ptr< T >& vertexData,
-		//const shared_ptr< UINT_T >& tetraVertexIndex,
-		//const shared_ptr< UINT_T >& faceVertexIndex,
-		//const shared_ptr< UINT_T >& faceTetraIndex,
-		//const shared_ptr< UINT_T >& tetraFaceIndex,
-		//const UINT_T& quadCount,
-		//const shared_ptr< T >& tetraQuadData,
-		//const IncWave< T >* incWave,
-		//shared_ptr< complex< T > >& rhsData // preallocated
-
-	/*
-	.tetramesh
-	.tetraface
-	.tetraquad
-	.incwave
-
-	save
-	.rhs
-	*/
-
 	string meshFileName = argv[ 1 ];
 	string faceFileName = argv[ 2 ];
 	string tetqFileName = argv[ 3 ];
@@ -60,17 +39,6 @@ int main( int argc, char *argv[] )
 
 	RhsFile< FLOAT_T > rhsFile;
 	rhsFile.Initialize( faceFile.faceCount_ );
-	
-		//const UINT_T& faceCount,
-		//const UINT_T& quadCount,
-		//const shared_ptr< T >& vertexData,
-		//const shared_ptr< T >& tetraQuadData,
-		//const shared_ptr< UINT_T >& tetraVertexIndex,
-		//const shared_ptr< UINT_T >& faceVertexIndex,
-		//const shared_ptr< UINT_T >& faceTetraIndex,
-		//const shared_ptr< UINT_T >& tetraFaceIndex,
-		//const IncWave< T >* incWave,
-		//shared_ptr< complex< T > >& rhsData // preallocated
 
 	RhsGenerator< FLOAT_T > rhsGenerator(
 		faceFile.faceCount_,
@@ -85,23 +53,7 @@ int main( int argc, char *argv[] )
 		rhsFile.rhsData_
 	);
 
-	//rhsGenerator.Generate();
-
 	rhsGenerator.ThreadedGenerate();
-
-
-	//rhsGenerator.Generate(
-	//	faceFile.faceCount_,
-	//	meshFile.vertexData_,
-	//	meshFile.tetraVertexIndex_,
-	//	faceFile.faceVertexIndex_,
-	//	faceFile.faceTetraIndex_,
-	//	faceFile.tetraFaceIndex_,
-	//	tetqFile.quadCount_,
-	//	tetqFile.quadData_,
-	//	incWave.get(),
-	//	rhsFile.rhsData_
-	//);
 
 	rhsFile.Save( rhsFileName );
 

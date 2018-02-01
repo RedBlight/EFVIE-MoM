@@ -141,6 +141,12 @@
     <ClInclude Include="..\Source\Operations\RhsGenerator.hpp">
       <Filter>Headers\Operations</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\MomMatrixFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\MomGenerator.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
