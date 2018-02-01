@@ -60,20 +60,48 @@ int main( int argc, char *argv[] )
 
 	RhsFile< FLOAT_T > rhsFile;
 	rhsFile.Initialize( faceFile.faceCount_ );
+	
+		//const UINT_T& faceCount,
+		//const UINT_T& quadCount,
+		//const shared_ptr< T >& vertexData,
+		//const shared_ptr< T >& tetraQuadData,
+		//const shared_ptr< UINT_T >& tetraVertexIndex,
+		//const shared_ptr< UINT_T >& faceVertexIndex,
+		//const shared_ptr< UINT_T >& faceTetraIndex,
+		//const shared_ptr< UINT_T >& tetraFaceIndex,
+		//const IncWave< T >* incWave,
+		//shared_ptr< complex< T > >& rhsData // preallocated
 
-	RhsGenerator< FLOAT_T > rhsGenerator;
-	rhsGenerator.Generate(
+	RhsGenerator< FLOAT_T > rhsGenerator(
 		faceFile.faceCount_,
+		tetqFile.quadCount_,
 		meshFile.vertexData_,
+		tetqFile.quadData_,
 		meshFile.tetraVertexIndex_,
 		faceFile.faceVertexIndex_,
 		faceFile.faceTetraIndex_,
 		faceFile.tetraFaceIndex_,
-		tetqFile.quadCount_,
-		tetqFile.quadData_,
 		incWave.get(),
 		rhsFile.rhsData_
 	);
+
+	//rhsGenerator.Generate();
+
+	rhsGenerator.ThreadedGenerate();
+
+
+	//rhsGenerator.Generate(
+	//	faceFile.faceCount_,
+	//	meshFile.vertexData_,
+	//	meshFile.tetraVertexIndex_,
+	//	faceFile.faceVertexIndex_,
+	//	faceFile.faceTetraIndex_,
+	//	faceFile.tetraFaceIndex_,
+	//	tetqFile.quadCount_,
+	//	tetqFile.quadData_,
+	//	incWave.get(),
+	//	rhsFile.rhsData_
+	//);
 
 	rhsFile.Save( rhsFileName );
 
@@ -85,6 +113,7 @@ int main( int argc, char *argv[] )
 	cout << "Tetrahedron count: " << meshFile.tetraCount_ << endl;
 	cout << "TetraQuad count: " << tetqFile.quadCount_ << endl;
 	cout << "Face count: " << faceFile.faceCount_ << endl;
+	cout << "Thread count: " << rhsGenerator.threadCount_ << endl;
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;

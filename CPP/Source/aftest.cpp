@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <complex>
+#include <thread>
 
 using namespace af;
 
@@ -22,12 +23,15 @@ int main(int argc, char *argv[])
         af::setDevice( device );
         af::info();
 
-		std::complex< double > arr[6] = {{1,2},{3,4},{5,6},{7,8},{9,10},{11,12}};
+		//std::complex< double > arr[6] = {{1,2},{3,4},{5,6},{7,8},{9,10},{11,12}};
 
-		array afarr = array( 3, 2, c64 );
-		afarr.write( arr, 8 * 12, afHost );;
-		af_print( afarr );
+		//array afarr = array( 3, 2, c64 );
+		//afarr.write( arr, 8 * 12, afHost );
+		//af_print( afarr );
 
+
+		unsigned int n = std::thread::hardware_concurrency();
+    std::cout << n << " concurrent threads are supported.\n";
 
 		//af::array afTetra2ComputeMatrix = af::array( 3, quadCount, AF_COMPLEX_T );
 		//afTetra2ComputeMatrix.write( reinterpret_cast< T* >( tetra2QuadFieldE ), SIZEOF_CT * 3 * quadCount, afHost );
