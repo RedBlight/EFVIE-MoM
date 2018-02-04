@@ -53,6 +53,7 @@
     <ClInclude Include="..\Source\IncWave\IncWave_Factory.hpp" />
     <ClInclude Include="..\Source\IncWave\IncWave_Plane.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector.hpp" />
+    <ClInclude Include="..\Source\LuVector\LuVector_ArrayFire.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Body.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Geometry.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Math.hpp" />

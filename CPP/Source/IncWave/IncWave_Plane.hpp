@@ -11,6 +11,8 @@ class IncWave_Plane: public IncWave< T >
 protected:
 	vector< T > waveData_;
 
+	complex< T > j_;
+
 	T waveLength_;
 	T waveNumber_;
 	T amplitudeU_;
@@ -55,6 +57,8 @@ protected:
 		}
 		waveData_ = waveData;
 
+		j_ = complex< T >( 0, 1 );
+
 		waveLength_	= waveData_[ WAVL ];
 		waveNumber_ = 2.0 * pi_ / waveLength_;
 		amplitudeU_ = waveData_[ AMPU ];
@@ -83,8 +87,8 @@ protected:
 		T dist = LUV::Dot( obsPoint - obsPointProj, direction_ );
 		T lambdaDist = waveNumber_ * dist;
 
-		LUV::LuVector3c< T > fieldEU = exp( 1i * ( phaseOffsetU_ - lambdaDist ) ) * ampPolEU_;
-		LUV::LuVector3c< T > fieldER = exp( 1i * ( phaseOffsetR_ - lambdaDist ) ) * ampPolER_;
+		LUV::LuVector3c< T > fieldEU = exp( j_ * ( phaseOffsetU_ - lambdaDist ) ) * ampPolEU_;
+		LUV::LuVector3c< T > fieldER = exp( j_ * ( phaseOffsetR_ - lambdaDist ) ) * ampPolER_;
 		LUV::LuVector3c< T > fieldE = fieldEU + fieldER;
 
 		return fieldE;
@@ -97,8 +101,8 @@ protected:
 		T dist = LUV::Dot( obsPoint - obsPointProj, direction_ );
 		T lambdaDist = waveNumber_ * dist;
 
-		LUV::LuVector3c< T > fieldMU = exp( 1i * ( phaseOffsetU_ - lambdaDist ) ) * ampPolMU_;
-		LUV::LuVector3c< T > fieldMR = exp( 1i * ( phaseOffsetR_ - lambdaDist ) ) * ampPolMR_;
+		LUV::LuVector3c< T > fieldMU = exp( j_ * ( phaseOffsetU_ - lambdaDist ) ) * ampPolMU_;
+		LUV::LuVector3c< T > fieldMR = exp( j_ * ( phaseOffsetR_ - lambdaDist ) ) * ampPolMR_;
 		LUV::LuVector3c< T > fieldM = fieldMU + fieldMR;
 
 		return fieldM;
@@ -111,12 +115,12 @@ protected:
 		T dist = LUV::Dot( obsPoint - obsPointProj, direction_ );
 		T lambdaDist = waveNumber_ * dist;
 		
-		LUV::LuVector3c< T > fieldEU = exp( 1i * ( phaseOffsetU_ - lambdaDist ) ) * ampPolEU_;
-		LUV::LuVector3c< T > fieldER = exp( 1i * ( phaseOffsetR_ - lambdaDist ) ) * ampPolER_;
+		LUV::LuVector3c< T > fieldEU = exp( j_ * ( phaseOffsetU_ - lambdaDist ) ) * ampPolEU_;
+		LUV::LuVector3c< T > fieldER = exp( j_ * ( phaseOffsetR_ - lambdaDist ) ) * ampPolER_;
 		LUV::LuVector3c< T > fieldE = fieldEU + fieldER;
 
-		LUV::LuVector3c< T > fieldMU = exp( 1i * ( phaseOffsetU_ - lambdaDist ) ) * ampPolMU_;
-		LUV::LuVector3c< T > fieldMR = exp( 1i * ( phaseOffsetR_ - lambdaDist ) ) * ampPolMR_;
+		LUV::LuVector3c< T > fieldMU = exp( j_ * ( phaseOffsetU_ - lambdaDist ) ) * ampPolMU_;
+		LUV::LuVector3c< T > fieldMR = exp( j_ * ( phaseOffsetR_ - lambdaDist ) ) * ampPolMR_;
 		LUV::LuVector3c< T > fieldM = fieldMU + fieldMR;
 
 		return make_pair( fieldE, fieldM );

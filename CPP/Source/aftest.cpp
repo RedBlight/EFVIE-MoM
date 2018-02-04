@@ -12,16 +12,43 @@
 #include <cstdlib>
 #include <complex>
 #include <thread>
+#include <iostream>
 
-using namespace af;
+#include <_LuVector.hpp>
 
 int main(int argc, char *argv[])
 {
-    try {
-        // Select a device and display arrayfire info
+    try
+	{
+		// Select a device and display arrayfire info
         int device = argc > 1 ? atoi(argv[1]) : 0;
         af::setDevice( device );
         af::info();
+
+		
+		af::array A = af::constant( 2, 2, 2, f64 );
+		af::array B = af::constant( 3, 2, 2, f64 );
+		af::array C = af::constant( 5, 2, 2, f64 );
+		af_print( A );
+		af_print( B );
+		af_print( C );
+
+		LUV::LuVector< 3, af::array > KKK( A, B, C );
+
+		LUV::LuVector< 3, af::array > LLL( KKK );
+		
+		af_print( LUV::Dot( KKK, KKK ) );
+		
+		af_print( KKK[0] );
+
+		//af::array RES = LUV::Dot( KKK, KKK );
+		//af_print( RES );
+
+
+
+
+
+
 
 		//std::complex< double > arr[6] = {{1,2},{3,4},{5,6},{7,8},{9,10},{11,12}};
 
@@ -30,8 +57,8 @@ int main(int argc, char *argv[])
 		//af_print( afarr );
 
 
-		unsigned int n = std::thread::hardware_concurrency();
-    std::cout << n << " concurrent threads are supported.\n";
+		//unsigned int n = std::thread::hardware_concurrency();
+		//std::cout << n << " concurrent threads are supported.\n";
 
 		//af::array afTetra2ComputeMatrix = af::array( 3, quadCount, AF_COMPLEX_T );
 		//afTetra2ComputeMatrix.write( reinterpret_cast< T* >( tetra2QuadFieldE ), SIZEOF_CT * 3 * quadCount, afHost );
