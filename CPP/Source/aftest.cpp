@@ -7,6 +7,8 @@
  * http://arrayfire.com/licenses/BSD-3-Clause
  ********************************************************/
 
+#include <_BitDepthDefines.hpp>
+
 #include <arrayfire.h>
 #include <cstdio>
 #include <cstdlib>
@@ -25,21 +27,47 @@ int main(int argc, char *argv[])
         af::setDevice( device );
         af::info();
 
-		
-		af::array A = af::constant( 2, 2, 2, f64 );
-		af::array B = af::constant( 3, 2, 2, f64 );
-		af::array C = af::constant( 5, 2, 2, f64 );
-		af_print( A );
-		af_print( B );
-		af_print( C );
+		std::complex< float > A = std::complex< float >( 3, 5 ) * (float)(10.0); 
 
-		LUV::LuVector< 3, af::array > KKK( A, B, C );
+		//af::array A = af::randu( 1, 1, c64 );
+		//af_print( A );
 
-		LUV::LuVector< 3, af::array > LLL( KKK );
+		//std::complex< double > z;
+		//A.host( &z );
+
+		//std::cout << z << std::endl;
+
+		//af::array A = af::randu( 5, 5, c64 );
+		//A( 0, 0 ) = af::cdouble( 0, 0 );
+		//A( 2, 2 ) = af::cdouble( 0, 0 );
+		//af_print( A );
+
+		//A( af::iszero( af::real( A ) ) && af::iszero( af::imag( A ) ) ) = af::cdouble( 99, 99 );
+		//af_print( A );
+
 		
-		af_print( LUV::Dot( KKK, KKK ) );
+		//double jTemp[] = { 0, 1 };
+		//af::array j = af::array( 1, reinterpret_cast< AF_CFLOAT* >( jTemp ) );
+
+		//af::array A = af::constant( 2, 2, 2, f64 );
+		//af::array B = AF_CFLOAT( 3, 5 ) * A;
+		//af_print( B );
 		
-		af_print( KKK[0] );
+		
+		//af::array A = af::constant( 2, 2, 2, f64 );
+		//af::array B = af::constant( 3, 2, 2, f64 );
+		//af::array C = af::constant( 5, 2, 2, f64 );
+		//af_print( A );
+		//af_print( B );
+		//af_print( C );
+
+		//LUV::LuVector< 3, af::array > KKK( A, B, C );
+
+		//LUV::LuVector< 3, af::array > LLL( KKK );
+		//
+		//af_print( LUV::Dot( KKK, KKK ) );
+		//
+		//af_print( KKK[0] );
 
 		//af::array RES = LUV::Dot( KKK, KKK );
 		//af_print( RES );

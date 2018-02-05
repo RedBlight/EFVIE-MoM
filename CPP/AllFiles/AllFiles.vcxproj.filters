@@ -150,6 +150,12 @@
     <ClInclude Include="..\Source\LuVector\LuVector_ArrayFire.hpp">
       <Filter>Headers\LuVector</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\CoefFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\MomSolver.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
@@ -180,6 +186,12 @@
       <Filter>Source\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\AppletsNoExcept\MakeRHSNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeMoMNoExcept.cpp">
+      <Filter>Source\AppletsNoExcept</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AppletsNoExcept\SolveMoMNoExcept.cpp">
       <Filter>Source\AppletsNoExcept</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,9 @@
 #ifndef MOM_GENERATOR_INCLUDED
 #define MOM_GENERATOR_INCLUDED
 
+// generatin' yo mama
+// yo mama so fat, she (sometimes) doesn't fit into a 24 GB ram.
+
 #include <_BitDepthDefines.hpp>
 
 #include <fstream>
@@ -28,9 +31,15 @@ class MomGenerator
 public:
 	UINT_T threadCount_;
 	vector< thread* > threadList_;
+	
+	AF_CFLOAT j_;
 
 	T eps0_;
 	T mu0_;
+	T c0_;
+
+	T waveNumber_;
+	AF_CFLOAT waveNumberJ_;
 
 	//temporary list of pointers to use across functions.
 	UINT_T faceCount_;
@@ -53,6 +62,7 @@ public:
 
 public:
 	MomGenerator(
+		const T& waveNumber,
 		const UINT_T& faceCount,
 		const UINT_T& tetraQuadCount,
 		const UINT_T& faceQuadCount,
@@ -68,8 +78,12 @@ public:
 	) :
 		threadCount_( thread::hardware_concurrency() * 2 ),
 		threadList_(),
+		j_( 0.0, 1.0 ),
 		eps0_( 8.85418782E-12 ),
 		mu0_( 1.25663706E-6 ),
+		c0_( 299792458.0 ),
+		waveNumber_( waveNumber ),
+		waveNumberJ_( waveNumber * j_ ),
 		faceCount_( faceCount ),
 		tetraQuadCount_( tetraQuadCount ),
 		faceQuadCount_( faceQuadCount ),
@@ -103,7 +117,7 @@ public:
 		)));
 	}
 
-	inline complex< T > TetrahedralIntegral( const UINT_T& idFace, const UINT_T& idTetra ) const
+	/*inline complex< T > TetrahedralIntegral( const UINT_T& idFace, const UINT_T& idTetra ) const
 	{
 		UINT_T idTetraVertex[ 4 ] = {
 			tetraVertexIndexPtr_[ 4 * idTetra ],
@@ -155,17 +169,192 @@ public:
 		tetraResult /= tetraVolume;
 
 		return tetraResult;
+	}*/
+	
+	inline void CalculateG_VV(
+		LUV::LuVector< 3, af::array >& vecV1,
+		LUV::LuVector< 3, af::array >& vecV2,
+		LUV::LuVector< 3, af::array >& vecV3,
+		LUV::LuVector< 3, af::array >& vecV4,
+		LUV::LuVector< 3, af::array >& vecObs,
+		af::array& GIVV,
+		LUV::LuVector< 3, af::array >& GDVV
+	)
+	{
+		LUV::LuVector< 3, af::array > dirN = -LUV::PlaneNormalP( vecV4, vecV1, vecV2, vecV3 );
+		LUV::LuVector< 3, af::array > dirU = -LUV::LineNormalP( vecV3, vecV1, vecV2 );
+		LUV::LuVector< 3, af::array > dirL = LUV::Cross( dirN, dirU );
+
+		LUV::LuVector< 3, af::array > vecS = vecV2 + vecV1;
+		LUV::LuVector< 3, af::array > vecM = vecV2 - vecV1;
+		LUV::LuVector< 3, af::array > dirM = Unit( vecM );
+		LUV::LuVector< 3, af::array > vecB = LUV::Dot( dirM, dirL ) * vecM;
+		LUV::LuVector< 3, af::array > vecRhoM = ( vecS - vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRhoP = ( vecS + vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRho = LUV::ProjPlane( vecObs, vecV1, dirN );
+		
+		af::array magD = LUV::Dot( vecObs - vecRho, dirN );
+
+		LUV::LuVector< 3, af::array > vecL = vecRhoP - vecRhoM;
+		af::array magL = LUV::Length( vecL );
+		
+		LUV::LuVector< 3, af::array > vecPM = vecRhoM - vecRho;
+		LUV::LuVector< 3, af::array > vecPP = vecRhoP - vecRho;
+
+		af::array magLM = LUV::Dot( vecPM, dirL );
+		af::array magLP = LUV::Dot( vecPP, dirL );
+		af::array magP0 = af::abs( LUV::Dot( vecPM, dirU ) );
+		af::array magPM = LUV::Length( vecPM );
+		af::array magPP = LUV::Length( vecPM );
+
+		LUV::LuVector< 3, af::array > dirP0 = ( vecPM - magLM * dirL ) / magP0;
+		
+		af::array magR0 = LUV::Length( vecObs - LUV::ProjLine( vecObs, vecRhoM, vecRhoP ) );
+		af::array magRM = LUV::Length( vecObs - vecRhoM );
+		af::array magRP = LUV::Length( vecObs - vecRhoP );
+
+		//
+
+		af::array magR0S = magR0 * magR0;
+		af::array magAbsD = af::abs( magD );
+		af::array magDS = magD * magD;
+
+		///
+
+		af::array magA1 = af::atan( ( magP0 * magLP ) / ( magR0S + magAbsD * magRP ) );
+		af::array magA2 = af::atan( ( magP0 * magLM ) / ( magR0S + magAbsD * magRM ) );
+		af::array magA3 = af::log( ( magRP + magLP ) / ( magRM + magLM ) );
+		af::array magA4 = ( magP0 * ( magR0S + 2.0 * magDS ) ) / 2.0;
+		af::array magA5 = ( magP0 * ( magLP * magRP - magLM * magRM ) ) / 2.0;
+
+		GIVV = af::sum( af::sum( magD * ( LUV::Dot( dirP0, dirU ) * ( magAbsD * ( magA1 - magA2 - magP0 * magA3 ) ) ) , 2 ), 3 ) / 2;
+		GDVV = dirN * ( LUV::Dot( dirP0, dirU ) * ( magA3 * magA4 + magA5 - magAbsD * magAbsD * magAbsD * ( magA1 - magA2 ) ) );
+		GDVV[0] = af::sum( af::sum( GDVV[0], 2 ), 3 ) / 3;
+		GDVV[1] = af::sum( af::sum( GDVV[1], 2 ), 3 ) / 3;
+		GDVV[2] = af::sum( af::sum( GDVV[2], 2 ), 3 ) / 3;
+	}
+	
+	inline void CalculateGISV(
+		LUV::LuVector< 3, af::array >& vecV1,
+		LUV::LuVector< 3, af::array >& vecV2,
+		LUV::LuVector< 3, af::array >& vecV3,
+		LUV::LuVector< 3, af::array >& vecV4,
+		LUV::LuVector< 3, af::array >& vecObs,
+		af::array& GISV
+	)
+	{
+		LUV::LuVector< 3, af::array > dirN = -LUV::PlaneNormalP( vecV4, vecV1, vecV2, vecV3 );
+		LUV::LuVector< 3, af::array > dirU = -LUV::LineNormalP( vecV3, vecV1, vecV2 );
+		LUV::LuVector< 3, af::array > dirL = LUV::Cross( dirN, dirU );
+
+		LUV::LuVector< 3, af::array > vecS = vecV2 + vecV1;
+		LUV::LuVector< 3, af::array > vecM = vecV2 - vecV1;
+		LUV::LuVector< 3, af::array > dirM = Unit( vecM );
+		LUV::LuVector< 3, af::array > vecB = LUV::Dot( dirM, dirL ) * vecM;
+		LUV::LuVector< 3, af::array > vecRhoM = ( vecS - vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRhoP = ( vecS + vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRho = LUV::ProjPlane( vecObs, vecV1, dirN );
+		
+		af::array magD = LUV::Dot( vecObs - vecRho, dirN );
+
+		LUV::LuVector< 3, af::array > vecL = vecRhoP - vecRhoM;
+		af::array magL = LUV::Length( vecL );
+		
+		LUV::LuVector< 3, af::array > vecPM = vecRhoM - vecRho;
+		LUV::LuVector< 3, af::array > vecPP = vecRhoP - vecRho;
+
+		af::array magLM = LUV::Dot( vecPM, dirL );
+		af::array magLP = LUV::Dot( vecPP, dirL );
+		af::array magP0 = af::abs( LUV::Dot( vecPM, dirU ) );
+		af::array magPM = LUV::Length( vecPM );
+		af::array magPP = LUV::Length( vecPM );
+
+		LUV::LuVector< 3, af::array > dirP0 = ( vecPM - magLM * dirL ) / magP0;
+		
+		af::array magR0 = LUV::Length( vecObs - LUV::ProjLine( vecObs, vecRhoM, vecRhoP ) );
+		af::array magRM = LUV::Length( vecObs - vecRhoM );
+		af::array magRP = LUV::Length( vecObs - vecRhoP );
+
+		//
+
+		af::array magR0S = magR0 * magR0;
+		af::array magAbsD = af::abs( magD );
+
+		///
+
+		af::array magA1 = af::atan( ( magP0 * magLP ) / ( magR0S + magAbsD * magRP ) );
+		af::array magA2 = af::atan( ( magP0 * magLM ) / ( magR0S + magAbsD * magRM ) );
+		af::array magA3 = af::log( ( magRP + magLP ) / ( magRM + magLM ) );
+
+		GISV = af::sum( af::sum( magD * ( LUV::Dot( dirP0, dirU ) * ( magAbsD * ( magA1 - magA2 - magP0 * magA3 ) ) ) , 2 ), 3 ) / 2;
+	}
+	
+	inline void CalculateGI_S(
+		LUV::LuVector< 3, af::array >& vecV1,
+		LUV::LuVector< 3, af::array >& vecV2,
+		LUV::LuVector< 3, af::array >& vecV3,
+		LUV::LuVector< 3, af::array >& vecV4,
+		LUV::LuVector< 3, af::array >& vecObs,
+		af::array& GI_S
+	)
+	{
+		LUV::LuVector< 3, af::array > dirN = -LUV::PlaneNormalP( vecV4, vecV1, vecV2, vecV3 );
+		LUV::LuVector< 3, af::array > dirU = -LUV::LineNormalP( vecV3, vecV1, vecV2 );
+		LUV::LuVector< 3, af::array > dirL = LUV::Cross( dirN, dirU );
+
+		LUV::LuVector< 3, af::array > vecS = vecV2 + vecV1;
+		LUV::LuVector< 3, af::array > vecM = vecV2 - vecV1;
+		LUV::LuVector< 3, af::array > dirM = Unit( vecM );
+		LUV::LuVector< 3, af::array > vecB = LUV::Dot( dirM, dirL ) * vecM;
+		LUV::LuVector< 3, af::array > vecRhoM = ( vecS - vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRhoP = ( vecS + vecB ) / 2;
+		LUV::LuVector< 3, af::array > vecRho = LUV::ProjPlane( vecObs, vecV1, dirN );
+		
+		af::array magD = LUV::Dot( vecObs - vecRho, dirN );
+
+		LUV::LuVector< 3, af::array > vecL = vecRhoP - vecRhoM;
+		af::array magL = LUV::Length( vecL );
+		
+		LUV::LuVector< 3, af::array > vecPM = vecRhoM - vecRho;
+		LUV::LuVector< 3, af::array > vecPP = vecRhoP - vecRho;
+
+		af::array magLM = LUV::Dot( vecPM, dirL );
+		af::array magLP = LUV::Dot( vecPP, dirL );
+		af::array magP0 = af::abs( LUV::Dot( vecPM, dirU ) );
+		af::array magPM = LUV::Length( vecPM );
+		af::array magPP = LUV::Length( vecPM );
+
+		LUV::LuVector< 3, af::array > dirP0 = ( vecPM - magLM * dirL ) / magP0;
+		
+		af::array magR0 = LUV::Length( vecObs - LUV::ProjLine( vecObs, vecRhoM, vecRhoP ) );
+		af::array magRM = LUV::Length( vecObs - vecRhoM );
+		af::array magRP = LUV::Length( vecObs - vecRhoP );
+
+		//
+
+		af::array magR0S = magR0 * magR0;
+		af::array magAbsD = af::abs( magD );
+
+		///
+
+		af::array magA1 = af::atan( ( magP0 * magLP ) / ( magR0S + magAbsD * magRP ) );
+		af::array magA2 = af::atan( ( magP0 * magLM ) / ( magR0S + magAbsD * magRM ) );
+		af::array magA3 = af::log( ( magRP + magLP ) / ( magRM + magLM ) );
+
+		GI_S = af::sum( magD * ( LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) ) ) , 2 );
 	}
 
-	inline void CalculateGI(
+	inline void CalculateG(
 		af::array& afFaceQuadDataM,
 		af::array& afTetraQuadDataA,
 		af::array& afFaceVertexN,
 		af::array& afTetraVertexB,
-		af::array& afGIVV,
-		af::array& afGIVS,
-		af::array& afGISV,
-		af::array& afGISS
+		LUV::LuVector3< T >& swgVertexN,
+		af::array& GIVV,
+		af::array& GIVS,
+		af::array& GISV,
+		af::array& GISS,
+		LUV::LuVector< 3, af::array > GDVV
 	)
 	{
 		af::array afFaceVertexN0 = af::reorder( afFaceVertexN, 0, 2, 1, 3 );
@@ -235,48 +424,81 @@ public:
 		LUV::LuVector< 3, af::array > vecV3_VV = LUV::LuVector< 3, af::array >( afTetraVertexB2_V( 0, af::span, af::span, af::span ), afTetraVertexB2_V( 1, af::span, af::span, af::span ), afTetraVertexB2_V( 2, af::span, af::span, af::span ) );
 		LUV::LuVector< 3, af::array > vecV4_VV = LUV::LuVector< 3, af::array >( afTetraVertexB3_V( 0, af::span, af::span, af::span ), afTetraVertexB3_V( 1, af::span, af::span, af::span ), afTetraVertexB3_V( 2, af::span, af::span, af::span ) );
 
+		LUV::LuVector< 3, af::array > vecV1_SV = LUV::LuVector< 3, af::array >( afTetraVertexB0_S( 0, af::span, af::span, af::span ), afTetraVertexB0_S( 1, af::span, af::span, af::span ), afTetraVertexB0_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV2_SV = LUV::LuVector< 3, af::array >( afTetraVertexB1_S( 0, af::span, af::span, af::span ), afTetraVertexB1_S( 1, af::span, af::span, af::span ), afTetraVertexB1_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV3_SV = LUV::LuVector< 3, af::array >( afTetraVertexB2_S( 0, af::span, af::span, af::span ), afTetraVertexB2_S( 1, af::span, af::span, af::span ), afTetraVertexB2_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV4_SV = LUV::LuVector< 3, af::array >( afTetraVertexB3_S( 0, af::span, af::span, af::span ), afTetraVertexB3_S( 1, af::span, af::span, af::span ), afTetraVertexB3_S( 2, af::span, af::span, af::span ) );
+		
+		LUV::LuVector< 3, af::array > vecV1_VS = LUV::LuVector< 3, af::array >( afFaceVertexN0_V( 0, af::span, af::span, af::span ), afFaceVertexN0_V( 1, af::span, af::span, af::span ), afFaceVertexN0_V( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV2_VS = LUV::LuVector< 3, af::array >( afFaceVertexN1_V( 0, af::span, af::span, af::span ), afFaceVertexN1_V( 1, af::span, af::span, af::span ), afFaceVertexN1_V( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV3_VS = LUV::LuVector< 3, af::array >( afFaceVertexN2_V( 0, af::span, af::span, af::span ), afFaceVertexN2_V( 1, af::span, af::span, af::span ), afFaceVertexN2_V( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV4_VS = LUV::LuVector< 3, af::array >( af::constant( swgVertexN[0], vecV1_VS[0].dims() ), af::constant( swgVertexN[2], vecV1_VS[0].dims() ), af::constant( swgVertexN[2], vecV1_VS[0].dims() ) );
+		
+		LUV::LuVector< 3, af::array > vecV1_SS = LUV::LuVector< 3, af::array >( afFaceVertexN0_S( 0, af::span, af::span, af::span ), afFaceVertexN0_S( 1, af::span, af::span, af::span ), afFaceVertexN0_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV2_SS = LUV::LuVector< 3, af::array >( afFaceVertexN1_S( 0, af::span, af::span, af::span ), afFaceVertexN1_S( 1, af::span, af::span, af::span ), afFaceVertexN1_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV3_SS = LUV::LuVector< 3, af::array >( afFaceVertexN2_S( 0, af::span, af::span, af::span ), afFaceVertexN2_S( 1, af::span, af::span, af::span ), afFaceVertexN2_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecV4_SS = LUV::LuVector< 3, af::array >( af::constant( swgVertexN[0], vecV1_SS[0].dims() ), af::constant( swgVertexN[2], vecV1_SS[0].dims() ), af::constant( swgVertexN[2], vecV1_SS[0].dims() ) );
+
+		//
 		LUV::LuVector< 3, af::array > vecObs_VV = LUV::LuVector< 3, af::array >( afTetraQuadVertexA_V( 0, af::span, af::span, af::span ), afTetraQuadVertexA_V( 1, af::span, af::span, af::span ), afTetraQuadVertexA_V( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecObs_VS = LUV::LuVector< 3, af::array >( afTetraQuadVertexA_S( 0, af::span, af::span, af::span ), afTetraQuadVertexA_S( 1, af::span, af::span, af::span ), afTetraQuadVertexA_S( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecObs_SV = LUV::LuVector< 3, af::array >( afFaceQuadVertexM_V( 0, af::span, af::span, af::span ), afFaceQuadVertexM_V( 1, af::span, af::span, af::span ), afFaceQuadVertexM_V( 2, af::span, af::span, af::span ) );
+		LUV::LuVector< 3, af::array > vecObs_SS = LUV::LuVector< 3, af::array >( afFaceQuadVertexM_S( 0, af::span, af::span, af::span ), afFaceQuadVertexM_S( 1, af::span, af::span, af::span ), afFaceQuadVertexM_S( 2, af::span, af::span, af::span ) );
 
-		LUV::LuVector< 3, af::array > dirN_VV = -LUV::PlaneNormalP( vecV4_VV, vecV1_VV, vecV2_VV, vecV3_VV );
-		LUV::LuVector< 3, af::array > dirU_VV = -LUV::LineNormalP( vecV3_VV, vecV1_VV, vecV2_VV );
-		LUV::LuVector< 3, af::array > dirL_VV = LUV::Cross( dirN_VV, dirU_VV );
-
-		LUV::LuVector< 3, af::array > vecS_VV = vecV2_VV + vecV1_VV;
-		LUV::LuVector< 3, af::array > vecM_VV = vecV2_VV - vecV1_VV;
-		LUV::LuVector< 3, af::array > dirM_VV = Unit( vecM_VV );
-		LUV::LuVector< 3, af::array > vecB_VV = LUV::Dot( dirM_VV, dirL_VV ) * vecM_VV;
-		LUV::LuVector< 3, af::array > vecRhoM_VV = ( vecS_VV - vecB_VV ) / 2;
-		LUV::LuVector< 3, af::array > vecRhoP_VV = ( vecS_VV + vecB_VV ) / 2;
-		LUV::LuVector< 3, af::array > vecRho_VV = LUV::ProjPlane( vecObs_VV, vecV1_VV, dirN_VV );
+		//cout << "E" << endl;
+		CalculateG_VV( vecV1_VV, vecV2_VV, vecV3_VV, vecV4_VV, vecObs_VV, GIVV, GDVV );
+		//cout << "E1" << endl;
+		CalculateGISV( vecV1_SV, vecV2_SV, vecV3_SV, vecV4_SV, vecObs_SV, GISV );
 		
-		af::array magD_VV = LUV::Dot( vecObs_VV - vecRho_VV, dirN_VV );
+		//cout << "E2" << endl;
+		CalculateGI_S( vecV1_VS, vecV2_VS, vecV3_VS, vecV4_VS, vecObs_VS, GIVS );
+		//cout << "E3" << endl;
+		CalculateGI_S( vecV1_SS, vecV2_SS, vecV3_SS, vecV4_SS, vecObs_SS, GISS );
 
-		LUV::LuVector< 3, af::array > vecL_VV = vecRhoP_VV - vecRhoM_VV;
-		af::array magL_VV = LUV::Length( vecL_VV );
 		
-		LUV::LuVector< 3, af::array > vecPM_VV = vecRhoM_VV - vecRho_VV;
-		LUV::LuVector< 3, af::array > vecPP_VV = vecRhoP_VV - vecRho_VV;
 
-		af::array magLM_VV = LUV::Dot( vecPM_VV, dirL_VV );
-		af::array magLP_VV = LUV::Dot( vecPP_VV, dirL_VV );
-		af::array magP0_VV = LUV::Length( LUV::Dot( vecPM_VV, dirU_VV ) );
-		af::array magPM_VV = LUV::Length( vecPM_VV );
-		af::array magPP_VV = LUV::Length( vecPM_VV );
+		//cout << "F" << endl;
 
-		LUV::LuVector< 3, af::array > dirP0_VV = ( vecPM_VV - magLM_VV * dirL_VV ) / magP0_VV;
-		
-		af::array magR0_VV = LUV::Length( vecObs_VV - LUV::ProjLine( vecObs_VV, vecRhoM_VV, vecRhoP_VV ) );
-		af::array magRM_VV = LUV::Length( vecObs_VV - vecRhoM_VV );
-		af::array magRP_VV = LUV::Length( vecObs_VV - vecRhoP_VV );
+		//LUV::LuVector< 3, af::array > dirN_VV = -LUV::PlaneNormalP( vecV4_VV, vecV1_VV, vecV2_VV, vecV3_VV );
+		//LUV::LuVector< 3, af::array > dirU_VV = -LUV::LineNormalP( vecV3_VV, vecV1_VV, vecV2_VV );
+		//LUV::LuVector< 3, af::array > dirL_VV = LUV::Cross( dirN_VV, dirU_VV );
 
-		af::array magR0S_VV = magR0_VV * magR0_VV;
-		af::array magAbsD_VV = af::abs( magD_VV );
+		//LUV::LuVector< 3, af::array > vecS_VV = vecV2_VV + vecV1_VV;
+		//LUV::LuVector< 3, af::array > vecM_VV = vecV2_VV - vecV1_VV;
+		//LUV::LuVector< 3, af::array > dirM_VV = Unit( vecM_VV );
+		//LUV::LuVector< 3, af::array > vecB_VV = LUV::Dot( dirM_VV, dirL_VV ) * vecM_VV;
+		//LUV::LuVector< 3, af::array > vecRhoM_VV = ( vecS_VV - vecB_VV ) / 2;
+		//LUV::LuVector< 3, af::array > vecRhoP_VV = ( vecS_VV + vecB_VV ) / 2;
+		//LUV::LuVector< 3, af::array > vecRho_VV = LUV::ProjPlane( vecObs_VV, vecV1_VV, dirN_VV );
+		//
+		//af::array magD_VV = LUV::Dot( vecObs_VV - vecRho_VV, dirN_VV );
 
-		af::array magA1_VV = af::atan( ( magP0_VV * magLP_VV ) / ( magR0S_VV + magAbsD_VV * magRP_VV ) );
-		af::array magA2_VV = af::atan( ( magP0_VV * magLM_VV ) / ( magR0S_VV + magAbsD_VV * magRM_VV ) );
-		af::array magA3_VV = af::log( ( magRP_VV + magLP_VV ) / ( magRM_VV + magLM_VV ) );
+		//LUV::LuVector< 3, af::array > vecL_VV = vecRhoP_VV - vecRhoM_VV;
+		//af::array magL_VV = LUV::Length( vecL_VV );
+		//
+		//LUV::LuVector< 3, af::array > vecPM_VV = vecRhoM_VV - vecRho_VV;
+		//LUV::LuVector< 3, af::array > vecPP_VV = vecRhoP_VV - vecRho_VV;
 
-		afGIVV = af::sum( af::sum( magD_VV * ( LUV::Dot( dirP0_VV, dirU_VV ) * ( magAbsD_VV * ( magA1_VV - magA2_VV - magP0_VV * magA3_VV ) ) ) , 2 ), 3 ) / 2;
+		//af::array magLM_VV = LUV::Dot( vecPM_VV, dirL_VV );
+		//af::array magLP_VV = LUV::Dot( vecPP_VV, dirL_VV );
+		//af::array magP0_VV = LUV::Length( LUV::Dot( vecPM_VV, dirU_VV ) );
+		//af::array magPM_VV = LUV::Length( vecPM_VV );
+		//af::array magPP_VV = LUV::Length( vecPM_VV );
+
+		//LUV::LuVector< 3, af::array > dirP0_VV = ( vecPM_VV - magLM_VV * dirL_VV ) / magP0_VV;
+		//
+		//af::array magR0_VV = LUV::Length( vecObs_VV - LUV::ProjLine( vecObs_VV, vecRhoM_VV, vecRhoP_VV ) );
+		//af::array magRM_VV = LUV::Length( vecObs_VV - vecRhoM_VV );
+		//af::array magRP_VV = LUV::Length( vecObs_VV - vecRhoP_VV );
+
+		//af::array magR0S_VV = magR0_VV * magR0_VV;
+		//af::array magAbsD_VV = af::abs( magD_VV );
+
+		//af::array magA1_VV = af::atan( ( magP0_VV * magLP_VV ) / ( magR0S_VV + magAbsD_VV * magRP_VV ) );
+		//af::array magA2_VV = af::atan( ( magP0_VV * magLM_VV ) / ( magR0S_VV + magAbsD_VV * magRM_VV ) );
+		//af::array magA3_VV = af::log( ( magRP_VV + magLP_VV ) / ( magRM_VV + magLM_VV ) );
+
+		//afGIVV = af::sum( af::sum( magD_VV * ( LUV::Dot( dirP0_VV, dirU_VV ) * ( magAbsD_VV * ( magA1_VV - magA2_VV - magP0_VV * magA3_VV ) ) ) , 2 ), 3 ) / 2;
 
 
 
@@ -425,8 +647,6 @@ public:
 
 		LUV::LuVector3< T > swgVertexM = LUV::LuVector3< T >( vertexDataPtr_[ 3 * idSwgVertexM ], vertexDataPtr_[ 3 * idSwgVertexM + 1 ], vertexDataPtr_[ 3 * idSwgVertexM + 2 ] );
 		LUV::LuVector3< T > swgVertexN = LUV::LuVector3< T >( vertexDataPtr_[ 3 * idSwgVertexN ], vertexDataPtr_[ 3 * idSwgVertexN + 1 ], vertexDataPtr_[ 3 * idSwgVertexN + 2 ] );
-
-		T factorC = faceAreaM * faceAreaN / ( 9 * tetraVolumeA * tetraVolumeB );
 		
 		//////
 		
@@ -452,23 +672,183 @@ public:
 
 		////// see the documents in the THEORY folder
 		
-		af::array afGIVV = af::array( 1, tetraQuadCount_, AF_FLOAT_T );
-		af::array afGIVS = af::array( 1, tetraQuadCount_, AF_FLOAT_T );
-		af::array afGISV = af::array( 1, faceQuadCount_, AF_FLOAT_T );
-		af::array afGISS = af::array( 1, faceQuadCount_, AF_FLOAT_T );
+		af::array GIVV = af::array( 1, tetraQuadCount_, AF_FLOAT_T );
+		af::array GIVS = af::array( 1, tetraQuadCount_, AF_FLOAT_T );
+		af::array GISV = af::array( 1, faceQuadCount_, AF_FLOAT_T );
+		af::array GISS = af::array( 1, faceQuadCount_, AF_FLOAT_T );
 
-		CalculateGI( afFaceQuadDataM, afTetraQuadDataA, afFaceVertexN, afTetraVertexB, afGIVV, afGIVS, afGISV, afGISS );
+		LUV::LuVector3< af::array > GDVV( GIVV, GIVV, GIVV );
+
+		//cout << "D" << endl;
+		CalculateG( afFaceQuadDataM, afTetraQuadDataA, afFaceVertexN, afTetraVertexB, swgVertexN, GIVV, GIVS, GISV, GISS, GDVV ); // [ 1, m, 1, 1 ]
+
+		//CalculateGDVV(  ); // L3A[ 1, m, 1, 1 ]
+
+		//////
+
+		// R
+
+		//cout << "D1" << endl;
+
+		af::array vecRxVVm = af::tile( afTetraQuadDataA.row( 1 ), tetraQuadCount_, 1, 1, 1 );
+		af::array vecRyVVm = af::tile( afTetraQuadDataA.row( 2 ), tetraQuadCount_, 1, 1, 1 );
+		af::array vecRzVVm = af::tile( afTetraQuadDataA.row( 3 ), tetraQuadCount_, 1, 1, 1 );
+
+		af::array vecRxVVn = af::tile( af::transpose( afTetraQuadDataB.row( 1 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array vecRyVVn = af::tile( af::transpose( afTetraQuadDataB.row( 2 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array vecRzVVn = af::tile( af::transpose( afTetraQuadDataB.row( 3 ) ), 1, tetraQuadCount_, 1, 1 );
 
 
+		af::array vecRxSVm = af::tile( afFaceQuadDataM.row( 1 ), tetraQuadCount_, 1, 1, 1 );
+		af::array vecRySVm = af::tile( afFaceQuadDataM.row( 2 ), tetraQuadCount_, 1, 1, 1 );
+		af::array vecRzSVm = af::tile( afFaceQuadDataM.row( 3 ), tetraQuadCount_, 1, 1, 1 );
 
-		af::array afTetraQuadData = af::array( 4, quadCount_, AF_FLOAT_T );
-		afTetraQuadData.write( &tetraQuadDataPtr_[ quadBlockSize_ * idTetra ], SIZEOF_T * 4 * quadCount_, afHost );
+		af::array vecRxSVn = af::tile( af::transpose( afTetraQuadDataB.row( 1 ) ), 1, faceQuadCount_, 1, 1 );
+		af::array vecRySVn = af::tile( af::transpose( afTetraQuadDataB.row( 2 ) ), 1, faceQuadCount_, 1, 1 );
+		af::array vecRzSVn = af::tile( af::transpose( afTetraQuadDataB.row( 3 ) ), 1, faceQuadCount_, 1, 1 );
 
 
+		af::array vecRxVSm = af::tile( afTetraQuadDataA.row( 1 ), faceQuadCount_, 1, 1, 1 );
+		af::array vecRyVSm = af::tile( afTetraQuadDataA.row( 2 ), faceQuadCount_, 1, 1, 1 );
+		af::array vecRzVSm = af::tile( afTetraQuadDataA.row( 3 ), faceQuadCount_, 1, 1, 1 );
+
+		af::array vecRxVSn = af::tile( af::transpose( afFaceQuadDataN.row( 1 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array vecRyVSn = af::tile( af::transpose( afFaceQuadDataN.row( 2 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array vecRzVSn = af::tile( af::transpose( afFaceQuadDataN.row( 3 ) ), 1, tetraQuadCount_, 1, 1 );
 
 
+		af::array vecRxSSm = af::tile( afFaceQuadDataM.row( 1 ), faceQuadCount_, 1, 1, 1 );
+		af::array vecRySSm = af::tile( afFaceQuadDataM.row( 2 ), faceQuadCount_, 1, 1, 1 );
+		af::array vecRzSSm = af::tile( afFaceQuadDataM.row( 3 ), faceQuadCount_, 1, 1, 1 );
+
+		af::array vecRxSSn = af::tile( af::transpose( afFaceQuadDataN.row( 1 ) ), 1, faceQuadCount_, 1, 1 );
+		af::array vecRySSn = af::tile( af::transpose( afFaceQuadDataN.row( 2 ) ), 1, faceQuadCount_, 1, 1 );
+		af::array vecRzSSn = af::tile( af::transpose( afFaceQuadDataN.row( 3 ) ), 1, faceQuadCount_, 1, 1 );
+
+		//cout << "D2" << endl;
 
 
+		af::array RVV = af::sqrt( af::pow( vecRxVVm - vecRxVVn, 2.0 ) + af::pow( vecRyVVm - vecRyVVn, 2.0 ) + af::pow( vecRzVVm - vecRzVVn, 2.0 ) );
+		af::array RSV = af::sqrt( af::pow( vecRxSVm - vecRxSVn, 2.0 ) + af::pow( vecRySVm - vecRySVn, 2.0 ) + af::pow( vecRzSVm - vecRzSVn, 2.0 ) );
+		af::array RVS = af::sqrt( af::pow( vecRxVSm - vecRxVSn, 2.0 ) + af::pow( vecRyVSm - vecRyVSn, 2.0 ) + af::pow( vecRzVSm - vecRzVSn, 2.0 ) );
+		af::array RSS = af::sqrt( af::pow( vecRxSSm - vecRxSSn, 2.0 ) + af::pow( vecRySSm - vecRySSn, 2.0 ) + af::pow( vecRzSSm - vecRzSSn, 2.0 ) );
+
+
+		af::array isZeroRVV = af::iszero( RVV );
+		af::array isZeroRSV = af::iszero( RSV );
+		af::array isZeroRVS = af::iszero( RVS );
+		af::array isZeroRSS = af::iszero( RSS );
+
+		
+		//cout << "D3" << endl;
+
+
+		//af::array GNVV = ( ( ( af::exp( waveNumberJ_ * RVV ) - 1 ) / RVV )( isZeroRVV ) = waveNumberJ_ );
+		//af::array GNSV = ( ( ( af::exp( waveNumberJ_ * RSV ) - 1 ) / RVV )( isZeroRSV ) = waveNumberJ_ );
+		//af::array GNVS = ( ( ( af::exp( waveNumberJ_ * RVS ) - 1 ) / RVV )( isZeroRVS ) = waveNumberJ_ );
+		//af::array GNSS = ( ( ( af::exp( waveNumberJ_ * RSS ) - 1 ) / RSS )( isZeroRSS ) = waveNumberJ_ );
+
+		af::array GNVV = ( af::exp( waveNumberJ_ * RVV ) - 1 ) / RVV;
+		af::array GNSV = ( af::exp( waveNumberJ_ * RSV ) - 1 ) / RSV;
+		af::array GNVS = ( af::exp( waveNumberJ_ * RVS ) - 1 ) / RVS;
+		af::array GNSS = ( af::exp( waveNumberJ_ * RSS ) - 1 ) / RSS;
+
+		GNVV( isZeroRVV ) = waveNumberJ_;
+		GNSV( isZeroRSV ) = waveNumberJ_;
+		GNVS( isZeroRVS ) = waveNumberJ_;
+		GNSS( isZeroRSS ) = waveNumberJ_;
+
+
+		//cout << "D4" << endl;
+
+		//////
+
+		
+
+		af::array WnVV = af::tile( af::transpose( afTetraQuadDataB.row( 0 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array WnSV = af::tile( af::transpose( afTetraQuadDataB.row( 0 ) ), 1, faceQuadCount_, 1, 1 );
+		af::array WnVS = af::tile( af::transpose( afFaceQuadDataN.row( 0 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array WnSS = af::tile( af::transpose( afFaceQuadDataN.row( 0 ) ), 1, faceQuadCount_, 1, 1 );
+
+		af::array WmV = afTetraQuadDataA.row( 0 );
+		af::array WmS = afFaceQuadDataN.row( 0 );
+
+		af::array QxmV = afTetraQuadDataA.row( 1 );
+		af::array QymV = afTetraQuadDataA.row( 2 );
+		af::array QzmV = afTetraQuadDataA.row( 3 );
+
+		af::array QxnVV = af::tile( af::transpose( afTetraQuadDataB.row( 1 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array QynVV = af::tile( af::transpose( afTetraQuadDataB.row( 2 ) ), 1, tetraQuadCount_, 1, 1 );
+		af::array QznVV = af::tile( af::transpose( afTetraQuadDataB.row( 3 ) ), 1, tetraQuadCount_, 1, 1 );
+
+		//////
+
+		//cout << "D5" << endl;
+
+		complex< T > I[19];
+
+		sum( WmV * ( af::sum( WnVV * GNVV, 0 ) + GIVV ), 1 ).host( &I[0] );
+
+		sum( WmV * QxmV * ( af::sum( WnVV * GNVV, 0 ) + GIVV ), 1 ).host( &I[1] );
+		sum( WmV * QymV * ( af::sum( WnVV * GNVV, 0 ) + GIVV ), 1 ).host( &I[2] );
+		sum( WmV * QzmV * ( af::sum( WnVV * GNVV, 0 ) + GIVV ), 1 ).host( &I[3] );
+
+		sum( WmV * ( af::sum( WnVV * QxnVV * GNVV, 0 ) + GDVV[0] + QxmV * GIVV ), 1 ).host( &I[4] );
+		sum( WmV * ( af::sum( WnVV * QynVV * GNVV, 0 ) + GDVV[1] + QymV * GIVV ), 1 ).host( &I[5] );
+		sum( WmV * ( af::sum( WnVV * QznVV * GNVV, 0 ) + GDVV[2] + QzmV * GIVV ), 1 ).host( &I[6] );
+
+		sum( WmV * QxmV * ( af::sum( WnVV * QxnVV * GNVV, 0 ) + GDVV[0] + QxmV * GIVV ), 1 ).host( &I[7] );
+		sum( WmV * QymV * ( af::sum( WnVV * QynVV * GNVV, 0 ) + GDVV[1] + QymV * GIVV ), 1 ).host( &I[8] );
+		sum( WmV * QzmV * ( af::sum( WnVV * QznVV * GNVV, 0 ) + GDVV[2] + QzmV * GIVV ), 1 ).host( &I[9] );
+
+		sum( WmS * ( af::sum( WnSV * GNSV, 0 ) + GISV ), 1 ).host( &I[10] );
+		sum( WmV * ( af::sum( WnVS * GNVS, 0 ) + GIVS ), 1 ).host( &I[11] );
+		sum( WmS * ( af::sum( WnSS * GNSS, 0 ) + GISS ), 1 ).host( &I[12] );
+
+		sum( WmV * QxmV, 1 ).host( &I[13] );
+		sum( WmV * QymV, 1 ).host( &I[14] );
+		sum( WmV * QzmV, 1 ).host( &I[15] );
+
+		sum( WmV * QxmV * QxmV, 1 ).host( &I[16] );
+		sum( WmV * QymV * QymV, 1 ).host( &I[17] );
+		sum( WmV * QzmV * QzmV, 1 ).host( &I[18] );
+
+		//cout << "D6" << endl;
+
+		//////
+		
+		T factorC = faceAreaM * faceAreaN / ( 9 * tetraVolumeA * tetraVolumeB );
+		T epsRA = emPropDataPtr_[ 2 * idTetraA ];
+		T epsRB = emPropDataPtr_[ 2 * idTetraB ];
+		T contrastA = ( 1 - epsRA ) / epsRA;
+		T contrastB = ( 1 - epsRB ) / epsRB;
+		T swgDot = LUV::Dot( swgVertexM, swgVertexN );
+		LUV::LuVector3< T > swgSum = swgVertexM + swgVertexN;
+
+		//cout << "D7" << endl;
+
+		complex< T > j( 0, 1 );
+
+		complex< T > factor1 = ( -j ) * ( factorC / ( waveNumber_ * c0_ * eps0_ * epsRB ) );
+		complex< T > factor2 = j * ( waveNumber_ * c0_ * mu0_ * contrastB * factorC );
+		complex< T > factor3 = ( -j ) * ( 9 * factorC * contrastB / ( waveNumber_ * c0_ * eps0_ ) );
+
+		T volArRatioM = tetraVolumeA / faceAreaM;
+		T volArRatioN = tetraVolumeB / faceAreaN;
+		T volArRatio = volArRatioM * volArRatioN;
+
+		complex< T > result =
+			factor1 * ( swgDot * tetraVolumeA + I[16] + I[17] + I[18]
+				- swgSum[0] * I[13] - swgSum[1] * I[14] - swgSum[2] * I[15] )
+			- factor2 * ( swgDot * I[0] + I[7] + I[8] + I[9]
+				- swgVertexN[0] * I[1] - swgVertexN[1] * I[2] - swgVertexN[2] * I[3]
+				- swgVertexM[0] * I[4] - swgVertexM[1] * I[5] - swgVertexM[2] * I[6] )
+			- factor3 * ( I[0] - volArRatioM * I[10] - volArRatioN * I[11] - volArRatio * I[12] )
+		;
+
+		//cout << "D8" << endl;
+
+		return result;
 
 	}
 
@@ -574,7 +954,7 @@ public:
 
 	//}
 
-	inline void GenerateSingleElem( const UINT_T& idFaceN, const UINT_T& idFaceM ) const
+	inline void GenerateSingleElem( const UINT_T& idFaceM, const UINT_T& idFaceN )
 	{
 		//UINT_T idFaceNVertex[ 3 ] = {
 		//	faceVertexIndexPtr_[ 3 * idFaceN ],
@@ -588,34 +968,37 @@ public:
 		//	faceVertexIndexPtr_[ 3 * idFaceM + 2 ]
 		//};
 			
-		UINT_T idTetraN[ 2 ] = {
-			faceTetraIndexPtr_[ 2 * idFaceN ],
-			faceTetraIndexPtr_[ 2 * idFaceN + 1 ]
-		};
-			
 		UINT_T idTetraM[ 2 ] = {
 			faceTetraIndexPtr_[ 2 * idFaceM ],
 			faceTetraIndexPtr_[ 2 * idFaceM + 1 ]
 		};
+			
+		UINT_T idTetraN[ 2 ] = {
+			faceTetraIndexPtr_[ 2 * idFaceN ],
+			faceTetraIndexPtr_[ 2 * idFaceN + 1 ]
+		};
 		
 		complex< T > result;
 
-		result = TetrahedralIntegral( idFaceN, idFaceM, idTetraN[ 0 ], idTetraM[ 0 ] );
-
-		if( idTetraM[ 1 ] != -1 )
-		{
-			result -= TetrahedralIntegral( idFaceN, idFaceM, idTetraN[ 0 ], idTetraM[ 1 ] );
-		}
+		//cout << "C" << endl;
+		result = TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 0 ], idTetraN[ 0 ] );
 
 		if( idTetraN[ 1 ] != -1 )
 		{
-			result -= TetrahedralIntegral( idFaceN, idFaceM, idTetraN[ 1 ], idTetraM[ 0 ] );
+			result -= TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 0 ], idTetraN[ 1 ] );
+		}
 
-			if( idTetraM[ 1 ] != -1 )
+		if( idTetraM[ 1 ] != -1 )
+		{
+			result -= TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 1 ], idTetraN[ 0 ] );
+
+			if( idTetraN[ 1 ] != -1 )
 			{
-				result += TetrahedralIntegral( idFaceN, idFaceM, idTetraN[ 1 ], idTetraM[ 1 ] );
+				result += TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 1 ], idTetraN[ 1 ] );
 			}
 		}
+
+		//cout << "C1" << endl;
 
 
 
@@ -656,26 +1039,27 @@ public:
 
 	void PartialGenerate( const UINT_T& idFaceNStart, const UINT_T& idFaceNEnd )
 	{
-		cout << "Thread: " << idFaceNStart << " - " << idFaceNEnd << endl;
+		//cout << "Thread: " << idFaceNStart << " - " << idFaceNEnd << endl;
 
 		UINT_T idFaceNLimit = faceCount_ < idFaceNEnd ? faceCount_ : idFaceNEnd;
 
-		for( UINT_T idFaceN = idFaceStart; idFaceN < idFaceLimit; ++idFaceN )
+		for( UINT_T idFaceN = idFaceNStart; idFaceN < idFaceNLimit; ++idFaceN )
 		{
 			for( UINT_T idFaceM = 0; idFaceM < faceCount_; ++idFaceM )
 			{
-				GenerateSingleElem( idFaceN, idFaceM );
+				GenerateSingleElem( idFaceM, idFaceN );
 			}
 		}
 	}
 
-	void Generate() const
+	void Generate()
 	{
 		for( UINT_T idFaceN = 0; idFaceN < faceCount_; ++idFaceN )
 		{
 			for( UINT_T idFaceM = 0; idFaceM < faceCount_; ++idFaceM )
 			{
-				GenerateSingleElem( idFaceN, idFaceM );
+				//cout << "B" << endl;
+				GenerateSingleElem( idFaceM, idFaceN );
 			}
 		}
 	}
@@ -687,7 +1071,7 @@ public:
 		for( UINT_T idThread = 0; idThread < threadCount_; ++idThread )
 		{
 			UINT_T idFaceNStart = idThread * idFaceNDelta;
-			UINT_T idFaceNEnd = idFaceSNtart + idFaceNDelta;
+			UINT_T idFaceNEnd = idFaceNStart + idFaceNDelta;
 			threadList_.push_back( new thread( [=]{ PartialGenerate( idFaceNStart, idFaceNEnd ); } ));
 		}
 		

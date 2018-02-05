@@ -8,4 +8,9 @@
       <UniqueIdentifier>{d8d939e0-acd4-4474-b5a0-cb9e9e71d83b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeMoMNoExcept.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

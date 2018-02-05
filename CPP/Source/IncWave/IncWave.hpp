@@ -23,6 +23,7 @@ class IncWave
 {
 protected:
 	virtual bool SetWaveData_( const vector< T >& waveData ) = 0;
+	virtual T WaveNumber_() const = 0;
 	virtual LUV::LuVector3c< T > FieldE_( const LUV::LuVector3< T >& obsPoint ) const = 0;
 	virtual LUV::LuVector3c< T > FieldM_( const LUV::LuVector3< T >& obsPoint ) const = 0;
 	virtual PairEM< T > FieldEM_( const LUV::LuVector3< T >& obsPoint ) const = 0;
@@ -33,6 +34,11 @@ public:
 	bool SetWaveData( const vector< T >& waveData )
 	{
 		return SetWaveData_( waveData );
+	}
+
+	T WaveNumber() const
+	{
+		return WaveNumber_();
 	}
 
 	LUV::LuVector3c< T > FieldE( const LUV::LuVector3< T >& obsPoint ) const

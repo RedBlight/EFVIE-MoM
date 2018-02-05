@@ -184,7 +184,7 @@ public:
 
 	void PartialGenerate( const UINT_T& idFaceStart, const UINT_T& idFaceEnd )
 	{
-		cout << "Thread: " << idFaceStart << " - " << idFaceEnd << endl;
+		//cout << "Thread: " << idFaceStart << " - " << idFaceEnd << endl;
 
 		UINT_T idFaceLimit = faceCount_ < idFaceEnd ? faceCount_ : idFaceEnd;
 

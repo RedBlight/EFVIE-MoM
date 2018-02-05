@@ -1,6 +1,8 @@
 #ifndef _OPERATIONS_INCLUDED
 #define _OPERATIONS_INCLUDED
 
+#include <MomGenerator.hpp>
+#include <MomSolver.hpp>
 #include <RhsGenerator.hpp>
 #include <TetraFaceExtractor.hpp>
 #include <TetraQuadGenerator64.hpp>

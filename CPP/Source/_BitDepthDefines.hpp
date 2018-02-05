@@ -4,7 +4,7 @@
 
 // change this to alternate between 32 and 64 bits of operation.
 /////////////////////////////
-#define EFVIEMOM_BIT_DEPTH 32
+#define EFVIEMOM_BIT_DEPTH 64
 /////////////////////////////
 
 #if EFVIEMOM_BIT_DEPTH == 32
@@ -21,6 +21,8 @@
 #define AF_INT_T		s32
 #define AF_UINT_T		u32
 
+#define AF_CFLOAT		af::cfloat
+
 #elif EFVIEMOM_BIT_DEPTH == 64
 
 #define SIZEOF_T		8
@@ -34,6 +36,8 @@
 #define AF_FLOAT_T		f64
 #define AF_INT_T		s64
 #define AF_UINT_T		u64
+
+#define AF_CFLOAT		af::cdouble
 
 #endif
 

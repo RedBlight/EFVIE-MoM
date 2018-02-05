@@ -81,6 +81,11 @@ protected:
 		return true;
 	}
 
+	T WaveNumber_() const override
+	{
+		return waveNumber_;
+	}
+
 	LUV::LuVector3c< T > FieldE_( const LUV::LuVector3< T >& obsPoint ) const override
 	{
 		LUV::LuVector3< T > obsPointProj = LUV::ProjPlane( obsPoint, phaseOrigin_, direction_ );

@@ -39,6 +39,7 @@
     <ClInclude Include="..\Source\EmRule\EmRule.hpp" />
     <ClInclude Include="..\Source\EmRule\EmRule_Constant.hpp" />
     <ClInclude Include="..\Source\EmRule\EmRule_Factory.hpp" />
+    <ClInclude Include="..\Source\FileTypes\CoefFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\EmPropFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\EmRuleFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\IncWaveFile.hpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
     <ClInclude Include="..\Source\Operations\MomGenerator.hpp" />
+    <ClInclude Include="..\Source\Operations\MomSolver.hpp" />
     <ClInclude Include="..\Source\Operations\RhsGenerator.hpp" />
     <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp" />
     <ClInclude Include="..\Source\Operations\TetraQuadGenerator64.hpp" />
@@ -79,8 +81,10 @@
     <ClCompile Include="..\Source\AppletsNoExcept\ElectrifyNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeFaceNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeMeshNoExcept.cpp" />
+    <ClCompile Include="..\Source\AppletsNoExcept\MakeMoMNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeRHSNoExcept.cpp" />
+    <ClCompile Include="..\Source\AppletsNoExcept\SolveMoMNoExcept.cpp" />
     <ClCompile Include="..\Source\Applets\Electrify.cpp" />
     <ClCompile Include="..\Source\Applets\MakeFace.cpp" />
     <ClCompile Include="..\Source\Applets\MakeMesh.cpp" />

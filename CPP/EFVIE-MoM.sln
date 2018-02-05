@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArrayFireTest", "ArrayFireT
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeRHS", "MakeRHS\MakeRHS.vcxproj", "{1306E663-B329-4221-B3A1-6CB18D669A79}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SolveMoM", "SolveMoM\SolveMoM.vcxproj", "{49C3871E-C329-43C2-AAFC-825586F69155}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CPU_Debug|x64 = CPU_Debug|x64
@@ -177,6 +179,22 @@ Global
 		{1306E663-B329-4221-B3A1-6CB18D669A79}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
 		{1306E663-B329-4221-B3A1-6CB18D669A79}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
 		{1306E663-B329-4221-B3A1-6CB18D669A79}.Unified_Release|x64.Build.0 = Unified_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CPU_Debug|x64.ActiveCfg = CPU_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CPU_Debug|x64.Build.0 = CPU_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CPU_Release|x64.ActiveCfg = CPU_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CPU_Release|x64.Build.0 = CPU_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CUDA_Debug|x64.ActiveCfg = CUDA_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CUDA_Debug|x64.Build.0 = CUDA_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CUDA_Release|x64.ActiveCfg = CUDA_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.CUDA_Release|x64.Build.0 = CUDA_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.OpenCL_Debug|x64.ActiveCfg = OpenCL_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.OpenCL_Debug|x64.Build.0 = OpenCL_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.OpenCL_Release|x64.ActiveCfg = OpenCL_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.OpenCL_Release|x64.Build.0 = OpenCL_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.Unified_Debug|x64.ActiveCfg = Unified_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.Unified_Debug|x64.Build.0 = Unified_Debug|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.Unified_Release|x64.ActiveCfg = Unified_Release|x64
+		{49C3871E-C329-43C2-AAFC-825586F69155}.Unified_Release|x64.Build.0 = Unified_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

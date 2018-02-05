@@ -13,7 +13,7 @@ int main( int argc, char *argv[] )
 
 	af::setDevice( 0 );
 
-	cout << "# Make RHS #" << endl;
+	cout << "# MakeRHS #" << endl;
 
 	string meshFileName = argv[ 1 ];
 	string faceFileName = argv[ 2 ];
@@ -69,6 +69,18 @@ int main( int argc, char *argv[] )
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;
+
+	cout << "RHS:" << endl;
+	for( size_t idx = 0; idx < 1; ++idx )
+	{
+		cout << rhsFile.rhsData_.get()[7*idx] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+1] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+2] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+3] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+4] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+5] << " ";
+		cout << rhsFile.rhsData_.get()[7*idx+6] << endl;
+	}
 
 	return 0;
 }

@@ -115,10 +115,10 @@ namespace LUV
 
 	// make sure triangle is not degenerate
 	template<>
-	inline LuVector< 2, af::array > LineNormalP( const LuVector< 2, af::array >& vec, const LuVector< 2, af::array >& v1, const LuVector< 2, af::array >& v2 ) 
+	inline LuVector< 3, af::array > LineNormalP( const LuVector< 3, af::array >& vec, const LuVector< 3, af::array >& v1, const LuVector< 3, af::array >& v2 ) 
 	{
-		LuVector< 2, af::array > v12 = Unit( v2 - v1 );
-		LuVector< 2, af::array > ort = vec - ProjLineL( vec, v1, v12 );
+		LuVector< 3, af::array > v12 = Unit( v2 - v1 );
+		LuVector< 3, af::array > ort = vec - ProjLineL( vec, v1, v12 );
 		return ort / Length( ort );
 	}
 
