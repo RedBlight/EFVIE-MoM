@@ -6,6 +6,8 @@
 #include <EmRuleFile.hpp>
 #include <IncWaveFile.hpp>
 #include <MomMatrixFile.hpp>
+#include <ObsAngleFile.hpp>
+#include <ObsPointFile.hpp>
 #include <RhsFile.hpp>
 #include <TetraFaceFile.hpp>
 #include <TetraMeshFile.hpp>
