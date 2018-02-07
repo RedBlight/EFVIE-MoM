@@ -37,7 +37,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{dce9bb66-9f1f-4f04-979e-7f14381179c5}</ProjectGuid>
     <RootNamespace>ComputeScattering</RootNamespace>
-    <ProjectName>New EFVIE-MOM Project</ProjectName>
+    <ProjectName>ComputeScattering</ProjectName>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

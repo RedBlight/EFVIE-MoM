@@ -44,6 +44,8 @@
     <ClInclude Include="..\Source\FileTypes\EmRuleFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\IncWaveFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\MomMatrixFile.hpp" />
+    <ClInclude Include="..\Source\FileTypes\ObsAngleFile.hpp" />
+    <ClInclude Include="..\Source\FileTypes\ObsPointFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\RhsFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\TetraFaceFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\TetraMeshFile.hpp" />
@@ -61,6 +63,7 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
+    <ClInclude Include="..\Source\Operations\FarFieldScatterer.hpp" />
     <ClInclude Include="..\Source\Operations\MomGenerator.hpp" />
     <ClInclude Include="..\Source\Operations\MomSolver.hpp" />
     <ClInclude Include="..\Source\Operations\RhsGenerator.hpp" />

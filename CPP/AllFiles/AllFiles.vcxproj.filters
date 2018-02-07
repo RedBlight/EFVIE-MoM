@@ -156,6 +156,15 @@
     <ClInclude Include="..\Source\Operations\MomSolver.hpp">
       <Filter>Headers\Operations</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\ObsPointFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Operations\FarFieldScatterer.hpp">
+      <Filter>Headers\Operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\FileTypes\ObsAngleFile.hpp">
+      <Filter>Headers\FileTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Applets\MakeMoM.cpp">
