@@ -67,7 +67,7 @@ public:
 
 		obsCount_ = obsCount;
 
-		obsData_.reset( new T[ 3 * obsCount_ ], []( T* ptr ){ delete[] ptr; } );
+		obsData_.reset( new T[ 2 * obsCount_ ], []( T* ptr ){ delete[] ptr; } );
 
 		init_ = true;
 	}
@@ -97,9 +97,9 @@ public:
 		obsFile.read( ( char* )&obsCount_, SIZEOF_T );
 		obsFile.read( ( char* )&tetraCount_, SIZEOF_T );
 
-		obsData_.reset( new T[ 3 * obsCount_ ], []( T* ptr ){ delete[] ptr; } );
+		obsData_.reset( new T[ 2 * obsCount_ ], []( T* ptr ){ delete[] ptr; } );
 
-		obsFile.read( ( char* )( obsData_.get() ), SIZEOF_T * 3 * obsCount_ );
+		obsFile.read( ( char* )( obsData_.get() ), SIZEOF_T * 2 * obsCount_ );
 
 		obsFile.close();
 
@@ -120,7 +120,7 @@ public:
 
 		obsFile.write( ( char* )&obsCount_, SIZEOF_T );
 
-		obsFile.write( ( char* )( obsData_.get() ), SIZEOF_T * 3 * obsCount_ );
+		obsFile.write( ( char* )( obsData_.get() ), SIZEOF_T * 2 * obsCount_ );
 
 		obsFile.close();
 

@@ -1,0 +1,22 @@
+
+.obspoint
+.obsangle
+
+.emprop
+.tetraquad
+.coef
+.tetramesh
+.tetraface
+
+
+ObserveScattering.exe
+ScatteringObserver
+
+
+ObserveFarField.exe
+FarFieldObserver
+
+for each obs angle
+	for each swg base
+		calculate j
+
