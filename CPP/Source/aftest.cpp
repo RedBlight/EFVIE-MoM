@@ -27,7 +27,25 @@ int main(int argc, char *argv[])
         af::setDevice( device );
         af::info();
 
-		std::complex< float > A = std::complex< float >( 3, 5 ) * (float)(10.0); 
+		af::array B = af::constant( 2, 2, 2, f64 );
+
+		//af_print( A * std::complex< double >( 0, 1 ) );
+
+		af::cdouble A = {0,1};
+		B = B * A;
+		af_print( B );
+
+		//std::complex< double > j(0,1);
+		//LUV::LuVector3< std::complex< double > > A = 0;
+		//LUV::LuVector3< double > B = 1.0/sqrt(3.0);
+		//std::complex< double > C = std::exp( j * af::Pi / 4.0 );
+
+		//std::cout << A << std::endl;
+
+		//std::cout << C * B << std::endl;
+		//std::cout << LUV::Length( C * B ) << std::endl;
+
+		/*std::complex< float > A = std::complex< float >( 3, 5 ) * (float)(10.0); */
 
 		//af::array A = af::randu( 1, 1, c64 );
 		//af_print( A );

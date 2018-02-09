@@ -45,6 +45,11 @@
 @RD /S /Q "New EFVIE-MOM Project\OpenCL"
 @RD /S /Q "New EFVIE-MOM Project\Unified"
 
+@RD /S /Q "ObserveRCS\CPU"
+@RD /S /Q "ObserveRCS\CUDA"
+@RD /S /Q "ObserveRCS\OpenCL"
+@RD /S /Q "ObserveRCS\Unified"
+
 @RD /S /Q "SolveMoM\CPU"
 @RD /S /Q "SolveMoM\CUDA"
 @RD /S /Q "SolveMoM\OpenCL"

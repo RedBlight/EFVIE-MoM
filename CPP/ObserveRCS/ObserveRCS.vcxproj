@@ -34,10 +34,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\AppletsNoExcept\ObserveRCSNoExcept.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{dce9bb66-9f1f-4f04-979e-7f14381179c5}</ProjectGuid>
-    <RootNamespace>ComputeScattering</RootNamespace>
-    <ProjectName>ComputeScattering</ProjectName>
+    <ProjectGuid>{19ebc54c-ef56-4e1d-8d22-0ab97a3257d9}</ProjectGuid>
+    <RootNamespace>ObserveRCS</RootNamespace>
+    <ProjectName>ObserveRCS</ProjectName>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

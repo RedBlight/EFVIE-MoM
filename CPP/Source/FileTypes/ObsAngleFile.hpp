@@ -95,7 +95,6 @@ public:
 		}
 
 		obsFile.read( ( char* )&obsCount_, SIZEOF_T );
-		obsFile.read( ( char* )&tetraCount_, SIZEOF_T );
 
 		obsData_.reset( new T[ 2 * obsCount_ ], []( T* ptr ){ delete[] ptr; } );
 

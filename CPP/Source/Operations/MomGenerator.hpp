@@ -1045,6 +1045,9 @@ public:
 
 		for( UINT_T idFaceN = idFaceNStart; idFaceN < idFaceNLimit; ++idFaceN )
 		{
+			//
+			cout << idFaceN % (UINT_T)( ceil( (double)( faceCount_ ) / (double)( threadCount_ ) ) ) << " / " << (UINT_T)( ceil( (double)( faceCount_ ) / (double)( threadCount_ ) ) ) << endl;
+			//
 			for( UINT_T idFaceM = 0; idFaceM < faceCount_; ++idFaceM )
 			{
 				GenerateSingleElem( idFaceM, idFaceN );

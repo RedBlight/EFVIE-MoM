@@ -8,6 +8,8 @@
 #include <MomMatrixFile.hpp>
 #include <ObsAngleFile.hpp>
 #include <ObsPointFile.hpp>
+#include <RcsResultFile.hpp>
+#include <ScatterResultFile.hpp>
 #include <RhsFile.hpp>
 #include <TetraFaceFile.hpp>
 #include <TetraMeshFile.hpp>

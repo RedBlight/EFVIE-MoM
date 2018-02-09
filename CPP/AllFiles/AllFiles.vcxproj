@@ -46,7 +46,9 @@
     <ClInclude Include="..\Source\FileTypes\MomMatrixFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\ObsAngleFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\ObsPointFile.hpp" />
+    <ClInclude Include="..\Source\FileTypes\RcsResultFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\RhsFile.hpp" />
+    <ClInclude Include="..\Source\FileTypes\ScatterResultFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\TetraFaceFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\TetraMeshFile.hpp" />
     <ClInclude Include="..\Source\FileTypes\TetraQuadFile.hpp" />
@@ -63,9 +65,9 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Op.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Overload.hpp" />
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
-    <ClInclude Include="..\Source\Operations\FarFieldScatterer.hpp" />
     <ClInclude Include="..\Source\Operations\MomGenerator.hpp" />
     <ClInclude Include="..\Source\Operations\MomSolver.hpp" />
+    <ClInclude Include="..\Source\Operations\RcsObserver.hpp" />
     <ClInclude Include="..\Source\Operations\RhsGenerator.hpp" />
     <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp" />
     <ClInclude Include="..\Source\Operations\TetraQuadGenerator64.hpp" />
@@ -87,6 +89,7 @@
     <ClCompile Include="..\Source\AppletsNoExcept\MakeMoMNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeQuadNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\MakeRHSNoExcept.cpp" />
+    <ClCompile Include="..\Source\AppletsNoExcept\ObserveRCSNoExcept.cpp" />
     <ClCompile Include="..\Source\AppletsNoExcept\SolveMoMNoExcept.cpp" />
     <ClCompile Include="..\Source\Applets\Electrify.cpp" />
     <ClCompile Include="..\Source\Applets\MakeFace.cpp" />

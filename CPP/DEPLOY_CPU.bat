@@ -5,3 +5,4 @@
 @COPY /Y "MakeRHS\CPU\MakeRHS.exe" "..\MATLAB\"
 @COPY /Y "MakeMoM\CPU\MakeMoM.exe" "..\MATLAB\"
 @COPY /Y "SolveMoM\CPU\SolveMoM.exe" "..\MATLAB\"
+@COPY /Y "ObserveRCS\CPU\ObserveRCS.exe" "..\MATLAB\"

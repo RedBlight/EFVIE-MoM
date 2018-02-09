@@ -8,4 +8,9 @@
       <UniqueIdentifier>{4de47fd3-2f01-41e0-bb51-627b73d57902}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\AppletsNoExcept\ObserveRCSNoExcept.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
