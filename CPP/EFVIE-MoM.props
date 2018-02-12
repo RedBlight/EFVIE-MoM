@@ -3,8 +3,16 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)Source\;$(SolutionDir)Source\EmRule\;$(SolutionDir)Source\FileTypes\;$(SolutionDir)Source\IncWave\;$(SolutionDir)Source\LuVector\;$(SolutionDir)Source\Operations\;$(SolutionDir)Source\Tools\;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalLibraryDirectories>$(BOOST_PATH)\lib64-msvc-14.1;</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\;$(SolutionDir)Source\EmRule\;$(SolutionDir)Source\FileTypes\;$(SolutionDir)Source\IncWave\;$(SolutionDir)Source\LuVector\;$(SolutionDir)Source\Operations\;$(SolutionDir)Source\Tools\;$(BOOST_PATH)\</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

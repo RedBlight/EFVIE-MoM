@@ -1,5 +1,7 @@
 @RD /S /Q ".vs"
 
+@RD /S /Q "Debug"
+
 @RD /S /Q "AllFiles\CPU"
 @RD /S /Q "AllFiles\CUDA"
 @RD /S /Q "AllFiles\OpenCL"
