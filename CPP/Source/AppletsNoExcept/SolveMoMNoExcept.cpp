@@ -49,6 +49,7 @@ int main( int argc, char *argv[] )
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;
 
+	/*
 	cout << "COEFVEC:" << endl;
 	for( size_t idx = 0; idx < 1; ++idx )
 	{
@@ -60,6 +61,7 @@ int main( int argc, char *argv[] )
 		cout << coefFile.coefData_.get()[7*idx+5] << " ";
 		cout << coefFile.coefData_.get()[7*idx+6] << endl;
 	}
+	*/
 
 	return 0;
 }

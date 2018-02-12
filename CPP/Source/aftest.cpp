@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 		//af_print( A * std::complex< double >( 0, 1 ) );
 
-		af::cdouble A = {0,1};
+		af::cdouble A(0,1);
 		B = B * A;
 		af_print( B );
 

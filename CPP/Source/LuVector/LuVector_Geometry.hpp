@@ -44,7 +44,7 @@ namespace LUV
 	inline LuVector< 3, T > LineNormal( const LuVector< 3, T >& v1, const LuVector< 3, T >& v2 ) 
 	{
 		LuVector< 3, T > v12 = Unit( v2 - v1 );
-		return OrthogonalR( v12 );
+		return OrthonormalR( v12 );
 	}
 
 	// LineNormal N=2
@@ -52,21 +52,21 @@ namespace LUV
 	inline LuVector< 2, T > LineNormal( const LuVector< 2, T >& v1, const LuVector< 2, T >& v2 ) 
 	{
 		LuVector< 2, T > v12 = Unit( v2 - v1 );
-		return OrthogonalR( v12 );
+		return OrthonormalR( v12 );
 	}
 
 	// LineNormalL N=3
 	template< class T >
 	inline LuVector< 3, T > LineNormalL( const LuVector< 3, T >& lineDir ) 
 	{
-		return OrthogonalR( lineDir );
+		return OrthonormalR( lineDir );
 	}
 
 	// LineNormalL N=2
 	template< class T >
 	inline LuVector< 2, T > LineNormalL( const LuVector< 2, T >& lineDir ) 
 	{
-		return OrthogonalR( lineDir );
+		return OrthonormalR( lineDir );
 	}
 
 	// LineNormalP N=3

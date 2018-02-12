@@ -14,11 +14,9 @@ close all;
 
 
 fileID = fopen( 'Data/sphere52r1.rcsresult' );
-A = fread( fileID, 362, 'double' );
+A = fread( fileID, 182, 'double' );
 
 figure();
-plot( 0:360, A( 2 : 362 ) )
-
-
+plot( -180:2:180, A( 2 : 182 ) )
 
 fclose( fileID );

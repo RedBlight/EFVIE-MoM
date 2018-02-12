@@ -82,7 +82,7 @@ int main( int argc, char *argv[] )
 	MomMatrixFile< FLOAT_T > momFile;
 	momFile.Initialize( faceFile.faceCount_ );
 
-	MomGenerator< FLOAT_T > momGenerator(
+	MomGeneratorCpu< FLOAT_T > momGenerator(
 		incWave->WaveNumber(),
 		faceFile.faceCount_,
 		tetqFile.quadCount_,
@@ -116,6 +116,7 @@ int main( int argc, char *argv[] )
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;
 
+	/*
 	cout << "MOMMAT:" << endl;
 	for( size_t idx = 0; idx < faceFile.faceCount_; ++idx )
 	{
@@ -127,6 +128,7 @@ int main( int argc, char *argv[] )
 		cout << momFile.momData_.get()[7*idx+5] << " ";
 		cout << momFile.momData_.get()[7*idx+6] << endl;
 	}
+	*/
 
 	return 0;
 }

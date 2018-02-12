@@ -2,6 +2,7 @@
 #define _OPERATIONS_INCLUDED
 
 #include <MomGenerator.hpp>
+#include <MomGeneratorCpu.hpp>
 #include <MomSolver.hpp>
 #include <RhsGenerator.hpp>
 #include <RcsObserver.hpp>
