@@ -88,9 +88,9 @@ public:
 
 			UINT_T idQuad = 4 * 7 * idf;
 
-			LUV::LuVector< 3, T > v1( vertexDataPtr[ idv1x ], vertexDataPtr[ idv1x ], vertexDataPtr[ idv1x ] );
-			LUV::LuVector< 3, T > v2( vertexDataPtr[ idv2y ], vertexDataPtr[ idv2y ], vertexDataPtr[ idv2y ] );
-			LUV::LuVector< 3, T > v3( vertexDataPtr[ idv3z ], vertexDataPtr[ idv3z ], vertexDataPtr[ idv3z ] );
+			LUV::LuVector< 3, T > v1( vertexDataPtr[ idv1x ], vertexDataPtr[ idv1y ], vertexDataPtr[ idv1z ] );
+			LUV::LuVector< 3, T > v2( vertexDataPtr[ idv2x ], vertexDataPtr[ idv2y ], vertexDataPtr[ idv2z ] );
+			LUV::LuVector< 3, T > v3( vertexDataPtr[ idv3x ], vertexDataPtr[ idv3y ], vertexDataPtr[ idv3z ] );
 
 			LUV::LuVector< 3, T > q[7];
 

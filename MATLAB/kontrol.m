@@ -1,8 +1,8 @@
-clc;
-clear all;
-close all;
+%clc;
+%clear all;
+%close all;
 
-fileID = fopen( 'Data/sphere86.rcsresult' );
+fileID = fopen( 'Data/sphere52r1.rcsresult' );
 A = fread( fileID, 182, 'double' );
 
 fclose( fileID );
@@ -13,12 +13,15 @@ C = table2array( T(:,2) );
 R = A(2:182);
 
 NR = R - min( R );
-NR = max( NR ) - NR;
 NR = NR ./ max( NR );
-NR = NR .* max( C );
+NR = NR .* ( max( C ) - min( C ) );
+NR = NR + min( C );
 
 figure(  );
 plot( -180:2:180, NR, "red", -180:2:180, C, "blue" );
+
+figure(  );
+plot( -180:2:180, R, "red" );
 
 
 

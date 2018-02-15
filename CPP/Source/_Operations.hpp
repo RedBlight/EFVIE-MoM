@@ -5,7 +5,9 @@
 #include <MomGeneratorCpu.hpp>
 #include <MomSolver.hpp>
 #include <RhsGenerator.hpp>
+#include <RhsGeneratorCpu.hpp>
 #include <RcsObserver.hpp>
+#include <RcsObserverCpu.hpp>
 #include <TetraFaceExtractor.hpp>
 #include <TetraQuadGenerator64.hpp>
 #include <TriQuadGenerator7.hpp>

@@ -69,7 +69,9 @@
     <ClInclude Include="..\Source\Operations\MomGeneratorCpu.hpp" />
     <ClInclude Include="..\Source\Operations\MomSolver.hpp" />
     <ClInclude Include="..\Source\Operations\RcsObserver.hpp" />
+    <ClInclude Include="..\Source\Operations\RcsObserverCpu.hpp" />
     <ClInclude Include="..\Source\Operations\RhsGenerator.hpp" />
+    <ClInclude Include="..\Source\Operations\RhsGeneratorCpu.hpp" />
     <ClInclude Include="..\Source\Operations\TetraFaceExtractor.hpp" />
     <ClInclude Include="..\Source\Operations\TetraQuadGenerator64.hpp" />
     <ClInclude Include="..\Source\Operations\TriQuadGenerator7.hpp" />

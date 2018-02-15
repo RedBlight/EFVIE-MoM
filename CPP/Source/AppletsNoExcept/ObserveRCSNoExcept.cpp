@@ -52,7 +52,7 @@ int main( int argc, char *argv[] )
 	shared_ptr< IncWave< FLOAT_T > > incWave = waveFac.GetWave( waveFile.waveType_ );
 	incWave->SetWaveData( waveFile.waveData_ );
 
-	RcsObserver< FLOAT_T > rcsObserver(
+	RcsObserverCpu< FLOAT_T > rcsObserver(
 		incWave->WaveNumber(),
 		obsaFile.obsCount_,
 		faceFile.faceCount_,
@@ -82,6 +82,11 @@ int main( int argc, char *argv[] )
 
 	cout << "# Finished in " << tMsec.count() << " sec. #" << endl;
 	cout << endl;
+
+	cout << incWave->FieldE( LUV::LuVector3d( 0,0,0 ) ) << endl;
+	cout << incWave->FieldE( LUV::LuVector3d( 5,0,0 ) ) << endl;
+	cout << incWave->FieldE( LUV::LuVector3d( 0,5,0 ) ) << endl;
+	cout << incWave->FieldE( LUV::LuVector3d( 0,0,12 ) ) << endl;
 
 	//cout << "COEFVEC:" << endl;
 	//for( size_t idx = 0; idx < 1; ++idx )

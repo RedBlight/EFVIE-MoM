@@ -3,7 +3,7 @@ clear all;
 close all;
 
 dataN = "Data/";
-geomN = "sphere86";
+geomN = "sphere52r1";
 ruleN = "eps2";
 waveN = "PlaneZinYpol";
 obspN = "xycircular361";
@@ -32,7 +32,7 @@ system( "MakeMoM.exe" + meshF + faceF + tetqF + triqF + propF + waveF + mommF );
 system( "SolveMoM.exe" + mommF + rhsvF + coefF );
 system( "ObserveRCS.exe" + meshF + faceF + tetqF + propF + waveF + coefF + obspF + rsltF );
 
-
+kontrol;
 % system( "MakeMesh.exe Data/sphere52r1.unv Data/sphere52r1.tetramesh" );
 % system( "MakeFace.exe Data/sphere52r1.tetramesh Data/sphere52r1.tetraface" );
 % system( "Electrify.exe Data/sphere52r1.tetramesh Data/eps2.emrule Data/sphere52r1.emprops" );

@@ -40,7 +40,7 @@ int main( int argc, char *argv[] )
 	RhsFile< FLOAT_T > rhsFile;
 	rhsFile.Initialize( faceFile.faceCount_ );
 
-	RhsGenerator< FLOAT_T > rhsGenerator(
+	RhsGeneratorCpu< FLOAT_T > rhsGenerator(
 		faceFile.faceCount_,
 		tetqFile.quadCount_,
 		meshFile.vertexData_,

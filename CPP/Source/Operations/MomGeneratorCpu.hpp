@@ -119,12 +119,12 @@ public:
 
 	inline complex< T > GreenWhole( const T& R )
 	{
-		return exp( waveNumberJ_ * R ) / R;
+		return exp( -waveNumberJ_ * R ) / R;
 	}
 
 	inline complex< T > GreenRegular( const T& R )
 	{
-		return R == 0 ? waveNumberJ_ : ( exp( waveNumberJ_ * R ) - 1.0 ) / R;
+		return R == 0 ? (-waveNumberJ_) : ( ( exp( - waveNumberJ_ * R ) - 1.0 ) / R );
 	}
 
 	inline T GreenSingular( const T& R )
@@ -193,7 +193,7 @@ public:
 		T magA6 = LUV::Dot( dirP0, dirU );
 		T magA7 = magA1 - magA2;
 
-		edgeGIVV += magA6 * ( magA7 - magP0 * magA3 );
+		edgeGIVV += magA6 * ( magAbsD * magA7 - magP0 * magA3 );
 		edgeGDVV += magA6 * ( magA3 * magA4 + magA5 - magAbsDC * magA7 );
 	}
 
@@ -219,7 +219,7 @@ public:
 		GreenVolVolIntegralEdge( edgeGIVV, edgeGDVV, dirN, vecRho, magD, vecObs, vecTetra, vecV2, vecV3, vecV1 );
 		GreenVolVolIntegralEdge( edgeGIVV, edgeGDVV, dirN, vecRho, magD, vecObs, vecTetra, vecV3, vecV1, vecV2 );
 		
-		GIVV += magD * magAbsD * edgeGIVV;
+		GIVV += magD * edgeGIVV;
 		GDVV += dirN * edgeGDVV;
 	}
 
@@ -311,7 +311,7 @@ public:
 		T magA6 = LUV::Dot( dirP0, dirU );
 		T magA7 = magA1 - magA2;
 
-		edgeGISV += magA6 * ( magA7 - magP0 * magA3 );
+		edgeGISV += magA6 * ( magAbsD * magA7 - magP0 * magA3 );
 	}
 
 	inline void GreenVolIntegralFace(
@@ -334,7 +334,7 @@ public:
 		GreenVolIntegralEdge( edgeGISV, dirN, vecRho, magAbsD, vecObs, vecTetra, vecV2, vecV3, vecV1 );
 		GreenVolIntegralEdge( edgeGISV, dirN, vecRho, magAbsD, vecObs, vecTetra, vecV3, vecV1, vecV2 );
 		
-		GISV += magD * magAbsD * edgeGISV;
+		GISV += magD * edgeGISV;
 	}
 
 	inline void GreenVolIntegral(
@@ -635,7 +635,7 @@ public:
 			- factor2 * ( swgDot * I1 + LUV::Sum( I4 )
 				- LUV::Dot( I2, *swgVertexN )
 				- LUV::Dot( I3, *swgVertexM ) )
-			- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN - I5[2] * volArRatio );
+			- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 
 				/*
 		complex< T > result =
