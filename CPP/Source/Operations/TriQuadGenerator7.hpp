@@ -65,7 +65,7 @@ public:
 	) const
 	{
 		T* vertexDataPtr = vertexData.get();
-		UINT_T* tetraVertexIndexPtr = faceVertexIndex.get();
+		UINT_T* faceVertexIndexPtr = faceVertexIndex.get();
 		T* quadDataPtr = quadData.get();
 
 		for( UINT_T idf = 0; idf < faceCount; ++idf )
@@ -74,15 +74,15 @@ public:
 			UINT_T idx2 = idx1 + 1;
 			UINT_T idx3 = idx1 + 2;
 
-			UINT_T idv1x = 3 * tetraVertexIndexPtr[ idx1 ];
+			UINT_T idv1x = 3 * faceVertexIndexPtr[ idx1 ];
 			UINT_T idv1y = idv1x + 1;
 			UINT_T idv1z = idv1x + 2;
 
-			UINT_T idv2x = 3 * tetraVertexIndexPtr[ idx2 ];
+			UINT_T idv2x = 3 * faceVertexIndexPtr[ idx2 ];
 			UINT_T idv2y = idv2x + 1;
 			UINT_T idv2z = idv2x + 2;
 
-			UINT_T idv3x = 3 * tetraVertexIndexPtr[ idx3 ];
+			UINT_T idv3x = 3 * faceVertexIndexPtr[ idx3 ];
 			UINT_T idv3y = idv3x + 1;
 			UINT_T idv3z = idv3x + 2;
 

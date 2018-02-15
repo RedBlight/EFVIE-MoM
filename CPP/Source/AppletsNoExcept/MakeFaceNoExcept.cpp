@@ -48,6 +48,7 @@ int main( int argc, char *argv[] )
 	);
 
 	faceFile.Save( faceFileName );
+	meshFile.Save( meshFileName );
 
 
 	auto tEnd = chrono::high_resolution_clock::now();

@@ -87,8 +87,8 @@ public:
 				if( itMap == faceMap.end() )
 				{
 					tetraFace[ idf ].t1_ = idt;
-					faceList.push_back( tetraFace[ idf ] );
 					UINT_T faceIndex = faceList.size();
+					faceList.push_back( tetraFace[ idf ] );
 					faceMap[ faceHash[ idf ] ] = faceIndex;
 					tetraFaceIndexPtr[ iVert[ idf ] ] = faceIndex;
 				}

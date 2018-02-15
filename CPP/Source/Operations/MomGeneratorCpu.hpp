@@ -124,7 +124,7 @@ public:
 
 	inline complex< T > GreenRegular( const T& R )
 	{
-		return R == 0 ? (-waveNumberJ_) : ( ( exp( - waveNumberJ_ * R ) - 1.0 ) / R );
+		return R == 0 ? (waveNumberJ_) : ( ( exp( waveNumberJ_ * R ) - 1.0 ) / R );
 	}
 
 	inline T GreenSingular( const T& R )
@@ -310,8 +310,11 @@ public:
 
 		T magA6 = LUV::Dot( dirP0, dirU );
 		T magA7 = magA1 - magA2;
+		
+		//cout << "magP0: " << magP0 << endl;
+		//cout << "edgeGISV: " << ( magAbsD * magA7 - magP0 * magA3 ) << endl;
 
-		edgeGISV += magA6 * ( magAbsD * magA7 - magP0 * magA3 );
+		edgeGISV += magP0 == 0 ? 0 : magA6 * ( magAbsD * magA7 - magP0 * magA3 );
 	}
 
 	inline void GreenVolIntegralFace(
@@ -399,6 +402,12 @@ public:
 		T magP0 = abs( LUV::Dot( vecPM, dirU ) );
 
 		LUV::LuVector3< T > dirP0 = ( vecPM - magLM * dirL ) / magP0;
+
+		//cout << magP0 << endl;
+		//if( isnan( magP0 ) ){ cout << ">>>>NaN @ magP0" << endl; char stopper; cin >> stopper; };
+		//if( isnan( magLM ) ){ cout << ">>>>NaN @ magLM" << endl; char stopper; cin >> stopper; };
+		//if( isnan( LUV::Sum( vecPM ) ) ){ cout << ">>>>NaN @ vecPM" << endl; char stopper; cin >> stopper; };
+		//if( isnan( LUV::Sum( dirL ) ) ){ cout << ">>>>NaN @ dirL" << endl; char stopper; cin >> stopper; };
 		
 		T magR0 = LUV::Length( vecObs - LUV::ProjLine( vecObs, vecRhoM, vecRhoP ) );
 		T magRM = LUV::Length( vecObs - vecRhoM );
@@ -409,8 +418,14 @@ public:
 		T magA1 = atan( ( magP0 * magLP ) / ( magR0S + magAbsD * magRP ) );
 		T magA2 = atan( ( magP0 * magLM ) / ( magR0S + magAbsD * magRM ) );
 		T magA3 = log( ( magRP + magLP ) / ( magRM + magLM ) );
+		
+		//if( isnan( LUV::Sum( dirP0 ) ) ){ cout << ">>>>NaN @ dirP0" << endl; char stopper; cin >> stopper; };
+		//if( isnan( LUV::Sum( dirU ) ) ){ cout << ">>>>NaN @ dirP0" << endl; char stopper; cin >> stopper; };
+		//if( isnan( magA1 ) ){ cout << ">>>>NaN @ magA1" << endl; char stopper; cin >> stopper; };
+		//if( isnan( magA2 ) ){ cout << ">>>>NaN @ magA2" << endl; char stopper; cin >> stopper; };
+		//if( isnan( LUV::Dot( dirP0, dirU ) ) ){ cout << ">>>>NaN @ LUV::Dot( dirP0, dirU )" << endl; char stopper; cin >> stopper; };
 
-		edgeGI_S += LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) );
+		edgeGI_S += magP0 == 0 ? 0 : LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) );
 	}
 
 	inline void GreenSurIntegral(
@@ -425,6 +440,10 @@ public:
 		LUV::LuVector3< T > dirN = -LUV::PlaneNormalP( vecTetra, vecV1, vecV2, vecV3 );
 		LUV::LuVector3< T > vecRho = LUV::ProjPlane( vecObs, vecV1, dirN );
 		T magAbsD = abs( LUV::Dot( vecObs - vecRho, dirN ) );
+
+		
+		if( isnan( LUV::Sum( dirN ) ) ){ cout << ">>>NaN @ dirN" << endl; char stopper; cin >> stopper; };
+		if( isnan( LUV::Sum( vecRho ) ) ){ cout << ">>>NaN @ vecRho" << endl; char stopper; cin >> stopper; };
 
 		GreenSurIntegralEdge( GI_S, dirN, vecRho, magAbsD, vecObs, vecTetra, vecV1, vecV2, vecV3 );
 		GreenSurIntegralEdge( GI_S, dirN, vecRho, magAbsD, vecObs, vecTetra, vecV2, vecV3, vecV1 );
@@ -559,8 +578,10 @@ public:
 			I7 += vecQAw * *vecQA;
 		}
 
+		//cout << faceQuadCount_ << endl;
 		for( UINT_T idqM = 0; idqM < faceQuadCount_; ++idqM )
 		{
+			//cout << "!!!!!!!!MMMM!!!!!!" << endl;
 			addressQM = addressStartQM + 4 * idqM;
 			T* magWM = &faceQuadDataPtr_[ addressQM ];
 			LUV::LuVector3< T >* vecQM = reinterpret_cast< LUV::LuVector3< T >* >( &faceQuadDataPtr_[ addressQM + 1 ] );
@@ -599,6 +620,13 @@ public:
 			
 			I5[ 0 ] += ( magGNSV + magGISV ) * *magWM;
 			I5[ 2 ] += ( magGNSS + magGISS ) * *magWM;
+			
+		
+			if( isnan( abs( magGNSV ) ) ){ cout << ">>NaN @ magGNSV" << endl; char stopper; cin >> stopper; };
+			if( isnan( abs( magGISV ) ) ){ cout << ">>NaN @ magGISV" << endl; char stopper; cin >> stopper; };
+			if( isnan( abs( magGNSS ) ) ){ cout << ">>NaN @ magGNSS" << endl; char stopper; cin >> stopper; };
+			if( isnan( abs( magGISS ) ) ){ cout << ">>NaN @ magGISS" << endl; char stopper; cin >> stopper; };
+			if( isnan( abs( *magWM ) ) ){ cout << ">>NaN @ *magWM" << endl; char stopper; cin >> stopper; };
 		}
 		
 		T factorC = faceAreaM * faceAreaN / ( 9 * tetraVolumeA * tetraVolumeB );
@@ -629,6 +657,24 @@ public:
 		LUV::LuVector3< T > I7( 0, 0, 0 ); // 16 17 18
 		*/
 
+		
+		if( isnan( abs( factor1 ) ) ){ cout << ">NaN @ factor1" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( factor2 ) ) ){ cout << ">NaN @ factor2" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( factor3 ) ) ){ cout << ">NaN @ factor3" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( swgDot ) ) ){ cout << ">NaN @ swgDot" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( tetraVolumeA ) ) ){ cout << ">NaN @ tetraVolumeA" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Sum( I7 ) ) ) ){ cout << ">NaN @ LUV::Sum( I7 )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I6, swgSum ) ) ) ){ cout << ">NaN @ LUV::Dot( I6, swgSum )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I1 ) ) ){ cout << ">NaN @ I1" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Sum( I4 ) ) ) ){ cout << ">NaN @ LUV::Sum( I4 )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I2, *swgVertexN ) ) ) ){ cout << ">NaN @ LUV::Dot( I2, *swgVertexN )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I3, *swgVertexM ) ) ) ){ cout << ">NaN @  LUV::Dot( I3, *swgVertexM )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[0] ) ) ){ cout << ">NaN @ I5[0]" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[1] ) ) ){ cout << ">NaN @ I5[1]" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[2] ) ) ){ cout << ">NaN @ I5[2]" << endl; char stopper; cin >> stopper; };
+
+
+
 		return
 			factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
 				- LUV::Dot( I6, swgSum ) )
@@ -657,19 +703,43 @@ public:
 		complex< T > result;
 
 		result = TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 0 ], idTetraN[ 0 ] );
+		if( isnan( abs( result ) ) )
+		{
+			cout << "NaN @ M = " << idFaceM << ", N = " << idFaceN << ", A = " << idTetraM[ 0 ] << ", B = " << idTetraN[ 0 ] << endl;
+			char stopper;
+			cin >> stopper;
+		}
 
 		if( idTetraN[ 1 ] != -1 )
 		{
 			result -= TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 0 ], idTetraN[ 1 ] );
+			if( isnan( abs( result ) ) )
+			{
+				cout << "NaN @ M = " << idFaceM << ", N = " << idFaceN << ", A = " << idTetraM[ 0 ] << ", B = " << idTetraN[ 1 ] << endl;
+				char stopper;
+				cin >> stopper;
+			}
 		}
 
 		if( idTetraM[ 1 ] != -1 )
 		{
 			result -= TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 1 ], idTetraN[ 0 ] );
+			if( isnan( abs( result ) ) )
+			{
+				cout << "NaN @ M = " << idFaceM << ", N = " << idFaceN << ", A = " << idTetraM[ 1 ] << ", B = " << idTetraN[ 0 ] << endl;
+				char stopper;
+				cin >> stopper;
+			}
 
 			if( idTetraN[ 1 ] != -1 )
 			{
 				result += TetrahedralIntegral( idFaceM, idFaceN, idTetraM[ 1 ], idTetraN[ 1 ] );
+				if( isnan( abs( result ) ) )
+				{
+					cout << "NaN @ M = " << idFaceM << ", N = " << idFaceN << ", A = " << idTetraM[ 1 ] << ", B = " << idTetraN[ 1 ] << endl;
+					char stopper;
+					cin >> stopper;
+				}
 			}
 		}
 		

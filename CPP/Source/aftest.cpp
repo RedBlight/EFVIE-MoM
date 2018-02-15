@@ -504,7 +504,7 @@ void GreenIntegralUnitTest()
 {
 	using namespace std;
 
-	LUV::LuVector3d vecObs( 3.0, 3.0, 3.0 );
+	LUV::LuVector3d vecObs( 5.0, 5.0, 5.0 );
 	LUV::LuVector3d vecV1( 0.0, 0.0, 0.0 );
 	LUV::LuVector3d vecV2( 1.0, 0.0, 0.0 );
 	LUV::LuVector3d vecV3( 0.0, 2.0, 0.0 );
@@ -570,7 +570,7 @@ void GreenIntegralUnitTest()
 		LUV::LuVector3d* vecQ = reinterpret_cast< LUV::LuVector3d* >( &(tetraQuadData.get())[4*idq+1] );
 
 		result += *magW * ( 1 / LUV::Length( vecObs - *vecQ ) );
-		resultVec += *magW * ( ( vecObs - *vecQ ) / LUV::Length( vecObs - *vecQ ) );
+		resultVec += *magW * ( ( *vecQ - vecObs ) / LUV::Length( vecObs - *vecQ ) );
 	}
 
 	resfac = 0;
@@ -585,5 +585,8 @@ void GreenIntegralUnitTest()
 	cout << resfac << endl;
 	cout << result << endl;
 	cout << resultVec << endl;
+
+	cout << "Vol: " << LUV::TetrahedronVolume( vecV1, vecV2, vecV3, vecV4 ) << endl;
+	cout << "Area: " << LUV::TriangleArea( vecV1, vecV2, vecV3 ) << endl;
 }
 

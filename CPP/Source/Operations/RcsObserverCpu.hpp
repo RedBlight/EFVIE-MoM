@@ -159,7 +159,7 @@ public:
 			LUV::LuVector3< T >* vecQ = reinterpret_cast< LUV::LuVector3< T >* >( &tetraQuadDataPtr_[ addressQ + 1 ] );
 
 			T qDot = LUV::Dot( *vecQ, vecObs );
-			complex< T > expPart = exp( qDot * waveNumberJ_ );
+			complex< T > expPart = exp( - qDot * waveNumberJ_ );
 
 			result += ( expPart * *magW ) * ( *vecQ - *swgVertex );
 		}
@@ -167,7 +167,7 @@ public:
 		
 
 		T tetraEps = emPropDataPtr_[ 2 * idTetra ];
-		T contrast = ( tetraEps - 1.0 ) / tetraEps;
+		T contrast = ( 1.0 - tetraEps ) / tetraEps;
 
 		result *= swgCoefDataPtr_[ idFace ] * ( contrast * faceArea / ( 3.0 * tetraVolume ) );
 
@@ -308,7 +308,7 @@ public:
 		//cout << endl;
 
 
-		rcsDataPtr_[ idObs ] = pow( LUV::Length( result ), 2 );
+		rcsDataPtr_[ idObs ] = 4.0 * acos(-1.0) * pow( LUV::Length( result ), 2 ) / ( waveNumber_ * waveNumber_ ); 
 	}
 
 	void PartialGenerate( const UINT_T& idObsStart, const UINT_T& idObsEnd )
