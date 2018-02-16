@@ -1,7 +1,7 @@
-[ faceCount1, tetraCount1, faceVertexIndex, faceTetraIndex, tetraFaceIndex ] = LoadTetraFace( "cube100" );
-[ vertexCount, tetraCount2, vertexData, tetraVertexIndex ] = LoadTetraMesh( "cube100" );
-[ tetraCount3, tetraQuadCount, tetraQuadData ] = LoadTetraQuad( "cube100" );
-[ faceCount2, faceQuadCount, faceQuadData ] = LoadFaceQuad( "cube100" );
+[ faceCount1, tetraCount1, faceVertexIndex, faceTetraIndex, tetraFaceIndex ] = LoadTetraFace( "spher378r1" );
+[ vertexCount, tetraCount2, vertexData, tetraVertexIndex ] = LoadTetraMesh( "spher378r1" );
+[ tetraCount3, tetraQuadCount, tetraQuadData ] = LoadTetraQuad( "spher378r1" );
+[ faceCount2, faceQuadCount, faceQuadData ] = LoadFaceQuad( "spher378r1" );
 
 surfSelector = repelem( faceTetraIndex(:,2) == 2^64 - 1, faceQuadCount );
 
@@ -22,7 +22,7 @@ sum( tetraQuadData(:,1) ...
     .* tetraQuadData(:,4) .* tetraQuadData(:,4) ...
 ) % must be 0.000578704
 
-[ faceCount3, momMatrix ] = LoadMomMatrix( "cube100" );
+[ faceCount3, momMatrix ] = LoadMomMatrix( "spher378r1" );
 figure();
 h = pcolor( abs( momMatrix ) );
 set(h, 'EdgeColor', 'none');

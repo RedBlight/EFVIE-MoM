@@ -113,23 +113,52 @@ public:
 		/**
 			Think of a different way to alleviate this extra copy below.
 		**/
+		UINT_T idSort = 0;
 		for( UINT_T idf = 0; idf < faceCount; ++idf )
 		{
-			UINT_T iVert[3];
-			iVert[0] = 3 * idf;
-			iVert[1] = iVert[0] + 1;
-			iVert[2] = iVert[0] + 2;
+			if( faceList[ idf ].t2_ == -1 )
+			{
+				UINT_T iVert[3];
+				iVert[0] = 3 * idSort;
+				iVert[1] = iVert[0] + 1;
+				iVert[2] = iVert[0] + 2;
 
-			UINT_T iTet[2];
-			iTet[0] = 2 * idf;
-			iTet[1] = iTet[0] + 1;
+				UINT_T iTet[2];
+				iTet[0] = 2 * idSort;
+				iTet[1] = iTet[0] + 1;
 
-			faceVertexIndexPtr[ iVert[0] ] = faceList[ idf ].v1_;
-			faceVertexIndexPtr[ iVert[1] ] = faceList[ idf ].v2_;
-			faceVertexIndexPtr[ iVert[2] ] = faceList[ idf ].v3_;
+				faceVertexIndexPtr[ iVert[0] ] = faceList[ idf ].v1_;
+				faceVertexIndexPtr[ iVert[1] ] = faceList[ idf ].v2_;
+				faceVertexIndexPtr[ iVert[2] ] = faceList[ idf ].v3_;
 
-			faceTetraIndexPtr[ iTet[0] ] = faceList[ idf ].t1_;
-			faceTetraIndexPtr[ iTet[1] ] = faceList[ idf ].t2_;
+				faceTetraIndexPtr[ iTet[0] ] = faceList[ idf ].t1_;
+				faceTetraIndexPtr[ iTet[1] ] = faceList[ idf ].t2_;
+
+				++idSort;
+			}
+		}
+		for( UINT_T idf = 0; idf < faceCount; ++idf )
+		{
+			if( faceList[ idf ].t2_ != -1 )
+			{
+				UINT_T iVert[3];
+				iVert[0] = 3 * idSort;
+				iVert[1] = iVert[0] + 1;
+				iVert[2] = iVert[0] + 2;
+
+				UINT_T iTet[2];
+				iTet[0] = 2 * idSort;
+				iTet[1] = iTet[0] + 1;
+
+				faceVertexIndexPtr[ iVert[0] ] = faceList[ idf ].v1_;
+				faceVertexIndexPtr[ iVert[1] ] = faceList[ idf ].v2_;
+				faceVertexIndexPtr[ iVert[2] ] = faceList[ idf ].v3_;
+
+				faceTetraIndexPtr[ iTet[0] ] = faceList[ idf ].t1_;
+				faceTetraIndexPtr[ iTet[1] ] = faceList[ idf ].t2_;
+
+				++idSort;
+			}
 		}
 	}
 

@@ -5,8 +5,8 @@ close all;
 geom1 = "spher64r1";
 geom2 = "spher70r1";
 geom3 = "spher83r1";
-%geom4 = "spher111r1";
-%geom5 = "spher378r1";
+geom4 = "spher111r1";
+geom5 = "spher378r1";
 
 ruleN = "eps2";
 waveN = "PlaneZinYpol";
@@ -15,14 +15,14 @@ obspN = "xycircular181";
 ObserveRCS( geom1, ruleN, waveN, obspN );
 ObserveRCS( geom2, ruleN, waveN, obspN );
 ObserveRCS( geom3, ruleN, waveN, obspN );
-%ObserveRCS( geom4, ruleN, waveN, obspN );
-%ObserveRCS( geom5, ruleN, waveN, obspN );
+ObserveRCS( geom4, ruleN, waveN, obspN );
+ObserveRCS( geom5, ruleN, waveN, obspN );
 
 rcs1 = ReadRcsResult( geom1 );
 rcs2 = ReadRcsResult( geom2 );
 rcs3 = ReadRcsResult( geom3 );
-%rcs4 = ReadRcsResult( geom4 );
-%rcs5 = ReadRcsResult( geom5 );
+rcs4 = ReadRcsResult( geom4 );
+rcs5 = ReadRcsResult( geom5 );
 
 T = readtable( "RCSs.dat" );
 rcs0 = table2array( T(:,2) );
