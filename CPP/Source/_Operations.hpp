@@ -3,6 +3,7 @@
 
 #include <MomGenerator.hpp>
 #include <MomGeneratorCpu.hpp>
+#include <MomGeneratorCpuRdc.hpp>
 #include <MomSolver.hpp>
 #include <RhsGenerator.hpp>
 #include <RhsGeneratorCpu.hpp>

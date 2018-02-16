@@ -67,6 +67,7 @@
     <ClInclude Include="..\Source\LuVector\LuVector_Unroll.hpp" />
     <ClInclude Include="..\Source\Operations\MomGenerator.hpp" />
     <ClInclude Include="..\Source\Operations\MomGeneratorCpu.hpp" />
+    <ClInclude Include="..\Source\Operations\MomGeneratorCpuRdc.hpp" />
     <ClInclude Include="..\Source\Operations\MomSolver.hpp" />
     <ClInclude Include="..\Source\Operations\RcsObserver.hpp" />
     <ClInclude Include="..\Source\Operations\RcsObserverCpu.hpp" />

@@ -1,7 +1,10 @@
-[ faceCount1, tetraCount1, faceVertexIndex, faceTetraIndex, tetraFaceIndex ] = LoadTetraFace( "spher378r1" );
-[ vertexCount, tetraCount2, vertexData, tetraVertexIndex ] = LoadTetraMesh( "spher378r1" );
-[ tetraCount3, tetraQuadCount, tetraQuadData ] = LoadTetraQuad( "spher378r1" );
-[ faceCount2, faceQuadCount, faceQuadData ] = LoadFaceQuad( "spher378r1" );
+
+modelName = "cube100";
+
+[ faceCount1, tetraCount1, faceVertexIndex, faceTetraIndex, tetraFaceIndex ] = LoadTetraFace( modelName );
+[ vertexCount, tetraCount2, vertexData, tetraVertexIndex ] = LoadTetraMesh( modelName );
+[ tetraCount3, tetraQuadCount, tetraQuadData ] = LoadTetraQuad( modelName );
+[ faceCount2, faceQuadCount, faceQuadData ] = LoadFaceQuad( modelName );
 
 surfSelector = repelem( faceTetraIndex(:,2) == 2^64 - 1, faceQuadCount );
 
@@ -22,8 +25,22 @@ sum( tetraQuadData(:,1) ...
     .* tetraQuadData(:,4) .* tetraQuadData(:,4) ...
 ) % must be 0.000578704
 
-[ faceCount3, momMatrix ] = LoadMomMatrix( "spher378r1" );
-figure();
+[ faceCount3, momMatrix ] = LoadMomMatrix( modelName );
+fig = figure();
 h = pcolor( abs( momMatrix ) );
 set(h, 'EdgeColor', 'none');
 axis equal tight square;
+ax = fig.CurrentAxes;
+ax.YDir = 'reverse';
+ax.XAxisLocation = 'top';
+
+[ faceCount4, rhsVector ] = LoadRhs( modelName );
+figure();
+plot( abs( rhsVector ) );
+
+[ faceCount5, coefVector ] = LoadCoef( modelName );
+figure();
+plot( abs( coefVector ) );
+
+% figure();
+% plot( abs( momMatrix * coefVector ) );

@@ -674,14 +674,36 @@ public:
 		if( isnan( abs( I5[2] ) ) ){ cout << ">NaN @ I5[2]" << endl; char stopper; cin >> stopper; };
 
 
+		// !!! book formula
+		//return
+		//	factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
+		//		- LUV::Dot( I6, swgSum ) )
+		//	- factor2 * ( swgDot * I1 + LUV::Sum( I4 )
+		//		- LUV::Dot( I2, *swgVertexN )
+		//		- LUV::Dot( I3, *swgVertexM ) )
+		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
+		// !!!
+
+
+		//return
+		//	( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
+		//		- LUV::Dot( I6, swgSum ) ) : 0 );
 
 		return
-			factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
-				- LUV::Dot( I6, swgSum ) )
+			( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
+				- LUV::Dot( I6, swgSum ) ) : 0 )
 			- factor2 * ( swgDot * I1 + LUV::Sum( I4 )
 				- LUV::Dot( I2, *swgVertexN )
 				- LUV::Dot( I3, *swgVertexM ) )
 			- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
+
+		//return
+		//	( idFaceM == idFaceN ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
+		//		- LUV::Dot( I6, swgSum ) ) : 0 )
+		//	- factor2 * ( swgDot * I1 + LUV::Sum( I4 )
+		//		- LUV::Dot( I2, *swgVertexN )
+		//		- LUV::Dot( I3, *swgVertexM ) )
+		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 
 				/*
 		complex< T > result =

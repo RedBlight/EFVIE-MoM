@@ -82,8 +82,9 @@ int main( int argc, char *argv[] )
 	MomMatrixFile< FLOAT_T > momFile;
 	momFile.Initialize( faceFile.faceCount_ );
 
-	MomGeneratorCpu< FLOAT_T > momGenerator(
+	MomGeneratorCpuRdc< FLOAT_T > momGenerator(
 		incWave->WaveNumber(),
+		meshFile.tetraCount_,
 		faceFile.faceCount_,
 		tetqFile.quadCount_,
 		triqFile.quadCount_,
@@ -97,6 +98,24 @@ int main( int argc, char *argv[] )
 		faceFile.tetraFaceIndex_,
 		momFile.momData_
 	);
+
+	
+
+	//MomGeneratorCpu< FLOAT_T > momGenerator(
+	//	incWave->WaveNumber(),
+	//	faceFile.faceCount_,
+	//	tetqFile.quadCount_,
+	//	triqFile.quadCount_,
+	//	meshFile.vertexData_,
+	//	tetqFile.quadData_,
+	//	triqFile.quadData_,
+	//	propFile.emPropData_,
+	//	meshFile.tetraVertexIndex_,
+	//	faceFile.faceVertexIndex_,
+	//	faceFile.faceTetraIndex_,
+	//	faceFile.tetraFaceIndex_,
+	//	momFile.momData_
+	//);
 
 	//cout << "A" << endl;
 	momGenerator.ThreadedGenerate();
