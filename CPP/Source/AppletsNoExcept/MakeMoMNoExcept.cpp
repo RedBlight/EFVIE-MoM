@@ -118,7 +118,9 @@ int main( int argc, char *argv[] )
 	//);
 
 	//cout << "A" << endl;
+
 	momGenerator.ThreadedGenerate();
+	//momGenerator.Generate();
 
 	momFile.Save( momFileName );
 
