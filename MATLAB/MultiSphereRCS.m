@@ -2,7 +2,7 @@
 % clear all;
 % close all;
 
-N = 8;
+N = 5;
 
 geom(1) = "sphere1r1p6t";
 geom(2) = "sphere1r2p24t";
@@ -15,17 +15,18 @@ geom(8) = "sphere1r8p2678t";
 
 ruleN = "eps2";
 waveN = "PlaneZinYpol";
-obspN = "sphere45x90";
+obspN = "xycircular181";
 
-%rcs = zeros( 181, N );
+rcs = zeros( 181, N );
 
 for k = 1:N
-	%ObserveRCS( geom( k ), ruleN, waveN, obspN );
-	rcsRes = ReadRcsResult( geom( k ) );
-	fig = figure();
-	h = pcolor( reshape( rcsRes, [91,46] ) );
-	set(h, 'EdgeColor', 'none');
-	axis equal tight;
+	ObserveRCS( geom( k ), ruleN, waveN, obspN );
+    rcs( :, k ) = ReadRcsResult( geom( k ) );
+%	rcsRes = ReadRcsResult( geom( k ) );
+%	fig = figure();
+%	h = pcolor( reshape( rcsRes, [91,46] ) );
+%	set(h, 'EdgeColor', 'none');
+%	axis equal tight;
 % 	ax = fig.CurrentAxes;
 % 	ax.YDir = 'reverse';
 % 	ax.XAxisLocation = 'top';

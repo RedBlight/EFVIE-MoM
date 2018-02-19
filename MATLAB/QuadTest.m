@@ -1,5 +1,11 @@
 
-modelName = "cube100";
+modelName = "sphere1r2p24t";
+
+ruleN = "eps2";
+waveN = "PlaneZinYpol";
+obspN = "xycircular181";
+
+ObserveRCS( modelName, ruleN, waveN, obspN );
 
 [ faceCount1, tetraCount1, faceVertexIndex, faceTetraIndex, tetraFaceIndex ] = LoadTetraFace( modelName );
 [ vertexCount, tetraCount2, vertexData, tetraVertexIndex ] = LoadTetraMesh( modelName );
@@ -34,13 +40,13 @@ ax = fig.CurrentAxes;
 ax.YDir = 'reverse';
 ax.XAxisLocation = 'top';
 
-[ faceCount4, rhsVector ] = LoadRhs( modelName );
-figure();
-plot( abs( rhsVector ) );
-
-[ faceCount5, coefVector ] = LoadCoef( modelName );
-figure();
-plot( abs( coefVector ) );
+% [ faceCount4, rhsVector ] = LoadRhs( modelName );
+% figure();
+% plot( abs( rhsVector ) );
+% 
+% [ faceCount5, coefVector ] = LoadCoef( modelName );
+% figure();
+% plot( abs( coefVector ) );
 
 % figure();
 % plot( abs( momMatrix * coefVector ) );

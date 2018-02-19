@@ -689,8 +689,12 @@ public:
 		complex< T > j( 0, 1 );
 
 		complex< T > factor1 = ( -j ) * ( factorC / ( waveNumber_ * c0_ * eps0_ * epsRB ) );
-		complex< T > factor2 = j * ( waveNumber_ * c0_ * mu0_ * contrastB * factorC );
-		complex< T > factor3 = ( -j ) * ( 9 * factorC * contrastB / ( waveNumber_ * c0_ * eps0_ ) );
+		complex< T > factor2 = (1.0) * j * ( waveNumber_ * c0_ * mu0_ * contrastB * factorC ) / ( 4.0 * acos(-1.0) );
+		complex< T > factor3 = (1.0) * ( -j ) * ( 9.0 * factorC * contrastB / ( waveNumber_ * c0_ * eps0_ ) ) / ( 4.0 * acos(-1.0) );
+
+		//complex< T > factor1 = ( -j ) * ( factorC / ( waveNumber_ * c0_ * eps0_ * epsRB ) );
+		//complex< T > factor2 = j * ( waveNumber_ * c0_ * mu0_ * contrastB * factorC );
+		//complex< T > factor3 = ( -j ) * ( 9 * factorC * contrastB / ( waveNumber_ * c0_ * eps0_ ) );
 
 		T volArRatioM = tetraVolumeA / faceAreaM;
 		T volArRatioN = tetraVolumeB / faceAreaN;
@@ -771,10 +775,15 @@ public:
 		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 		// !!!
 
-
+		// !!! LAST WORKING
 		//return
 		//	( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
-		//		- LUV::Dot( I6, swgSum ) ) : 0 );
+		//		- LUV::Dot( I6, swgSum ) ) : 0 )
+		//	- factor2 * ( swgDot * I1 + LUV::Sum( I4 )
+		//		- LUV::Dot( I2, *swgVertexN )
+		//		- LUV::Dot( I3, *swgVertexM ) )
+		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
+		// !!!
 
 		return
 			( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
@@ -783,6 +792,19 @@ public:
 				- LUV::Dot( I2, *swgVertexN )
 				- LUV::Dot( I3, *swgVertexM ) )
 			- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
+
+
+		//return
+		//	( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
+		//		- LUV::Dot( I6, swgSum ) ) : 0 );
+
+
+
+		//return
+		//	- factor3 * ( - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
+
+		//return
+		//	- factor3 * ( I5[2] * volArRatio );
 
 		//return
 		//	( idFaceM == idFaceN ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )

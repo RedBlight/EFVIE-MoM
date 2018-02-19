@@ -167,7 +167,7 @@ public:
 		
 
 		T tetraEps = emPropDataPtr_[ 2 * idTetra ];
-		T contrast = ( 1.0 - tetraEps ) / tetraEps;
+		T contrast = ( tetraEps - 1.0 ) / tetraEps;
 
 		result *= swgCoefDataPtr_[ idFace ] * ( contrast * faceArea / ( 3.0 * tetraVolume ) );
 

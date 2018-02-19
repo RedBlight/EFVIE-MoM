@@ -21,13 +21,13 @@ function ObserveRCS( geomN, ruleN, waveN, obspN )
     coefF = " " + dataN + geomN + ".coef";
     rsltF = " " + dataN + geomN + ".rcsresult";
 
-    %system( "MakeMesh.exe" + unvmF + meshF );
-    %system( "MakeFace.exe" + meshF + faceF );
-    %system( "Electrify.exe" + meshF + ruleF + propF );
-    %system( "MakeQuad.exe" + meshF + faceF + tetqF + triqF );
-    %system( "MakeRHS.exe" + meshF + faceF + tetqF + waveF + rhsvF );
-    %system( "MakeMoM.exe" + meshF + faceF + tetqF + triqF + propF + waveF + mommF );
-    %system( "SolveMoM.exe" + mommF + rhsvF + coefF );
+    system( "MakeMesh.exe" + unvmF + meshF );
+    system( "MakeFace.exe" + meshF + faceF );
+    system( "Electrify.exe" + meshF + ruleF + propF );
+    system( "MakeQuad.exe" + meshF + faceF + tetqF + triqF );
+    system( "MakeRHS.exe" + meshF + faceF + tetqF + waveF + rhsvF );
+    system( "MakeMoM.exe" + meshF + faceF + tetqF + triqF + propF + waveF + mommF );
+    system( "SolveMoM.exe" + mommF + rhsvF + coefF );
     system( "ObserveRCS.exe" + meshF + faceF + tetqF + propF + waveF + coefF + obspF + rsltF );
 
 end
