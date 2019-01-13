@@ -26,3 +26,4 @@ Incident Plane Wave Direction = x-axis (phi = 0)
 Incident Plane Wave Magnitude = 1  
 Incident Plane Wave Polarization = (0,1,1) / sqrt(2)  
 
+Current configuration in the "MATLAB\TEST\SW\Test_SingleFreq_Phi.m" file will generate these results, which then can be displayed on MATLAB, or exported to POSTFEKO.
