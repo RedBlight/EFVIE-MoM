@@ -16,10 +16,13 @@ See my internship diary (in Turkish) for more information.
 
 Scattering from a unit sphere:  
 <img src="img/result.png">  
-Tetrahedron count = 1110  
+Tetrahedron Count = 1110  
 Basis Function Count = 2349  
 Frequency = 30 MHz  
-Electrical Size = 0.1λ  
+Electrical Size = 0.2λ  
 Relative Permittivity = 50  
-Dielectric Loss Tangent = 0.3  
-Plane Wave Incident Direction = x-axis (phi = 0)  
+Dielectric Loss Tangent = 0.3
+Incident Plane Wave Direction = x-axis (phi = 0)
+Incident Plane Wave Magnitude = 1
+Incident Plane Wave Polarization = (0,1,1) / sqrt(2)
+
