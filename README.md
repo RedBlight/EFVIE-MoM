@@ -6,6 +6,20 @@ Unlike my SBR-PO implementation, this is a full wave solution and it makes no si
 
 Here is how computationally intensive this is: when you increase the frequency of the incident wave 2 times, the amount of tetrahedrons in the object model has to increase 2^3 times, and so the MoM matrix grows (2^3)^2 times, which we have to solve in order to get the results. It's very easy to get out of time and memory bounds as the object in analysis gets electrically large.
 
-I attempted to do this in a 4-week internship at GTU. Although I have completed every stage of it, there are some bugs in it's current state and will fix them in a later time.
+This is an experimental project and current working version is only in MATLAB.
+
+Current working version resides in the folder "MATLAB\TEST\SW".
 
 See my internship diary (in Turkish) for more information.
+
+## Here are some results:
+
+Scattering from a unit sphere:  
+<img src="img/result.png">  
+Tetrahedron count = 1110  
+Basis Function Count = 2349  
+Frequency = 30 MHz  
+Electrical Size = 0.1λ  
+Relative Permittivity = 50  
+Dielectric Loss Tangent = 0.3  
+Plane Wave Incident Direction = x-axis (phi = 0)  

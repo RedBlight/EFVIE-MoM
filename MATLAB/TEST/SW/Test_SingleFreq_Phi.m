@@ -6,7 +6,7 @@ tic;
 
 %%% INPUT %%%
 
-geomName = "sphere1r4p278t";
+geomName = "sphere1r6p1110t";
 epsR = 50 * ( 1 - 1i * 0.3 );
 
 obsRho = 3;
@@ -80,6 +80,8 @@ disp('I2 I3'); toc; tic;
 	tetraMidPoint ...
 );
 
+disp('momTerm1'); toc; tic;
+
 [ momTerm2 ] = GenerateMoM_Term2( ...
 	angFreq, faceCount, ...
 	vertexList, swgVertexIndex, faceTetraIndex, ...
@@ -88,11 +90,15 @@ disp('I2 I3'); toc; tic;
 	I2, I3TT ...
 );
 
+disp('momTerm2'); toc; tic;
+
 [ momTerm3 ] = GenerateMoM_Term3( ...
 	faceCount, faceTetraIndex, ...
 	faceArea, tetraVol, kontrast, kontrastDiff, ...
 	I3TT, I3TS, I3ST, I3SS ...
 );
+
+disp('momTerm3'); toc; tic;
 
 momMatrix = momTerm1 + momTerm2 + momTerm3;
 
