@@ -1,0 +1,13 @@
+function [ faceArea ] = GenerateFaceArea( faceCount, vertexList, faceVertexIndex )
+	
+	faceArea = zeros( 1, faceCount );
+	
+	for k = 1 : faceCount
+		faceArea( k ) = M.TriArea( ...
+			vertexList( :, faceVertexIndex( 1, k ) ), ...
+			vertexList( :, faceVertexIndex( 2, k ) ), ...
+			vertexList( :, faceVertexIndex( 3, k ) ) ...
+		);
+	end
+	
+end

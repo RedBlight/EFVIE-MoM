@@ -99,6 +99,22 @@ int main( int argc, char *argv[] )
 		momFile.momData_
 	);
 
+	//MomGeneratorCpu< FLOAT_T > momGenerator(
+	//	incWave->WaveNumber(),
+	//	faceFile.faceCount_,
+	//	tetqFile.quadCount_,
+	//	triqFile.quadCount_,
+	//	meshFile.vertexData_,
+	//	tetqFile.quadData_,
+	//	triqFile.quadData_,
+	//	propFile.emPropData_,
+	//	meshFile.tetraVertexIndex_,
+	//	faceFile.faceVertexIndex_,
+	//	faceFile.faceTetraIndex_,
+	//	faceFile.tetraFaceIndex_,
+	//	momFile.momData_
+	//);
+
 	
 
 	//MomGeneratorCpu< FLOAT_T > momGenerator(
@@ -119,8 +135,8 @@ int main( int argc, char *argv[] )
 
 	//cout << "A" << endl;
 
-	momGenerator.ThreadedGenerate();
-	//momGenerator.Generate();
+	//momGenerator.ThreadedGenerate();
+	momGenerator.Generate();
 
 	momFile.Save( momFileName );
 

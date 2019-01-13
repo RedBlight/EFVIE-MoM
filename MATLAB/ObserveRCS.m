@@ -29,6 +29,7 @@ function ObserveRCS( geomN, ruleN, waveN, obspN )
     system( "MakeMoM.exe" + meshF + faceF + tetqF + triqF + propF + waveF + mommF );
     system( "SolveMoM.exe" + mommF + rhsvF + coefF );
     system( "ObserveRCS.exe" + meshF + faceF + tetqF + propF + waveF + coefF + obspF + rsltF );
+	disp(x);
 
 end
 

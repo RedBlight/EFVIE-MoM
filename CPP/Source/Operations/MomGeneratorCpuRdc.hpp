@@ -170,7 +170,7 @@ public:
 
 	inline complex< T > GreenRegular( const T& R )
 	{
-		return R == 0 ? (waveNumberJ_) : ( ( exp( waveNumberJ_ * R ) - 1.0 ) / R );
+		return R == 0 ? (-waveNumberJ_) : ( ( exp( -waveNumberJ_ * R ) - 1.0 ) / R );
 	}
 
 	inline T GreenSingular( const T& R )
@@ -239,8 +239,11 @@ public:
 		T magA6 = LUV::Dot( dirP0, dirU );
 		T magA7 = magA1 - magA2;
 
-		edgeGIVV += magA6 * ( magAbsD * magA7 - magP0 * magA3 );
-		edgeGDVV += magA6 * ( magA3 * magA4 + magA5 - magAbsDC * magA7 );
+		
+		//if( ( magP0 / LUV::Length( vecPM ) < 1E-12 ) ){ cout << ">>>>NaN @ VolVol" << endl; char stopper; cin >> stopper; };
+
+		edgeGIVV += ( magP0 / LUV::Length( vecM ) < 1E-7 ) ? 0 : magA6 * ( magAbsD * magA7 - magP0 * magA3 );
+		edgeGDVV += ( magP0 / LUV::Length( vecM ) < 1E-7 ) ? 0 : magA6 * ( magA3 * magA4 + magA5 - magAbsDC * magA7 );
 	}
 
 	inline void GreenVolVolIntegralFace(
@@ -360,7 +363,10 @@ public:
 		//cout << "magP0: " << magP0 << endl;
 		//cout << "edgeGISV: " << ( magAbsD * magA7 - magP0 * magA3 ) << endl;
 
-		edgeGISV += magP0 == 0 ? 0 : magA6 * ( magAbsD * magA7 - magP0 * magA3 );
+		//if( ( magP0 / LUV::Length( vecPM ) < 1E-12 ) ){ cout << ">>>>NaN @ Vol " << magA6 * ( magAbsD * magA7 - magP0 * magA3 ) << endl; char stopper; cin >> stopper; };
+
+		edgeGISV += ( magP0 / LUV::Length( vecM ) < 1E-7 ) ? 0 : magA6 * ( magAbsD * magA7 - magP0 * magA3 );
+
 	}
 
 	inline void GreenVolIntegralFace(
@@ -470,7 +476,9 @@ public:
 		//if( isnan( magA2 ) ){ cout << ">>>>NaN @ magA2" << endl; char stopper; cin >> stopper; };
 		//if( isnan( LUV::Dot( dirP0, dirU ) ) ){ cout << ">>>>NaN @ LUV::Dot( dirP0, dirU )" << endl; char stopper; cin >> stopper; };
 
-		edgeGI_S += magP0 == 0 ? 0 : LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) );
+		//if( ( magP0 / LUV::Length( vecPM ) < 1E-12 ) ){ cout << ">>>>NaN @ Sur " << LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) ) << endl; char stopper; cin >> stopper; };
+
+		edgeGI_S += ( magP0 / LUV::Length( vecM ) < 1E-7 ) ? 0 : LUV::Dot( dirP0, dirU ) * ( magP0 * magA3 - magAbsD * ( magA1 - magA2 ) );
 	}
 
 	inline void GreenSurIntegral(
@@ -485,7 +493,10 @@ public:
 		LUV::LuVector3< T > vecRho = LUV::ProjPlane( vecObs, vecV1, dirN );
 		T magAbsD = abs( LUV::Dot( vecObs - vecRho, dirN ) );
 
-		
+		if( isnan( LUV::Sum( dirN ) ) ){ cout << vecV1 << endl; char stopper; cin >> stopper; };
+		if( isnan( LUV::Sum( dirN ) ) ){ cout << vecV2 << endl; char stopper; cin >> stopper; };
+		if( isnan( LUV::Sum( dirN ) ) ){ cout << vecV3 << endl; char stopper; cin >> stopper; };
+
 		if( isnan( LUV::Sum( dirN ) ) ){ cout << ">>>NaN @ dirN" << endl; char stopper; cin >> stopper; };
 		if( isnan( LUV::Sum( vecRho ) ) ){ cout << ">>>NaN @ vecRho" << endl; char stopper; cin >> stopper; };
 
@@ -550,7 +561,15 @@ public:
 		LUV::LuVector3< T >* swgVertexM = reinterpret_cast< LUV::LuVector3< T >* >( &vertexDataPtr_[ 3 * idSwgVertexM ] );
 		LUV::LuVector3< T >* swgVertexN = reinterpret_cast< LUV::LuVector3< T >* >( &vertexDataPtr_[ 3 * idSwgVertexN ] );
 
-		/*
+		/**/
+		//cout << "## MOM ELEM ANALYSIS ##" << endl;
+		//cout << "FM:" << idFaceM << " FN:" << idFaceN << " TA:" << idTetraA << " TB:" << idTetraB << endl;
+		//cout << "AreaM:" << faceAreaM << " AreaN:" << faceAreaN << " VolA:" << tetraVolumeA << " VolB:" << tetraVolumeB << endl;
+		//cout << "SwgVertexM:" << idSwgVertexM << " SwgVertexN:" << idSwgVertexN << endl;
+		//cout << "##" << endl << endl;
+		/**/
+
+		/**/
 		complex< T > I1( 0, 0 );
 		LUV::LuVector3< complex< T > > I2( ( 0, 0 ), ( 0, 0 ), ( 0, 0 ) );
 		LUV::LuVector3< complex< T > > I3( ( 0, 0 ), ( 0, 0 ), ( 0, 0 ) );
@@ -567,10 +586,7 @@ public:
 		UINT_T addressQB = 0;
 		UINT_T addressQM = 0;
 		UINT_T addressQN = 0;
-		*/
 
-
-		/*
 		for( UINT_T idqA = 0; idqA < tetraQuadCount_; ++idqA )
 		{
 			addressQA = addressStartQA + 4 * idqA;
@@ -676,7 +692,7 @@ public:
 			if( isnan( abs( magGISS ) ) ){ cout << ">>NaN @ magGISS" << endl; char stopper; cin >> stopper; };
 			if( isnan( abs( *magWM ) ) ){ cout << ">>NaN @ *magWM" << endl; char stopper; cin >> stopper; };
 		}
-		*/
+		/**/
 		
 		T factorC = faceAreaM * faceAreaN / ( 9 * tetraVolumeA * tetraVolumeB );
 		T epsRA = emPropDataPtr_[ 2 * idTetraA ];
@@ -710,7 +726,8 @@ public:
 		LUV::LuVector3< T > I7( 0, 0, 0 ); // 16 17 18
 		*/
 
-		/*
+		
+		/* Opened
 		complex< T > I1_ = P1_[ IdSymTetra( idTetraA, idTetraB ) ];
 		LUV::LuVector3c< T > I2_ = P2_[ idTetraA * tetraCount_ + idTetraB ];
 		LUV::LuVector3c< T > I3_ = P2_[ idTetraB * tetraCount_ + idTetraA ];
@@ -725,44 +742,56 @@ public:
 		*/
 
 
-		complex< T > I1 = P1_[ IdSymTetra( idTetraA, idTetraB ) ];
-		LUV::LuVector3c< T > I2 = P2_[ idTetraA * tetraCount_ + idTetraB ];
-		LUV::LuVector3c< T > I3 = P2_[ idTetraB * tetraCount_ + idTetraA ];
-		LUV::LuVector3c< T > I4 = P3_[ IdSymTetra( idTetraA, idTetraB ) ];
-		LUV::LuVector3c< T > I5( 
+		///* Reduced
+		I1 = P1_[ IdSymTetra( idTetraA, idTetraB ) ];
+		I2 = P2_[ idTetraA * tetraCount_ + idTetraB ];
+		I3 = P2_[ idTetraB * tetraCount_ + idTetraA ];
+		I4 = P3_[ IdSymTetra( idTetraA, idTetraB ) ];
+		I5 = LUV::LuVector3c< T >( 
 			P4_[ idFaceM * tetraCount_ + idTetraB ],
 			P4_[ idFaceN * tetraCount_ + idTetraA ],
 			P5_[ IdSymFace( idFaceM, idFaceN ) ]
 		);
-		LUV::LuVector3< T > I6 = P6_[ idTetraA ];
-		LUV::LuVector3< T > I7 = P7_[ idTetraA ];
-
+		I6 = P6_[ idTetraA ];
+		I7 = P7_[ idTetraA ];
+		//*/
 
 		//cout << idTetraA << " " << idTetraB << " " << IdSymTetra( idTetraA, idTetraB ) << " " << IdSymTetra( idTetraB, idTetraA ) << endl;
 		//cout << idFaceM << " " << idFaceN << " " << IdSymFace( idFaceM, idFaceN ) << " " << IdSymFace( idFaceN, idFaceM ) << endl;
 		//if( I1_ != I1 ){ cout << "I1 != I1_ !!! I1 = " << I1 << ", I1_ = " << I1_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I2_[0] - I2[0])/I2[0]) > 1e-5 || abs((I2_[1] - I2[1])/I2[1]) > 1e-5 || abs((I2_[2] - I2[2])/I2[2]) > 1e-5 ){ cout << "I2 != I2_ !!! I2 = " << I2 << ", I2_ = " << I2_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I3_[0] - I3[0])/I3[0]) > 1e-5 || abs((I3_[1] - I3[1])/I3[1]) > 1e-5 || abs((I3_[2] - I3[2])/I3[2]) > 1e-5 ){ cout << "I3 != I3_ !!! I3 = " << I3 << ", I3_ = " << I3_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I4_[0] - I4[0])/I4[0]) > 1e-5 || abs((I4_[1] - I4[1])/I4[1]) > 1e-5 || abs((I4_[2] - I4[2])/I4[2]) > 1e-5 ){ cout << "I4 != I4_ !!! I4 = " << I4 << ", I4_ = " << I4_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I5_[0] - I5[0])/I5[0]) > 1e-5 || abs((I5_[1] - I5[1])/I5[1]) > 1e-5 || abs((I5_[2] - I5[2])/I5[2]) > 1e-5 ){ cout << "I5 != I5_ !!! I5 = " << I5 << ", I5_ = " << I5_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I6_[0] - I6[0])/I6[0]) > 1e-5 || abs((I6_[1] - I6[1])/I6[1]) > 1e-5 || abs((I6_[2] - I6[2])/I6[2]) > 1e-5 ){ cout << "I6 != I6_ !!! I6 = " << I6 << ", I6_ = " << I6_ << endl; char stopper; cin >> stopper; };
-		//if( abs((I7_[0] - I7[0])/I7[0]) > 1e-5 || abs((I7_[1] - I7[1])/I7[1]) > 1e-5 || abs((I7_[2] - I7[2])/I7[2]) > 1e-5 ){ cout << "I7 != I7_ !!! I7 = " << I7 << ", I7_ = " << I7_ << endl; char stopper; cin >> stopper; };
 
-		//
-		//if( isnan( abs( factor1 ) ) ){ cout << ">NaN @ factor1" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( factor2 ) ) ){ cout << ">NaN @ factor2" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( factor3 ) ) ){ cout << ">NaN @ factor3" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( swgDot ) ) ){ cout << ">NaN @ swgDot" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( tetraVolumeA ) ) ){ cout << ">NaN @ tetraVolumeA" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( LUV::Sum( I7 ) ) ) ){ cout << ">NaN @ LUV::Sum( I7 )" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( LUV::Dot( I6, swgSum ) ) ) ){ cout << ">NaN @ LUV::Dot( I6, swgSum )" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( I1 ) ) ){ cout << ">NaN @ I1" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( LUV::Sum( I4 ) ) ) ){ cout << ">NaN @ LUV::Sum( I4 )" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( LUV::Dot( I2, *swgVertexN ) ) ) ){ cout << ">NaN @ LUV::Dot( I2, *swgVertexN )" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( LUV::Dot( I3, *swgVertexM ) ) ) ){ cout << ">NaN @  LUV::Dot( I3, *swgVertexM )" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( I5[0] ) ) ){ cout << ">NaN @ I5[0]" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( I5[1] ) ) ){ cout << ">NaN @ I5[1]" << endl; char stopper; cin >> stopper; };
-		//if( isnan( abs( I5[2] ) ) ){ cout << ">NaN @ I5[2]" << endl; char stopper; cin >> stopper; };
+		/*
+		if( abs((I2_[0] - I2[0])/I2[0]) > 1e-5 || abs((I2_[1] - I2[1])/I2[1]) > 1e-5 || abs((I2_[2] - I2[2])/I2[2]) > 1e-5 ){ cout << "I2 != I2_ !!! I2 = " << I2 << ", I2_ = " << I2_ << endl; char stopper; cin >> stopper; };
+		if( abs((I3_[0] - I3[0])/I3[0]) > 1e-5 || abs((I3_[1] - I3[1])/I3[1]) > 1e-5 || abs((I3_[2] - I3[2])/I3[2]) > 1e-5 ){ cout << "I3 != I3_ !!! I3 = " << I3 << ", I3_ = " << I3_ << endl; char stopper; cin >> stopper; };
+		if( abs((I4_[0] - I4[0])/I4[0]) > 1e-5 || abs((I4_[1] - I4[1])/I4[1]) > 1e-5 || abs((I4_[2] - I4[2])/I4[2]) > 1e-5 ){ cout << "I4 != I4_ !!! I4 = " << I4 << ", I4_ = " << I4_ << endl; char stopper; cin >> stopper; };
+		if( abs((I5_[0] - I5[0])/I5[0]) > 1e-5 || abs((I5_[1] - I5[1])/I5[1]) > 1e-5 || abs((I5_[2] - I5[2])/I5[2]) > 1e-5 ){ cout << "I5 != I5_ !!! I5 = " << I5 << ", I5_ = " << I5_ << endl; char stopper; cin >> stopper; };
+		if( abs((I6_[0] - I6[0])/I6[0]) > 1e-5 || abs((I6_[1] - I6[1])/I6[1]) > 1e-5 || abs((I6_[2] - I6[2])/I6[2]) > 1e-5 ){ cout << "I6 != I6_ !!! I6 = " << I6 << ", I6_ = " << I6_ << endl; char stopper; cin >> stopper; };
+		if( abs((I7_[0] - I7[0])/I7[0]) > 1e-5 || abs((I7_[1] - I7[1])/I7[1]) > 1e-5 || abs((I7_[2] - I7[2])/I7[2]) > 1e-5 ){ cout << "I7 != I7_ !!! I7 = " << I7 << ", I7_ = " << I7_ << endl; char stopper; cin >> stopper; };
+		*/
+
+		/*
+		if( abs((I2_[0] - I2[0])/I2[0]) > 1e-5 || abs((I2_[1] - I2[1])/I2[1]) > 1e-5 || abs((I2_[2] - I2[2])/I2[2]) > 1e-5 ){ cout << I2 - I2_ << endl; char stopper; cin >> stopper; };
+		if( abs((I3_[0] - I3[0])/I3[0]) > 1e-5 || abs((I3_[1] - I3[1])/I3[1]) > 1e-5 || abs((I3_[2] - I3[2])/I3[2]) > 1e-5 ){ cout << I3 - I3_ << endl; char stopper; cin >> stopper; };
+		if( abs((I4_[0] - I4[0])/I4[0]) > 1e-5 || abs((I4_[1] - I4[1])/I4[1]) > 1e-5 || abs((I4_[2] - I4[2])/I4[2]) > 1e-5 ){ cout << I4 - I4_ << endl; char stopper; cin >> stopper; };
+		if( abs((I5_[0] - I5[0])/I5[0]) > 1e-5 || abs((I5_[1] - I5[1])/I5[1]) > 1e-5 || abs((I5_[2] - I5[2])/I5[2]) > 1e-5 ){ cout << I5 - I5_ << endl; char stopper; cin >> stopper; };
+		if( abs((I6_[0] - I6[0])/I6[0]) > 1e-5 || abs((I6_[1] - I6[1])/I6[1]) > 1e-5 || abs((I6_[2] - I6[2])/I6[2]) > 1e-5 ){ cout << I6 - I6_ << endl; char stopper; cin >> stopper; };
+		if( abs((I7_[0] - I7[0])/I7[0]) > 1e-5 || abs((I7_[1] - I7[1])/I7[1]) > 1e-5 || abs((I7_[2] - I7[2])/I7[2]) > 1e-5 ){ cout << I7 - I7_ << endl; char stopper; cin >> stopper; };
+		*/
+		
+		if( isnan( abs( factor1 ) ) ){ cout << ">NaN @ factor1" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( factor2 ) ) ){ cout << ">NaN @ factor2" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( factor3 ) ) ){ cout << ">NaN @ factor3" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( swgDot ) ) ){ cout << ">NaN @ swgDot" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( tetraVolumeA ) ) ){ cout << ">NaN @ tetraVolumeA" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Sum( I7 ) ) ) ){ cout << ">NaN @ LUV::Sum( I7 )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I6, swgSum ) ) ) ){ cout << ">NaN @ LUV::Dot( I6, swgSum )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I1 ) ) ){ cout << ">NaN @ I1" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Sum( I4 ) ) ) ){ cout << ">NaN @ LUV::Sum( I4 )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I2, *swgVertexN ) ) ) ){ cout << ">NaN @ LUV::Dot( I2, *swgVertexN )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( LUV::Dot( I3, *swgVertexM ) ) ) ){ cout << ">NaN @  LUV::Dot( I3, *swgVertexM )" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[0] ) ) ){ cout << ">NaN @ I5[0]" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[1] ) ) ){ cout << ">NaN @ I5[1]" << endl; char stopper; cin >> stopper; };
+		if( isnan( abs( I5[2] ) ) ){ cout << ">NaN @ I5[2]" << endl; char stopper; cin >> stopper; };
 
 
 		// !!! book formula
@@ -775,7 +804,7 @@ public:
 		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 		// !!!
 
-		// !!! LAST WORKING
+		
 		//return
 		//	( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
 		//		- LUV::Dot( I6, swgSum ) ) : 0 )
@@ -785,6 +814,7 @@ public:
 		//	- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 		// !!!
 
+		// !!! LAST WORKING
 		return
 			( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
 				- LUV::Dot( I6, swgSum ) ) : 0 )
@@ -794,9 +824,16 @@ public:
 			- factor3 * ( I1 - I5[0] * volArRatioM - I5[1] * volArRatioN + I5[2] * volArRatio );
 
 
+		
+
+
 		//return
 		//	( idTetraA == idTetraB ? factor1 * ( swgDot * tetraVolumeA + LUV::Sum( I7 )
-		//		- LUV::Dot( I6, swgSum ) ) : 0 );
+		//		- LUV::Dot( I6, swgSum ) ) : 0 )
+		//	
+		//	* ( j_ * waveNumber_ * c0_ )
+		//	
+		//	;
 
 
 
@@ -851,6 +888,8 @@ public:
 		}
 		
 		momDataPtr_[ idFaceN * faceCount_ + idFaceM ] = result; // column major
+
+		//cout << "FM:" << idFaceM << " FN:" << idFaceN << " VAL:" << result << endl;
 	}
 
 	void PartialGenerate( const UINT_T& idFaceNStart, const UINT_T& idFaceNEnd )

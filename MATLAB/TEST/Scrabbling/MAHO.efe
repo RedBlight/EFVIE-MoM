@@ -1,0 +1,710 @@
+##File Type: Electric near field
+##File Format: 3
+##Source: tet1
+##Date: 2018-07-01 12:34:53
+** File exported by POSTFEKO version 7.0.1-256428 (x64)
+
+#Request Name: MidPoint
+#Frequency: 1.00000000E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.52924088E-17   -2.27185811E-24    1.00000000E+00    5.23961256E-09   4.87561882E-17   -9.73653475E-25   
+
+#Request Name: MidPoint
+#Frequency: 1.77777778E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.19510477E-02   -4.17064790E-10    7.97370155E-01    7.40110039E-09   -4.19510477E-02   -4.17064790E-10   
+
+#Request Name: MidPoint
+#Frequency: 2.55555556E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.58444337E-02   -7.94293305E-10    6.67285174E-01    8.88849962E-09   -5.58444337E-02   -7.94293305E-10   
+
+#Request Name: MidPoint
+#Frequency: 3.33333333E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.99773750E-02   -1.10919428E-09    5.75218735E-01    9.98474409E-09   -5.99773750E-02   -1.10919428E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.11111111E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -6.01903549E-02   -1.36977088E-09    5.06139330E-01    1.08293270E-08   -6.01903549E-02   -1.36977088E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.88888889E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.87362559E-02   -1.58688193E-09    4.52199060E-01    1.15011776E-08   -5.87362559E-02   -1.58688193E-09   
+
+#Request Name: MidPoint
+#Frequency: 5.66666667E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.65871420E-02   -1.76971636E-09    4.08824859E-01    1.20488955E-08   -5.65871420E-02   -1.76971636E-09   
+
+#Request Name: MidPoint
+#Frequency: 6.44444444E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.41917585E-02   -1.92540198E-09    3.73145360E-01    1.25042307E-08   -5.41917585E-02   -1.92540198E-09   
+
+#Request Name: MidPoint
+#Frequency: 7.22222222E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -5.17645335E-02   -2.05936524E-09    3.43256330E-01    1.28888745E-08   -5.17645335E-02   -2.05936524E-09   
+
+#Request Name: MidPoint
+#Frequency: 8.00000000E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.94080674E-02   -2.17574442E-09    3.17840575E-01    1.32181804E-08   -4.94080674E-02   -2.17574442E-09   
+
+#Request Name: MidPoint
+#Frequency: 8.77777778E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.71692235E-02   -2.27772342E-09    2.95955774E-01    1.35033345E-08   -4.71692235E-02   -2.27772342E-09   
+
+#Request Name: MidPoint
+#Frequency: 9.55555556E+00
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.50663522E-02   -2.36777948E-09    2.76908896E-01    1.37526869E-08   -4.50663522E-02   -2.36777948E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.03333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.31030966E-02   -2.44786285E-09    2.60178306E-01    1.39725999E-08   -4.31030966E-02   -2.44786285E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.11111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -4.12756215E-02   -2.51952658E-09    2.45363545E-01    1.41680087E-08   -4.12756215E-02   -2.51952658E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.18888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.95764822E-02   -2.58402097E-09    2.32151886E-01    1.43428009E-08   -3.95764822E-02   -2.58402097E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.26666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.79967163E-02   -2.64236286E-09    2.20295448E-01    1.45000814E-08   -3.79967163E-02   -2.64236286E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.34444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.65269724E-02   -2.69538706E-09    2.09595145E-01    1.46423606E-08   -3.65269724E-02   -2.69538706E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.42222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.51581075E-02   -2.74378495E-09    1.99889199E-01    1.47716898E-08   -3.51581075E-02   -2.74378495E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.50000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.38814867E-02   -2.78813379E-09    1.91044765E-01    1.48897624E-08   -3.38814867E-02   -2.78813379E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.57777778E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.26891163E-02   -2.82891914E-09    1.82951716E-01    1.49979882E-08   -3.26891163E-02   -2.82891914E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.65555556E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.15736844E-02   -2.86655225E-09    1.75517977E-01    1.50975511E-08   -3.15736844E-02   -2.86655225E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.73333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -3.05285507E-02   -2.90138373E-09    1.68665961E-01    1.51894521E-08   -3.05285507E-02   -2.90138373E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.81111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.95477108E-02   -2.93371424E-09    1.62329821E-01    1.52745435E-08   -2.95477108E-02   -2.93371424E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.88888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.86257474E-02   -2.96380304E-09    1.56453305E-01    1.53535558E-08   -2.86257474E-02   -2.96380304E-09   
+
+#Request Name: MidPoint
+#Frequency: 1.96666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.77577782E-02   -2.99187487E-09    1.50988069E-01    1.54271185E-08   -2.77577782E-02   -2.99187487E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.04444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.69394038E-02   -3.01812549E-09    1.45892327E-01    1.54957768E-08   -2.69394038E-02   -3.01812549E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.12222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.61666577E-02   -3.04272617E-09    1.41129781E-01    1.55600058E-08   -2.61666577E-02   -3.04272617E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.20000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.54359611E-02   -3.06582741E-09    1.36668741E-01    1.56202209E-08   -2.54359611E-02   -3.06582741E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.27777778E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.47440808E-02   -3.08756200E-09    1.32481417E-01    1.56767871E-08   -2.47440808E-02   -3.08756200E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.35555556E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.40880921E-02   -3.10804752E-09    1.28543339E-01    1.57300266E-08   -2.40880921E-02   -3.10804752E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.43333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.34653453E-02   -3.12738846E-09    1.24832870E-01    1.57802245E-08   -2.34653453E-02   -3.12738846E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.51111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.28734360E-02   -3.14567800E-09    1.21330812E-01    1.58276345E-08   -2.28734360E-02   -3.14567800E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.58888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.23101787E-02   -3.16299948E-09    1.18020069E-01    1.58724824E-08   -2.23101787E-02   -3.16299948E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.66666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.17735840E-02   -3.17942768E-09    1.14885365E-01    1.59149708E-08   -2.17735840E-02   -3.17942768E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.74444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.12618374E-02   -3.19502988E-09    1.11913011E-01    1.59552810E-08   -2.12618374E-02   -3.19502988E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.82222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.07732817E-02   -3.20986676E-09    1.09090703E-01    1.59935764E-08   -2.07732817E-02   -3.20986676E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.90000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -2.03064005E-02   -3.22399324E-09    1.06407350E-01    1.60300045E-08   -2.03064005E-02   -3.22399324E-09   
+
+#Request Name: MidPoint
+#Frequency: 2.97777778E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.98598041E-02   -3.23745909E-09    1.03852929E-01    1.60646986E-08   -1.98598041E-02   -3.23745909E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.05555556E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.94322170E-02   -3.25030955E-09    1.01418358E-01    1.60977796E-08   -1.94322170E-02   -3.25030955E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.13333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.90224666E-02   -3.26258582E-09    9.90953917E-02    1.61293577E-08   -1.90224666E-02   -3.26258582E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.21111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.86294732E-02   -3.27432551E-09    9.68765217E-02    1.61595328E-08   -1.86294732E-02   -3.27432551E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.28888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.82522412E-02   -3.28556301E-09    9.47549002E-02    1.61883966E-08   -1.82522412E-02   -3.28556301E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.36666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.78898513E-02   -3.29632986E-09    9.27242673E-02    1.62160327E-08   -1.78898513E-02   -3.29632986E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.44444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.75414534E-02   -3.30665498E-09    9.07788894E-02    1.62425178E-08   -1.75414534E-02   -3.30665498E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.52222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.72062603E-02   -3.31656500E-09    8.89135050E-02    1.62679223E-08   -1.72062603E-02   -3.31656500E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.60000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.68835420E-02   -3.32608445E-09    8.71232769E-02    1.62923112E-08   -1.68835420E-02   -3.32608445E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.67777778E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.65726210E-02   -3.33523594E-09    8.54037505E-02    1.63157440E-08   -1.65726210E-02   -3.33523594E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.75555556E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.62728671E-02   -3.34404039E-09    8.37508167E-02    1.63382761E-08   -1.62728671E-02   -3.34404039E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.83333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.59836941E-02   -3.35251717E-09    8.21606788E-02    1.63599582E-08   -1.59836941E-02   -3.35251717E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.91111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.57045557E-02   -3.36068422E-09    8.06298235E-02    1.63808377E-08   -1.57045557E-02   -3.36068422E-09   
+
+#Request Name: MidPoint
+#Frequency: 3.98888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.54349421E-02   -3.36855820E-09    7.91549948E-02    1.64009583E-08   -1.54349421E-02   -3.36855820E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.06666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.51743772E-02   -3.37615461E-09    7.77331710E-02    1.64203607E-08   -1.51743772E-02   -3.37615461E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.14444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.49224161E-02   -3.38348785E-09    7.63615441E-02    1.64390826E-08   -1.49224161E-02   -3.38348785E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.22222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.46786420E-02   -3.39057137E-09    7.50375009E-02    1.64571592E-08   -1.46786420E-02   -3.39057137E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.30000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.44426647E-02   -3.39741770E-09    7.37586066E-02    1.64746233E-08   -1.44426647E-02   -3.39741770E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.37777778E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.42141182E-02   -3.40403855E-09    7.25225898E-02    1.64915056E-08   -1.42141182E-02   -3.40403855E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.45555556E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.39926587E-02   -3.41044487E-09    7.13273291E-02    1.65078346E-08   -1.39926587E-02   -3.41044487E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.53333333E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.37779635E-02   -3.41664693E-09    7.01708405E-02    1.65236371E-08   -1.37779635E-02   -3.41664693E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.61111111E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.35697287E-02   -3.42265433E-09    6.90512672E-02    1.65389382E-08   -1.35697287E-02   -3.42265433E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.68888889E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.33676686E-02   -3.42847609E-09    6.79668687E-02    1.65537614E-08   -1.33676686E-02   -3.42847609E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.76666667E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.31715137E-02   -3.43412069E-09    6.69160127E-02    1.65681287E-08   -1.31715137E-02   -3.43412069E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.84444444E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.29810100E-02   -3.43959608E-09    6.58971660E-02    1.65820608E-08   -1.29810100E-02   -3.43959608E-09   
+
+#Request Name: MidPoint
+#Frequency: 4.92222222E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.27959180E-02   -3.44490976E-09    6.49088878E-02    1.65955772E-08   -1.27959180E-02   -3.44490976E-09   
+
+#Request Name: MidPoint
+#Frequency: 5.00000000E+01
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.50000000E-01    2.50000000E-01    2.50000000E-01   -1.26160110E-02   -3.45006879E-09    6.39498221E-02    1.66086962E-08   -1.26160110E-02   -3.45006879E-09   
+

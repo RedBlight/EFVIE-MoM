@@ -113,6 +113,9 @@ public:
 		/**
 			Think of a different way to alleviate this extra copy below.
 		**/
+
+		map< UINT_T, UINT_T > faceIndexMap;
+
 		UINT_T idSort = 0;
 		for( UINT_T idf = 0; idf < faceCount; ++idf )
 		{
@@ -133,6 +136,8 @@ public:
 
 				faceTetraIndexPtr[ iTet[0] ] = faceList[ idf ].t1_;
 				faceTetraIndexPtr[ iTet[1] ] = faceList[ idf ].t2_;
+
+				faceIndexMap[ idf ] = idSort;
 
 				++idSort;
 			}
@@ -157,9 +162,17 @@ public:
 				faceTetraIndexPtr[ iTet[0] ] = faceList[ idf ].t1_;
 				faceTetraIndexPtr[ iTet[1] ] = faceList[ idf ].t2_;
 
+				faceIndexMap[ idf ] = idSort;
+
 				++idSort;
 			}
 		}
+
+		for( UINT_T idf = 0; idf < tetraCount * 4; ++idf )
+		{
+			tetraFaceIndexPtr[ idf ] = faceIndexMap[ tetraFaceIndexPtr[ idf ] ];
+		}
+
 	}
 
 };

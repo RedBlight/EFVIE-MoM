@@ -1,0 +1,50 @@
+##File Type: Electric near field
+##File Format: 3
+##Source: tet1
+##Date: 2018-07-01 12:34:53
+** File exported by POSTFEKO version 7.0.1-256428 (x64)
+
+#Request Name: MidPoint
+#Frequency: 1.00000000000000E+05
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.00000000E-00    2.00000000E-00    2.00000000E-00   1.91656191E+01   2.14835165E-03    -1.65496306E-04    2.19710375E-03   1.92129720E+01   5.47453628E-03   
+
+#Request Name: MidPoint
+#Frequency: 1.00666666666667E+07
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.00000000E-00    2.00000000E-00    2.00000000E-00   2.14975664E+01   -2.77203167E-01    5.20186669E+00    -4.09635475E+00   2.15667157E+01   3.85036452E-01   
+
+#Request Name: MidPoint
+#Frequency: 2.00333333333333E+07
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.00000000E-00    2.00000000E-00    2.00000000E-00   2.84940991E+01   -7.58686943E+00    4.63634155E+00    -2.41445601E+01   3.07116845E+01   -2.51614311E+00   
+
+#Request Name: MidPoint
+#Frequency: 3.00000000000000E+07
+#Coordinate System: Cartesian
+#No. of X Samples: 1
+#No. of Y Samples: 1
+#No. of Z Samples: 1
+#Result Type: Electric Field Values
+#No. of Header Lines: 1
+#                 "X"               "Y"               "Z"               "Re(Ex)"          "Im(Ex)"          "Re(Ey)"          "Im(Ey)"          "Re(Ez)"          "Im(Ez)"          
+                   2.00000000E-00    2.00000000E-00    2.00000000E-00   -1.74598560E+01   -4.96815952E+01    1.43466092E+01    -2.56668708E+01   4.60141122E+01   -2.26243425E+01   
+
