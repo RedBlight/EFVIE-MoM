@@ -21,8 +21,8 @@ Basis Function Count = 2349
 Frequency = 30 MHz  
 Electrical Size = 0.2λ  
 Relative Permittivity = 50  
-Dielectric Loss Tangent = 0.3
-Incident Plane Wave Direction = x-axis (phi = 0)
-Incident Plane Wave Magnitude = 1
-Incident Plane Wave Polarization = (0,1,1) / sqrt(2)
+Dielectric Loss Tangent = 0.3  
+Incident Plane Wave Direction = x-axis (phi = 0)  
+Incident Plane Wave Magnitude = 1  
+Incident Plane Wave Polarization = (0,1,1) / sqrt(2)  
 
