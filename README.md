@@ -22,8 +22,8 @@ Frequency = 30 MHz
 Electrical Size = 0.2λ  
 Relative Permittivity = 50  
 Dielectric Loss Tangent = 0.3  
-Incident Plane Wave Direction = x-axis (phi = 0)  
+Incident Plane Wave Direction = (-1,0,0) (in cartesian)
 Incident Plane Wave Magnitude = 1  
-Incident Plane Wave Polarization = (0,1,1) / sqrt(2)  
+Incident Plane Wave Polarization = (0,1,1) / sqrt(2) (in cartesian)
 
 Current configuration in the "MATLAB\TEST\SW\Test_SingleFreq_Phi.m" file will generate these results, which then can be displayed on MATLAB, or exported to POSTFEKO.
