@@ -22,7 +22,7 @@ Frequency = 30 MHz
 Electrical Size = 0.2λ  
 Relative Permittivity = 50  
 Dielectric Loss Tangent = 0.3  
-Incident Plane Wave Direction = (-1,0,0) (in cartesian)
+Incident Plane Wave Direction = (-1,0,0) (in cartesian)  
 Incident Plane Wave Magnitude = 1  
 Incident Plane Wave Polarization = (0,1,1) / sqrt(2) (in cartesian)
 
